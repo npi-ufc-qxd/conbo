@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Cadastrar Pessoa</title>
+</head>
+<body th:with="acao_url=${acao == 'CADASTRAR'? 'cadastrar' :'editar' }">
+
+<form action="#" th:action="@{/pessoa/cadastrar}" th:object="${pessoa}" th:method="post">
+   
+    <label th:for="${#ids.next('nome')}">Nome: </label>
+    <input type="text" id="nome" name="nome" th:value="${nome}" />
+   
+   	<label th:for="${#ids.next('email')}">Email: </label>
+    <input type="text" id="email" name="email" th:value="${email}" />
+   	
+   	<button type="submit">Enviar</button>
+   	
+</form>
+
+</body>
+</html>

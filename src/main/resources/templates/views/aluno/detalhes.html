@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Detalhes Aluno</title>
+</head>
+
+<body>
+	<table id="table-aluno" border="1" style="margin-left: 400px; margin-top: 200px">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Matrícula</th>
+				<th>CPF</th>
+				<th>Banco</th>
+				<th>Agencia</th>
+				<th>Conta Corrente</th>
+				<th>Ação</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td th:text="${aluno.nome}"></td>
+				<td th:text="${aluno.matricula}"></td>
+				<td th:text="${aluno.CPF}"></td>
+				<td th:text="${aluno.banco}"></td>
+				<td th:text="${aluno.agBanco}"></td>
+				<td th:text="${aluno.numeroContaCorrente}"></td>
+				<td><a th:href="@{${'/aluno/editar/'+aluno.idAluno}}" >Editar</a></td>
+				
+							
+			</tr>
+		</tbody>
+	</table>
+<div style="margin-left: 400px; margin-top: 200px">
+
+<h1>Ações</h1>
+
+<h2><a> Enviar Frequência</a></h2>
+<h2><a> Ver Frequência Por Bolsista</a></h2>
+<h2><a> Histórico</a></h2>
+
+</div>
+
+
+</body>
+</html>

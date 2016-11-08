@@ -40,4 +40,9 @@ public class AlunoServiceImpl implements AlunoService{
 		return alunoRepository.findAll();
 	}
 
+	@Override
+	public Aluno buscarPorNome(String nome) {
+		return alunoRepository.findByNome(nome);
+	}
+
 }

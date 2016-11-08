@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Cadastrar Aluno</title>
+</head>
+<body th:with="acao_url=${acao == 'CADASTRAR'? 'cadastrar' :'editar' }">
+
+<form action="#" th:action="@{/aluno/cadastrar}" th:object="${aluno}" th:method="post">
+   
+    <label th:for="${#ids.next('nome')}">Nome: </label>
+    <input type="text" id="nome" name="nome" th:value="${nome}" />
+   
+   	<br/>
+   	<br/>
+   	
+   	<label th:for="${#ids.next('matricula')}">Matricula: </label>
+    <input type="text" id="matricula" name="matricula" th:value="${matricula}" />
+    
+   	<br/>
+   	<br/>
+   	
+    <label th:for="${#ids.next('CPF')}">CPF: </label>
+    <input type="text" id="CPF" name="CPF" th:value="${CPF}"/>
+   	
+   	<br/>
+   	<br/>
+   	
+   	<label th:for="${#ids.next('banco')}">Banco: </label>
+    <input type="text" id="banco" name="banco" th:value="${banco}" />
+   	
+   	<br/>
+   	<br/>
+   	
+   	<label th:for="${#ids.next('agBanco')}">Agencia: </label>
+    <input type="text" id="agBanco" name="agBanco" th:value="${agBanco}" />
+   	
+   	<br/>
+   	<br/>
+   	
+   		
+   	<label th:for="${#ids.next('numeroContaCorrente')}">Conta Corrente: </label>
+    <input type="text" id="numeroContaCorrente" name="numeroContaCorrente" th:value="${numeroContaCorrente}" />
+   	
+   	<br/>
+   	<br/>
+   	<button type="submit">Enviar</button>
+   	
+</form>
+
+</body>
+
+<script src="../jquery-3.1.1.js" type="text/javascript"></script>
+<script src="../jquery.maskedinput.js" type="text/javascript"></script>
+<script src="../conbo_aluno.js" type="text/javascript"></script>
+</html>

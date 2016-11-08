@@ -15,6 +15,7 @@ public class Bolsa {
 	@Id
 	@GeneratedValue
 	private long idBolsa;
+	private String nome;
 	private Double valor;
 	private int ano;
 	private boolean frequencia;
@@ -47,6 +48,50 @@ public class Bolsa {
 
 	public void setIdBolsa(long idBolsa) {
 		this.idBolsa = idBolsa;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public List<Participacao> getParticipacoes() {
+		return participacoes;
+	}
+
+	public void setParticipacoes(List<Participacao> participacoes) {
+		this.participacoes = participacoes;
+	}
+	
+	public int countBolsistasAtivos(){
+		int count = 0;
+		
+		for(Participacao participacao: getParticipacoes()){
+			if(participacao.isStatus()){
+				count++;
+			}
+		}
+		
+		return count;
+	}
+
+	public Projeto getProjeto() {
+		return projeto;
+	}
+
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
+	}
+
+	public TipoBolsa getTipoBolsa() {
+		return tipoBolsa;
+	}
+
+	public void setTipoBolsa(TipoBolsa tipoBolsa) {
+		this.tipoBolsa = tipoBolsa;
 	}
 
 	public Double getValor() {

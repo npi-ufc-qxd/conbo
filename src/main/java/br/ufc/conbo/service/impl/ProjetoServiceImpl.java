@@ -40,4 +40,9 @@ public class ProjetoServiceImpl implements ProjetoService{
 		return projetoRepository.findAll();
 	}
 
+	@Override
+	public List<Projeto> buscarPorNome(String busca) {
+		return projetoRepository.buscarPorNome(busca);
+	}
+
 }

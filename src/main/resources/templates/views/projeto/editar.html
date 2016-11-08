@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"/>
-<title>Cadastrar Projeto</title>
+<title>Editar Projeto</title>
 </head>
 <body th:with="acao_url=${acao == 'CADASTRAR'? 'cadastrar' :'editar' }">
 
-<label>Eitar Projeto</label>
+<label>Editar Projeto</label>
 <form action="#" th:action="@{/projeto/editar}" th:object="${projeto}" th:method="post">
    
    <input id="id" type="hidden" th:field="*{idProjeto}" />

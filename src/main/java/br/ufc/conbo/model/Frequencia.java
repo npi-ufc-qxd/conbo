@@ -23,7 +23,6 @@ public class Frequencia {
 	
 	public Frequencia() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getIdFrequencia() {

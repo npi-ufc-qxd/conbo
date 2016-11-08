@@ -21,7 +21,6 @@ public class Pessoa {
 	
 	public Pessoa() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public long getIdPessoa() {

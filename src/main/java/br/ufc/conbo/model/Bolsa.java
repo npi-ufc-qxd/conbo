@@ -38,8 +38,7 @@ public class Bolsa {
 	private List<Pessoa> responsaveis;
 	
 	public Bolsa() {
-		super();
-		// TODO Auto-generated constructor stub
+		super();		
 	}
 
 	public long getIdBolsa() {

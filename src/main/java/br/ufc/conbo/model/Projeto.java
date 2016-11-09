@@ -21,7 +21,6 @@ public class Projeto {
 	
 	public Projeto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public long getIdProjeto() {

@@ -32,7 +32,6 @@ public class Participacao {
 	
 	public Participacao() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public long getIdParticipacao() {

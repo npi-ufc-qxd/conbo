@@ -5,10 +5,14 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Pessoa {
+	
 	
 	@Id
 	@GeneratedValue
@@ -16,7 +20,8 @@ public class Pessoa {
 	private String nome;
 	private String email;
 	
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name = "bolsa_responsaveis")
 	private List<Bolsa> bolsas; 
 	
 	public Pessoa() {
@@ -44,6 +49,9 @@ public class Pessoa {
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		return "Pessoa [idPessoa=" + idPessoa + ", nome=" + nome + ", email=" + email + ", bolsas=" + bolsas + "]";
+	}
 	
 }

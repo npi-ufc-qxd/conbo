@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Lista de Bolsas</title>
+</head>
+<body>
+
+<h3>Buscar Bolsa</h3>
+
+
+
+<form action="#" th:action="@{/bolsa/buscar}" th:object="${bolsa}"
+	th:method="post">
+
+		<label th:for="${#ids.next('nome')}">Nome: </label> 
+		<input type="text" id="nome" name="nome" th:value="${nome}" /> 
+		<button type="submit">Buscar</button>
+
+</form>
+<br /> 
+
+	<table id="table-bolsas" border="1">
+		<thead>
+			<tr>
+				
+				<th>Nome</th>
+				<th>Tipo</th>
+				<th>Bolsistas</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="bolsa:${bolsas}">
+				<td th:text="${bolsa.nome}"></td>
+				<td>  </td>
+				<td th:text="${bolsa.vagas}"></td>
+				<th><a th:href="@{${'/bolsa/editar/'+bolsa.idBolsa}}">Editar</a></th>
+				<th><a th:href="@{${'/bolsa/remover/'+bolsa.idBolsa}}">Deletar</a></th>
+				<th><a th:href="@{${'/bolsa/verDetalhes/'+bolsa.idBolsa}}">Ver Detalhes</a></th>
+			</tr>
+		</tbody>
+	</table>
+	
+</body>
+</html>

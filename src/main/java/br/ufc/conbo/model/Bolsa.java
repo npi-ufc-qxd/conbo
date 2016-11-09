@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -15,6 +16,7 @@ public class Bolsa {
 	@Id
 	@GeneratedValue
 	private long idBolsa;
+	private String nome;
 	private Double valor;
 	private int ano;
 	private boolean frequencia;
@@ -33,7 +35,7 @@ public class Bolsa {
 	@OneToOne
 	private TipoBolsa tipoBolsa;
 	
-	@OneToMany
+	@ManyToMany(mappedBy = "responsaveis")
 	private List<Pessoa> responsaveis;
 	
 	public Bolsa() {
@@ -51,6 +53,38 @@ public class Bolsa {
 
 	public Double getValor() {
 		return valor;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public List<Participacao> getParticipacoes() {
+		return participacoes;
+	}
+
+	public void setParticipacoes(List<Participacao> participacoes) {
+		this.participacoes = participacoes;
+	}
+
+	public Projeto getProjeto() {
+		return projeto;
+	}
+
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
+	}
+
+	public TipoBolsa getTipoBolsa() {
+		return tipoBolsa;
+	}
+
+	public void setTipoBolsa(TipoBolsa tipoBolsa) {
+		this.tipoBolsa = tipoBolsa;
 	}
 
 	public void setValor(Double valor) {
@@ -112,4 +146,14 @@ public class Bolsa {
 	public void setFolhaPagamento(boolean folhaPagamento) {
 		this.folhaPagamento = folhaPagamento;
 	}
+
+	@Override
+	public String toString() {
+		return "Bolsa [idBolsa=" + idBolsa + ", nome=" + nome + ", valor=" + valor + ", ano=" + ano + ", frequencia="
+				+ frequencia + ", vagas=" + vagas + ", observacao=" + observacao + ", status=" + status
+				+ ", folhaPagamento=" + folhaPagamento + ", participacoes=" + participacoes + ", projeto=" + projeto
+				+ ", tipoBolsa=" + tipoBolsa + ", responsaveis=" + responsaveis + "]";
+	}
+	
+	
 }

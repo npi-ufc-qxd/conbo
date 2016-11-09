@@ -21,12 +21,13 @@ public class Pessoa {
 	private String email;
 	
 	@ManyToMany
-	@JoinTable(name = "bolsa_responsaveis")
+	@JoinTable(name="bolsa_responsaveis", 
+            joinColumns=  @JoinColumn( name = "idPessoa"), 
+            inverseJoinColumns= @JoinColumn(name = "idBolsa") )
 	private List<Bolsa> bolsas; 
 	
 	public Pessoa() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public long getIdPessoa() {

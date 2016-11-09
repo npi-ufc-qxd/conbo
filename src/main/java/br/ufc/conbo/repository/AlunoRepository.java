@@ -8,5 +8,5 @@ import br.ufc.conbo.model.Aluno;
 @Repository
 @Transactional
 public interface AlunoRepository extends JpaRepository<Aluno, Long>{
-
+	Aluno findByNome(String nome);
 }

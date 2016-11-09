@@ -15,6 +15,11 @@ public class BolsaServiceImpl implements BolsaService{
 	private BolsaRepository bolsaRepository;
 	
 	@Override
+    public Bolsa buscarPorNome(String nome) {
+        return bolsaRepository.findByNome(nome);
+    }
+	
+	@Override
 	public void salvar(Bolsa bolsa) {
 		bolsaRepository.save(bolsa);
 	}

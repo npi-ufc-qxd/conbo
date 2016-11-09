@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -34,13 +35,14 @@ public class Bolsa {
 	
 	@OneToOne
 	private TipoBolsa tipoBolsa;
-	
-	@ManyToMany(mappedBy = "responsaveis")
+	@ManyToMany
+	@JoinTable(name="bolsa_responsaveis", 
+            joinColumns=  @JoinColumn( name = "idBolsa"), 
+            inverseJoinColumns= @JoinColumn(name = "idPessoa") )
 	private List<Pessoa> responsaveis;
 	
 	public Bolsa() {
-		super();
-		// TODO Auto-generated constructor stub
+		super();		
 	}
 
 	public long getIdBolsa() {
@@ -50,6 +52,23 @@ public class Bolsa {
 	public void setIdBolsa(long idBolsa) {
 		this.idBolsa = idBolsa;
 	}
+	
+	
+
+	public int countBolsistasAtivos(){
+		int count = 0;
+		
+		for(Participacao participacao: getParticipacoes()){
+			if(participacao.isStatus()){
+				count++;
+			}
+		}
+		
+		return count;
+	}
+
+
+
 
 	public Double getValor() {
 		return valor;
@@ -147,7 +166,7 @@ public class Bolsa {
 		this.folhaPagamento = folhaPagamento;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "Bolsa [idBolsa=" + idBolsa + ", nome=" + nome + ", valor=" + valor + ", ano=" + ano + ", frequencia="
 				+ frequencia + ", vagas=" + vagas + ", observacao=" + observacao + ", status=" + status
@@ -155,5 +174,5 @@ public class Bolsa {
 				+ ", tipoBolsa=" + tipoBolsa + ", responsaveis=" + responsaveis + "]";
 	}
 	
-	
+*/	
 }

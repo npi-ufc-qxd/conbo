@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Detalhes Projeto</title>
+</head>
+<body>
+
+	<h3 th:text="${projeto.nome}"></h3>
+	<label th:text="${projeto.descricao}"></label>
+	
+	<a th:href="@{${'/projeto/editar/' + projeto.idProjeto}}">Editar dados</a>
+	
+	<h3>Ações</h3>
+	<button>Associar Bolsa</button>
+	<button>Ver Bolsista</button>
+	<button>Ver Bolsas</button>
+	
+	<h3>Lista de Bolsas do Projeto</h3>
+	
+	<table id="table-bolsas" border="1">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Tipo</th>
+				<th>Bolsistas</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="bolsa:${projeto.bolsas}">
+				<td th:text="${bolsa.nome}"></td>
+				<td th:text="${bolsa.tipoBolsa.nome}"></td>
+				<td th:text="${bolsa.countBolsistasAtivos()}"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	
+	
+	
+
+
+</body>
+</html>

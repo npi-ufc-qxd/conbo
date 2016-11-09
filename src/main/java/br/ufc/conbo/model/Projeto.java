@@ -21,7 +21,6 @@ public class Projeto {
 	
 	public Projeto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public long getIdProjeto() {
@@ -30,6 +29,14 @@ public class Projeto {
 	public void setIdProjeto(long idProjeto) {
 		this.idProjeto = idProjeto;
 	}
+	public List<Bolsa> getBolsas() {
+		return bolsas;
+	}
+
+	public void setBolsas(List<Bolsa> bolsas) {
+		this.bolsas = bolsas;
+	}
+
 	public String getNome() {
 		return nome;
 	}

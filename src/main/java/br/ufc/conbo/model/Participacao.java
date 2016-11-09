@@ -32,7 +32,6 @@ public class Participacao {
 	
 	public Participacao() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public long getIdParticipacao() {
@@ -82,4 +81,30 @@ public class Participacao {
 	public void setRemuneracao(boolean remuneracao) {
 		this.remuneracao = remuneracao;
 	}
+
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
+	public List<Frequencia> getFrequencias() {
+		return frequencias;
+	}
+
+	public void setFrequencias(List<Frequencia> frequencias) {
+		this.frequencias = frequencias;
+	}
+
+	public Bolsa getBolsa() {
+		return bolsa;
+	}
+
+	public void setBolsa(Bolsa bolsa) {
+		this.bolsa = bolsa;
+	}
+	
+	
 }

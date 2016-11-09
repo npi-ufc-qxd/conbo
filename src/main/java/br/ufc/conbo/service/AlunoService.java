@@ -15,6 +15,8 @@ public interface AlunoService {
 	
 	Aluno buscarPorId(Long id);
 	
+	Aluno buscarPorNome(String nome);
+	
 	List<Aluno> listar();
 	
 }

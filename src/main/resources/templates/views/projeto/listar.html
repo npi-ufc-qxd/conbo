@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Lista de Projetos</title>
+</head>
+<body>
+
+	<form action="#" th:action="@{/projeto/listar}"
+		th:method="post">
+		<input type="text" name="busca" th:placeholder="Projeto" />
+		<button type="submit">Procurar</button>
+	</form>
+
+	
+	<table id="table-projetos" border="1">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Bolsas</th>
+				<th>Opções</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="projeto:${projetos}">
+				<td th:text="${projeto.nome}"></td>
+				<td th:text="${projeto.bolsas.size()}"></td>
+				<td>
+					<a th:href="@{${'/projeto/editar/' + projeto.idProjeto}}">Editar</a>
+					<a th:href="@{${'/projeto/remover/' + projeto.idProjeto}}">Excluir</a>
+					<a th:href="@{${'/projeto/detalhes/' + projeto.idProjeto}}">Detalhes</a>
+				</td>
+				
+			</tr>
+		</tbody>
+	</table>
+	
+</body>
+</html>

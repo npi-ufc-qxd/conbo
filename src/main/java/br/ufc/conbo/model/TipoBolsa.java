@@ -21,7 +21,6 @@ public class TipoBolsa {
 	
  	public TipoBolsa() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public long getIdTipoBolsa() {

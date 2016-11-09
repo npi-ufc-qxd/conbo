@@ -1,0 +1,30 @@
+
+<ul id="slide-out" class="side-nav fixed " th:fragment="side-nav">
+    <li>
+    	<a class="userView waves-effect waves-light indigo lighten-1 valign-wrapper" th:href="@{/}">
+	        <i class="cover material-icons grey-text text-lighten-5">group</i>
+	        <span class="grey-text text-lighten-5 title">COMBO</span>
+    	</a>
+    </li>
+    
+    <li>
+    	<a th:href="@{/}" class="waves-effect waves-light" th:classappend="(${currentPage} == 'inicio')? sidenav-active">
+    		<i class="material-icons">home</i>
+    		Início
+    	</a>
+    </li>
+    <li>
+    	<a th:href="@{/aluno/listar/}" class="waves-effect waves-light" th:classappend="(${currentPage} == 'aluno')? sidenav-active">
+    		<i class="material-icons">group</i>
+    		Alunos
+    	</a>
+    </li>
+    <li>
+    	<div class="divider blue-grey darken-3"></div>
+    </li>
+    <li>
+    	<a th:href="@{/logout}" class="waves-effect waves-light" th:classappend="(${currentPage} == 'sair')? sidenav-active">
+    		Sair
+    	</a>
+    </li>
+</ul>

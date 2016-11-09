@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="views/base/base"
+    th:with="currentPage='pagina-modelo'">
+
+	<head>
+	
+	    <title>Conbo - Página Modelo</title>
+	    
+	</head>
+
+	<section layout:fragment="conteudo">
+		
+		<div class="row">
+		
+			<!-- BREADCRUMBS - Mostra o caminho até a página atual -->
+			
+			<div class="col s12 breadcrumbs valign-wrapper">
+	            
+	            <a th:href="@{/}" class="breadcrumb blue-grey-text">
+	                <i class="material-icons left">home</i>
+	            </a>
+	            
+	            <a th:href="@{/url/da/pagina}" class="breadcrumb blue-grey-text">Nome da página atual</a>
+	            
+	        </div>
+	        
+	        <!-- BREADCRUMBS -->
+		
+		
+			<!-- CONTAINER - Conteiner principal da aplicação -->
+			
+		    <div class="col s12">
+		    	<!-- Conteúdo da página ... -->
+		    </div>
+		    	        	   
+		    <!-- CONTAINER -->
+		    
+		</div>
+		
+	</section>
+
+	<section layout:fragment="js">
+	
+		<!-- SCRIPTS - Coloque aqui os scripts desta página -->
+			
+	</section>
+
+</html>

@@ -62,9 +62,21 @@
 		    		
 		    		<!-- Dados para criação dos cards baseados no de referência -->
 		    		<div class="index__card"
-		    			data-title="Alunos" data-color="red" data-icon="account-multiple" data-size="medium">
+		    			data-title="Alunos" data-color="red" data-icon="school" data-size="medium">
 		    			<a th:href="@{/aluno/listar}">Listar</a>
 		    			<a th:href="@{/aluno/cadastrar}">Adicionar</a>
+		    		</div>
+		    		
+		    		<div class="index__card"
+		    			data-title="Pessoas" data-color="blue" data-icon="account-multiple" data-size="medium">
+		    			<a th:href="@{/pessoa/listar}">Listar</a>
+		    			<a th:href="@{/pessoa/cadastrar}">Adicionar</a>
+		    		</div>
+		    		
+		    		<div class="index__card"
+		    			data-title="Projetos" data-color="blue-grey" data-icon="view-dashboard" data-size="medium">
+		    			<a th:href="@{/projeto/listar}">Listar</a>
+		    			<a th:href="@{/projeto/cadastrar}">Adicionar</a>
 		    		</div>
 		    		
 		    	</div>

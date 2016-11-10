@@ -261,3 +261,16 @@ span.item-value {
 	font-size: 18px;
 	display: block;
 }
+
+.self-sampled {
+	transition: all .1s linear;
+	transform: translateX(0);
+}
+
+.self-sampled.move-left {
+	transform: translateX(-16px);
+}
+
+.self-sampled.move-right {
+	transform: translateX(16px);
+}

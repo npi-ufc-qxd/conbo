@@ -65,6 +65,34 @@ var mf_base = function() {
         }
     }
     
+    var initSelfSampling = function() {
+    	
+    	var animate = function() {
+    		setTimeout(function() {
+    			$(".self-sampled").addClass("move-left");
+    		}, 100);
+    		setTimeout(function() {
+    			$(".self-sampled").removeClass("move-left");
+    			$(".self-sampled").addClass("move-right");
+    		}, 200);
+    		setTimeout(function() {
+    			$(".self-sampled").removeClass("move-right");
+    			$(".self-sampled").addClass("move-left");
+    		}, 300);
+    		setTimeout(function() {
+    			$(".self-sampled").removeClass("move-left");
+    		}, 400);
+    	};
+    	
+    	setTimeout(function() {
+    		animate();
+    		setInterval(function() {
+        		animate();
+        	}, 5000);
+    	}, 1800);
+    	
+    }
+    
     var hideForeground = function() {
     	$("body").removeClass("no-transition");
     	$(".mf-foreground").fadeOut("slow");
@@ -77,6 +105,7 @@ var mf_base = function() {
             initSideBar();
             initCharts();
             initMask();
+            initSelfSampling();
             
             hideForeground();
         },

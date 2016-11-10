@@ -5,6 +5,10 @@
 .grid-stack-item-content {
 	overflow: visible !important;
 }
+
+.ui-draggable-dragging > * {
+	opacity: 1.0 !important;
+}
   
 .card {
 	transition: 0.1s linear;

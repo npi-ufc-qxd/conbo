@@ -62,12 +62,12 @@
 									<th>Banco</th>
 									<th>Agencia</th>
 									<th>Conta Corrente</th>
-									<th colspan="3">Opções</th>
+									<th>Opções</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="aluno:${alunos}">
-									<td th:text="${aluno.nome}"></td>
+									<td class="max-width-200"><p th:text="${aluno.nome}" class="justify"></p></td>
 									<td th:text="${aluno.matricula}"></td>
 									<td th:text="${aluno.CPF}"></td>
 									<td th:text="${aluno.banco}"></td>

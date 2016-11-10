@@ -1,0 +1,53 @@
+.index__card-reference {
+	display: none;
+}
+
+.grid-stack-item-content {
+	overflow: visible !important;
+}
+  
+.card {
+	transition: 0.1s linear;
+	height: 100%;
+}
+
+.card .card__menu {
+	position: absolute;
+	top: 13px;
+	right: 13px;
+	z-index: 10;
+}
+
+.grid-stack-item[data-gs-height="2"] .card .card-image-icon {
+    line-height: 140px !important;
+    font-size: 48px;
+}
+
+.grid-stack-item[data-gs-height="4"] .card .card-image-icon {
+    line-height: 223px !important;
+}
+
+.card .card-image {
+	min-height: 0 !important;
+}
+
+.card .card-image i {
+	transition: 0.1s linear;
+}
+
+.card:hover {
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card:hover .card-image i {
+	transform: scale(1.15, 1.15);
+}
+
+.dropdown-content {
+	z-index: 1000;
+}
+
+.col {
+	padding: 0 !important;
+	transition: 0.2s linear;
+}

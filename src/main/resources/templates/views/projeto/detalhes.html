@@ -13,10 +13,36 @@
 	
 	<h3>Ações</h3>
 	<button>Associar Bolsa</button>
-	<button>Ver Bolsista</button>
+
+	
+	<button type="button" onclick="VerBolsistas('divBolsa')">Ver Bolsista</button>
+    
+    <div id="VerBolsistas" style="display:none">
+    
+        
+        <h3>Lista de Bolsistas do Projeto</h3>
+        
+        <table id="table-bolsistas" border="1" >
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Matricula</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="bolsista:${projeto.bolsas.participacoes}">
+                    <td th:text="${bolsista.aluno.nome}"></td>
+                    <td th:text="${bolsista.aluno.matricula}"></td>
+                </tr>
+            </tbody>
+        </table>
+    
+    </div>
+	
 	<button>Ver Bolsas</button>
 	
-	<h3>Lista de Bolsas do Projeto</h3>
+	
+<!-- 	<h3>Lista de Bolsas do Projeto</h3>
 	
 	<table id="table-bolsas" border="1">
 		<thead>
@@ -35,10 +61,8 @@
 		</tbody>
 	</table>
 	
-	
-	
-	
-
-
+ -->
 </body>
+
+<script th:src="@{/js/projeto/detalhes.js}" type="text/javascript"></script>
 </html>

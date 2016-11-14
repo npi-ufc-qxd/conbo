@@ -35,7 +35,6 @@ public class BolsaController {
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
 	public ModelAndView cadastrarForm(){
-		System.err.println("Aqui");
 
 		ModelAndView modelAndView = new ModelAndView("/views/bolsa/cadastrar");
 		modelAndView.addObject("bolsa", new Bolsa());
@@ -48,15 +47,12 @@ public class BolsaController {
 
 	@RequestMapping(value="/buscar/{nome}", method = RequestMethod.GET)
 	public ModelAndView buscarForm(@PathVariable("nome") String nome){
-		System.err.println("AQUI");
 		ModelAndView model = new ModelAndView("/views/bolsa/listar");
 		Bolsa bolsa = this.bolsaService.buscarPorNome(nome);
-		System.err.println("AQUI");
 		List<Bolsa> bolsas = new ArrayList<>();
 		bolsas.add(bolsa);
 
 		model.addObject("bolsas", bolsas);
-		System.err.println("AQUI");
 		return model;
 	}
 
@@ -70,11 +66,7 @@ public class BolsaController {
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public String cadastrar(@ModelAttribute("bolsa") Bolsa bolsa) {
-
-		//bolsa.getTipoBolsa().setIdTipoBolsa(bolsa.getIdBolsa());
-
 		System.err.println("Aqui");
-		//System.err.println(bolsa.toString());
 		bolsaService.salvar(bolsa);
 		return "redirect:listar";
 	}

@@ -93,6 +93,46 @@ var mf_base = function() {
     	
     }
     
+    var initAlerts = function() {
+    	
+    	var getIconByType = function(type) {
+    		return (
+    			(type == 'info')   ? 'info':
+    			(type == 'warning')? 'warning':
+    			(type == 'success')? 'check':
+    			(type == 'error')  ? 'error': ''
+    		);
+    	}
+    	var getColorByType = function(type) {
+    		
+    		return (
+    			(type == 'info')    ? 'blue':
+    			(type == 'warning') ? 'deep-orange':
+    			(type == 'success') ? 'green':
+    			(type == 'error')   ? 'red': 'black'
+    		);
+    	}
+    	
+    	var delayAmount = 0;
+   		$(".alert-message").each(function(_, el) {
+   			$(el).remove();
+    			var text = $(el).text();
+        		var type = $(el).data("type").toLowerCase();
+        		var delay = $(el).data("delay");
+        		var icon = getIconByType(type);
+        		var color = getColorByType(type);
+        		console.log("Getting type: " + color);
+        		var content = $('<div class="valign-wrapper"><i class="material-icons ' + color + '-text">' + icon + '</i><span class="' + color + '-text">' + text + '</span></div>');
+
+        	setTimeout(function() {    			
+        		Materialize.toast(content, delay, 'alert-' + type + ' rounded');
+    		}, delayAmount);
+        	
+        	delayAmount += 500;
+        	
+       	});
+    }
+
     var hideForeground = function() {
     	$("body").removeClass("no-transition");
     	$(".mf-foreground").fadeOut("slow");
@@ -106,8 +146,9 @@ var mf_base = function() {
             initCharts();
             initMask();
             initSelfSampling();
+            initAlerts();
             
-            hideForeground();
+            hideForeground();            
         },
         
         doAddChart : function(el, type, labels, datasets) {

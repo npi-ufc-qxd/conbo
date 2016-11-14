@@ -274,3 +274,16 @@ span.item-value {
 .self-sampled.move-right {
 	transform: translateX(16px);
 }
+
+.toast {
+	background-color: #fff;
+}
+
+.toast i {
+	margin-right: 16px;
+}
+
+.toast i, .toast span {
+	margin-right: 16px;
+	font-weight: 400;
+}

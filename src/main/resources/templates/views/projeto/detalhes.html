@@ -14,31 +14,34 @@
 	<h3>Ações</h3>
 	<button>Associar Bolsa</button>
 	<button>Ver Bolsista</button>
-	<button>Ver Bolsas</button>
+	<button type="button" onclick="Mudarestado('divBolsa')">Ver Bolsas</button>
 	
-	<h3>Lista de Bolsas do Projeto</h3>
+	<div id="divBolsa" style="display:none">
 	
-	<table id="table-bolsas" border="1">
-		<thead>
-			<tr>
-				<th>Nome</th>
-				<th>Tipo</th>
-				<th>Bolsistas</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="bolsa:${projeto.bolsas}">
-				<td th:text="${bolsa.nome}"></td>
-				<td th:text="${bolsa.tipoBolsa.nome}"></td>
-				<td th:text="${bolsa.countBolsistasAtivos()}"></td>
-			</tr>
-		</tbody>
-	</table>
+		
+		<h3>Lista de Bolsas do Projeto</h3>
+		
+		<table id="table-bolsas" border="1" >
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Tipo</th>
+					<th>Bolsistas</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="bolsa:${projeto.bolsas}">
+					<td th:text="${bolsa.nome}"></td>
+					<td th:text="${bolsa.tipoBolsa.nome}"></td>
+					<td th:text="${bolsa.countBolsistasAtivos()}"></td>
+				</tr>
+			</tbody>
+		</table>
 	
+	</div>
 	
-	
-	
-
 
 </body>
+
+	<script th:src="@{/js/projeto/detalhes.js}" type="text/javascript"></script>
 </html>

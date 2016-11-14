@@ -1,0 +1,263 @@
+html {
+	overflow-x: hidden;
+}
+
+.no-transition * {
+	transition: none !important;
+}
+
+header, nav, main, footer, .side-nav, .side-nav i, .side-nav i {
+	transition: all 0.2s cubic-bezier(.14,.45,.59,.92);
+}
+
+header.sidenav-opened, main.sidenav-opened, footer.sidenav-opened {
+	padding-left: 240px;
+}
+
+header.sidenav-opened.smaller, main.sidenav-opened.smaller, footer.sidenav-opened.smaller {
+	padding-left: 72px;
+}
+
+header.sidenav-opened nav {
+    width: calc(100% - 240px);
+}
+
+header.sidenav-opened.smaller nav {
+    width: calc(100% - 72px);
+}
+
+@media only screen and (max-width : 992px) {
+	header.sidenav-opened, main.sidenav-opened, footer.sidenav-opened {
+		padding-left: 0 !important; 
+	}
+    
+    header.sidenav-opened nav {
+        width: 100% !important;
+    }
+}
+	
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+main {
+    display: -webkit-flex;
+    display: flex;
+    
+    flex-direction: column;
+}
+
+.main-container {
+    padding: 24px;
+    
+    -webkit-flex: 1000 1 auto;
+    flex: 1000 1 auto;
+}
+
+footer {
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+
+.mf-foreground {
+	position: fixed;
+	top: 0; bottom: 0;
+	left: 0; right: 0;
+	z-index: 10000;
+}
+
+.breadcrumbs {
+    margin-bottom: 24px;
+}
+
+.breadcrumb {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 37px;
+}
+
+.breadcrumb:before {
+    color: #607d8b !important;
+}
+
+.card-image {
+	min-height: 97px;
+}
+
+.card-title-large {
+	font-weight: 200;
+	font-size: 42px;
+	line-height: 97px;
+}
+
+nav .nav-wrapper {
+	display: -webkit-flex;
+    display: flex;
+
+    justify-content: space-between;
+}
+
+nav .search-wrapper.hide {
+	display: none;
+}
+
+nav .search-wrapper {
+    width: calc(480px - 4rem);	
+}
+
+@media only screen and (max-width : 992px) {
+    nav .search-wrapper {
+        width: calc(240px - 4rem);   
+    }
+}
+
+nav .search-wrapper input {
+	margin-top: 6px;
+	margin-bottom: 6px;
+	height: calc(64px - 12px) !important;
+	line-height: calc(64px - 12px) !important;
+	border-radius: 2px;
+	background: #EFEFEF;
+	color: #37474F;
+}
+
+nav .search-wrapper input:focus {
+	background: #FFFFFF;
+	box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 1px 0 rgba(0,0,0,.07),0 2px 1px -1px rgba(0,0,0,.06) !important;
+}
+
+nav .search-wrapper label i {
+	color: #78909C;
+}
+
+nav .search-wrapper label.active i {
+	color: #37474F;
+}
+
+.input-field input:focus ~ i {
+	color: #37474F !important;
+}
+
+nav .search-wrapper label,  
+nav .search-wrapper i {
+	height: calc(64px - 12px) !important;
+	line-height: calc(64px - 12px) !important;
+}
+
+nav .v-divider {
+	height: 64px;
+	width: 1px;
+	border-left: 1px solid rgba(160, 160, 160, 0.2);
+}
+
+@media only screen and (max-width : 600px) {
+	nav .search-wrapper input {
+		margin-top: 6px;
+		margin-bottom: 6px;
+		line-height: calc(56px - 12px) !important;
+		height: calc(56px - 12px) !important;
+	}
+	
+	nav .search-wrapper label, 
+	nav .search-wrapper i {
+		line-height: calc(56px - 12px) !important;
+		height: calc(56px - 12px) !important;
+	}
+	
+	nav .v-divider {
+		height: 56px;
+	}
+}
+
+nav .button-collapse {
+	flex-grow: 0;
+}
+
+table {
+	overflow: scroll;
+}
+
+.mf-table th {
+	font-weight: 400 !important;
+}
+
+.mf-table td {
+	font-weight: 300;
+	padding-top: 0;
+	padding-bottom: 0;
+	height: 52px;
+}
+.mf-table td a {
+	display: block;
+	transition: all .1s linear;
+	font-weight: 500;	
+}
+
+.fab-bottom-right {
+	position: absolute;
+	bottom: -26px;
+	right: 26px;
+}
+
+.mdi {
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+.modal-trigger {
+	cursor: pointer;
+}
+
+.card-image-icon {
+	width: 100%;
+	text-align: center;
+	font-size: 128px;
+	line-height: 240px;
+	color: #FFFFFF;
+}
+
+@media only screen and (max-width : 600px) {
+	.card-image-icon {
+		font-size: 96px;
+		line-height: 128px;
+	}
+}
+
+.card .btn-flat {
+	font-size: 14px;
+	margin-right: 8px !important;
+	padding: 0 12px;
+}
+
+.select2-container {
+	width: 100% !important;
+}
+
+.select2-search__field {
+	height: auto !important;
+}
+
+.userView {
+	display: flex !important;
+}
+
+.collapsible-header * {
+	font-weight: 300;
+}
+
+span.item-value {
+	font-weight: 300;
+	font-size: 18px;
+	display: block;
+}

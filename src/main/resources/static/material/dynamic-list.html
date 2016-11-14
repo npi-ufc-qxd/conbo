@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html>
+	
+	<head>
+		<title>Material Felipe</title>
+
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="materialize/css/materialize.css">
+		<link rel="stylesheet" type="text/css" href="css/mf.css">
+				
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <style type="text/css">
+
+            .dynamic-list-element {
+                transition: all 0.6s cubic-bezier(.87,-.41,.19,1.44);
+                opacity: 0.0;
+                transform: scale(0, 1);
+            }
+
+            .dynamic-list-added {
+                transform: scale(1, 1);
+                opacity: 1.0;
+            }
+
+            .dynamic-list-removed {
+                transform: scale(0, 0);
+                opacity: 0.0;
+            }
+
+        </style>
+
+	</head>
+
+	<body class="root grey lighten-4">
+
+        <div class="input-field ">
+            <input id="test" type="text" class="validate">
+            <label for="test">Type...</label>
+        </div>
+
+        <table class="dynamic-list card">
+
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+
+            <tr class="dynamic-list-element">
+                <td class="name"></td>
+
+                <td class="">
+                    <button class="btn-flat waves-effect dynamic-list-remove">Remover</button> 
+                </td>
+            </tr>
+
+            <tr>
+                <button class="btn-floating btn-large waves-effect waves-light dynamic-list-add">
+                    <i class="material-icons">add</i>
+                </button>
+            </tr>
+            
+        </table>
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="materialize/js/bin/materialize.min.js"></script>
+		<script src="js/mf.js"></script>
+        <script src="js/dynamic-list.js"></script>
+        <script src="js/autocomplete.js"></script>
+
+        <script type="text/javascript">
+            
+            $(function() {
+
+                var ac = AutoComplete({
+                    input: "input",
+                    onEdit: function(data) {
+                        console.log("Editing: " + data.text);
+                    }, 
+                    data: [
+                        {
+                            value: "Felipe Pinho", 
+                            text: "Felipe Pinho"
+                        }, 
+                        {
+                            value: "Roger Braz", 
+                            text: "Roger Braz"
+                        }
+                    ]
+                });
+
+                var dl = new DynamicList({
+                    list: ".dynamic-list", 
+                    element: ".dynamic-list-element", 
+                    addButton: ".dynamic-list-add", 
+                    removeButton: ".dynamic-list-remove",
+                    editButton: ".dynamic-list-edit", 
+                    onAdd: function() {
+                        return {
+                            ".name": {
+                                text: $("input").val()
+                            }
+                        };
+                    }, 
+                    onRemove: function(element) {
+                        return confirm("Deseja remover este item!");
+                    }
+                });
+
+            });
+
+        </script>
+				
+	</body>
+
+</html>

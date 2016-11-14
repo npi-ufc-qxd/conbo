@@ -1,0 +1,51 @@
+<header class="navbar-fixed sidenav-opened" th:fragment="header">
+    <nav class="white">
+        <div class="nav-wrapper">
+            
+            <ul id="nav-mobile" class="left">
+            	<li>
+            		<a href="#" data-activates="slide-out" class="circular waves-effect  button-collapse-hide hide-on-large-only waves-effect">
+		                <i class="material-icons grey-text">menu</i>
+		            </a>
+		        </li>
+                <li>    
+		            <a href="#" data-activates="slide-out" class="circular waves-effect button-collapse-minimalize hide-on-med-and-down waves-effect">
+		                <i class="material-icons grey-text">menu</i>
+		            </a>
+            	</li>
+            	<li class="v-divider"></li>
+                <li style="display: none">
+                	<a th:href="@{/material/buscar/}" class="circular waves-effect ">
+                    	<i class="material-icons grey-text">search</i>
+                	</a>
+                </li>
+            </ul>
+           
+            <div class="search-wrapper hide">
+		        <div class="input-field">
+					<input id="search" type="search" class="" autocomplete="off"/>
+					<label for="search"><i class="material-icons">search</i></label>
+					<i class="material-icons">close</i>
+		        </div>
+	        </div>
+	        
+            <ul id="nav-mobile" class="right">
+            	<li th:if="${#authentication}" class="blue-grey-text" >
+                	Olá, <span th:text="${#authentication?.principal?.nome}"></span>
+                </li>
+                <li>
+                	<a class="circular waves-effect dropdown-button" data-activates='user-account-options'
+                       data-alignment="right" data-constrainwidth="false" data-beloworigin="true">
+                    	<i class="material-icons grey-text">person</i>
+                	</a>
+                </li>
+            </ul>
+            
+            <ul id='user-account-options' class='dropdown-content'>
+                <li><a class="waves-effect blue-grey-text text-darken-4">Meus dados</a></li>
+                <li><a th:href="@{/logout}" class="waves-effect blue-grey-text text-darken-4">Sair</a></li>
+            </ul>
+            
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<title>Conbo</title>
+
+    <link rel="stylesheet" th:href="@{/material/materialize/fonts/icons/material-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/material/materialize/fonts/icons/material-icons-google.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/material/materialize/css/materialize.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/material/plugins/data_tables/css/dataTables.materialize.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/material/css/mf.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/material/css/mf-helpers.css}"/>
+			
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    
+    <!-- CONFIGURACAO DO CSRF -->
+    <!-- meta name="_csrf" th:content="${_csrf.token}"/ -->
+    <!-- default header name is X-CSRF-TOKEN -->
+    <!-- meta name="_csrf_header" th:content="${_csrf.headerName}"/ -->
+
+	<!-- CONFIGURACAO DO CONTEXTO -->
+   <meta name="_context" th:content="${#httpServletRequest.getContextPath()}" />
+</head>
+
+<body class="root grey lighten-3">
+		
+	<div th:replace="views/base/side-nav :: side-nav"></div>
+	<div th:replace="views/base/header :: header"></div>
+	
+	<main class="sidenav-opened"> 
+        <div class="main-container">
+        	<section class="" layout:fragment="conteudo"></section>
+        </div>
+    </main>            	
+            	        
+    <div class="mf-foreground white" ></div>
+    
+    <!-- Plugins externos e JQuery -->
+    <script type="text/javascript" th:src="@{/material/plugins/jquery/jquery-3.1.1.js}"></script>
+    <script type="text/javascript" th:src="@{/material/plugins/jquery/jquery.mask.min.js}"></script>
+    <script type="text/javascript" th:src="@{/material/plugins/data_tables/js/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/material/plugins/data_tables/js/dataTables.materialize.js}"></script>
+    <script type="text/javascript" th:src="@{/material/plugins/chart/chart.js}"></script>
+    <script type="text/javascript" th:src="@{/material/plugins/cookie/cookie.js}"></script>
+    
+    <!-- Framework base -->
+	<script type="text/javascript" th:src="@{/material/materialize/js/bin/materialize.js}"></script>
+	<script type="text/javascript" th:src="@{/material/js/mf.js}"></script>
+	
+	<section layout:fragment="js"></section>
+	
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+			
+			Materialize.updateTextFields();
+			$('select').material_select();
+			$('.datepicker').pickadate({
+			    selectMonths: true,
+			    selectYears: 100, 
+			    format: 'dd/mm/yyyy'
+			});			       
+		});
+	
+	</script>
+    
+</body>
+</html>

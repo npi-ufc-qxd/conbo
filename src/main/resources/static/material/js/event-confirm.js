@@ -105,25 +105,25 @@
         if (settings.title !== '') {
             modalHeader =
                 '<div class="modal-header">' +
-                    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-                    '<h4 class="modal-title">' + settings.title+'</h4>' +
+                    '<button type="button" style="position: absolute; top: 8px; right: 8px;" class="close btn-icon waves-effect" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                    '<h4 class="modal-title">' + settings.title +'</h4>' +
                 '</div>';
         }
         var cancelButtonHtml = '';
         if (settings.cancelButton) {
             cancelButtonHtml =
-                '<button class="cancel btn ' + settings.cancelButtonClass + '" type="button" data-dismiss="modal">' +
+                '<button style="margin-right: 16px;" class="cancel modal-action modal-close btn-flat waves-effect ' + settings.cancelButtonClass + '" type="button" data-dismiss="modal">' +
                     settings.cancelButton +
                 '</button>'
         }
         var modalHTML =
-                '<div class="confirmation-modal modal fade" tabindex="-1" role="dialog">' +
+                '<div class="confirmation-modal modal" tabindex="-1" role="dialog">' +
                     '<div class="'+ settings.dialogClass +'">' +
                         '<div class="modal-content">' +
                             modalHeader +
-                            '<div class="modal-body">' + settings.text + '</div>' +
+                            '<div class="modal-content">' + settings.text + '</div>' +
                             '<div class="modal-footer">' +
-                                '<button class="confirm btn ' + settings.confirmButtonClass + '" type="button" data-dismiss="modal">' +
+                                '<button class="confirm modal-action modal-close btn-flat waves-effect ' + settings.confirmButtonClass + '" type="button" data-dismiss="modal">' +
                                     settings.confirmButton +
                                 '</button>' +
                                 cancelButtonHtml +
@@ -136,18 +136,23 @@
 
         // Apply modal options
         if (typeof settings.modalOptionsBackdrop != "undefined" || typeof settings.modalOptionsKeyboard != "undefined") {
-            modal.modal({
+            /*
+            modal.leanModal({
                 backdrop: settings.modalOptionsBackdrop,
                 keyboard: settings.modalOptionsKeyboard
             });
+            */
         }
 
+        /*
         modal.on('shown.bs.modal', function () {
             modal.find(".btn-primary:first").focus();
         });
         modal.on('hidden.bs.modal', function () {
             modal.remove();
         });
+        */
+
         modal.find(".confirm").click(function () {
             settings.confirm(settings.button);
         });
@@ -157,7 +162,14 @@
 
         // Show the modal
         $("body").append(modal);
-        modal.modal('show');
+        modal.openModal({
+            ready: function(_, trigger) {
+                modal.find(".btn-primary:first").focus();
+            }, 
+            complete: function() {
+                modal.remove();
+            }
+        });
     };
 
     /**

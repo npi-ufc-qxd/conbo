@@ -268,11 +268,11 @@ span.item-value {
 }
 
 .self-sampled.move-left {
-	transform: translateX(-16px);
+	transform: translateX(-8px);
 }
 
 .self-sampled.move-right {
-	transform: translateX(16px);
+	transform: translateX(8px);
 }
 
 .toast {

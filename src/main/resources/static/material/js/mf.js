@@ -121,7 +121,6 @@ var mf_base = function() {
         		var delay = $(el).data("delay");
         		var icon = getIconByType(type);
         		var color = getColorByType(type);
-        		console.log("Getting type: " + color);
         		var content = $('<div class="valign-wrapper"><i class="material-icons ' + color + '-text">' + icon + '</i><span class="' + color + '-text">' + text + '</span></div>');
 
         	setTimeout(function() {    			
@@ -138,6 +137,15 @@ var mf_base = function() {
     	$(".mf-foreground").fadeOut("slow");
     }
 
+    var initConfirm = function() {
+        try {
+            $(".confirm").confirm({
+                "confirmButton": "Sim", 
+                "cancelButton": "Não"
+            });
+        } catch(err) { }
+    }
+
     return {
         
         doInit : function() {
@@ -147,6 +155,7 @@ var mf_base = function() {
             initMask();
             initSelfSampling();
             initAlerts();
+            initConfirm();
             
             hideForeground();            
         },

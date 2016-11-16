@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -33,8 +35,10 @@ public class Bolsa {
 	
 	@OneToOne
 	private TipoBolsa tipoBolsa;
-	
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name="bolsa_responsaveis", 
+            joinColumns=  @JoinColumn( name = "idBolsa"), 
+            inverseJoinColumns= @JoinColumn(name = "idPessoa") )
 	private List<Pessoa> responsaveis;
 	
 	public Bolsa() {
@@ -49,6 +53,27 @@ public class Bolsa {
 		this.idBolsa = idBolsa;
 	}
 	
+	
+
+	public int countBolsistasAtivos(){
+		int count = 0;
+		
+		for(Participacao participacao: getParticipacoes()){
+			if(participacao.isStatus()){
+				count++;
+			}
+		}
+		
+		return count;
+	}
+
+
+
+
+	public Double getValor() {
+		return valor;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -63,18 +88,6 @@ public class Bolsa {
 
 	public void setParticipacoes(List<Participacao> participacoes) {
 		this.participacoes = participacoes;
-	}
-	
-	public int countBolsistasAtivos(){
-		int count = 0;
-		
-		for(Participacao participacao: getParticipacoes()){
-			if(participacao.isStatus()){
-				count++;
-			}
-		}
-		
-		return count;
 	}
 
 	public Projeto getProjeto() {
@@ -91,10 +104,6 @@ public class Bolsa {
 
 	public void setTipoBolsa(TipoBolsa tipoBolsa) {
 		this.tipoBolsa = tipoBolsa;
-	}
-
-	public Double getValor() {
-		return valor;
 	}
 
 	public void setValor(Double valor) {
@@ -156,4 +165,14 @@ public class Bolsa {
 	public void setFolhaPagamento(boolean folhaPagamento) {
 		this.folhaPagamento = folhaPagamento;
 	}
+
+	/*@Override
+	public String toString() {
+		return "Bolsa [idBolsa=" + idBolsa + ", nome=" + nome + ", valor=" + valor + ", ano=" + ano + ", frequencia="
+				+ frequencia + ", vagas=" + vagas + ", observacao=" + observacao + ", status=" + status
+				+ ", folhaPagamento=" + folhaPagamento + ", participacoes=" + participacoes + ", projeto=" + projeto
+				+ ", tipoBolsa=" + tipoBolsa + ", responsaveis=" + responsaveis + "]";
+	}
+	
+*/	
 }

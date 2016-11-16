@@ -17,4 +17,6 @@ public interface BolsaService {
 	
 	List<Bolsa> listar();
 	
+	Bolsa buscarPorNome(String nome);
+	
 }

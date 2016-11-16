@@ -10,5 +10,7 @@ import br.ufc.conbo.model.Pessoa;
 @Repository
 @Transactional
 public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
+	
+	
 
 }

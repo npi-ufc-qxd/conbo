@@ -41,4 +41,12 @@ public class TipoBolsa {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	@Override
+	public String toString() {
+		return "TipoBolsa [idTipoBolsa=" + idTipoBolsa + ", nome=" + nome + ", descricao=" + descricao + ", bolsas="
+				+ bolsas + "]";
+	}
+	
+	
 }

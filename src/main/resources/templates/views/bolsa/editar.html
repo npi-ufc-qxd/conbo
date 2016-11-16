@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Editar Bolsa</title>
+</head>
+<body th:with="acao_url=${acao == 'CADASTRAR'? 'cadastrar' :'editar' }">
+
+
+<form action="#" th:action="@{/bolsa/editar}" th:object="${bolsa}"
+	th:method="post">
+	
+	 <input id="id" type="hidden" th:field="*{idBolsa}" />
+
+		<label th:for="${#ids.next('nome')}">Nome: </label> 
+		<input type="text" id="nome" name="nome" th:value="${bolsa.nome}" /> 
+		<br /> 
+		
+		<label th:for="${#ids.next('valor')}">valor: </label> 
+		<input type="text" id="valor" name="valor" th:value="${bolsa.valor}" /> 
+		<br /> 
+		
+		<label th:for="${#ids.next('ano')}">ano: </label> 
+		<input type="text" id="ano" name="ano" th:value="${bolsa.ano}" /> 
+		<br /> 
+		
+		<label th:for="${#ids.next('frequencia')}">frequencia</label>
+		<input type="checkbox" th:field="*{frequencia}" th:value="${bolsa.frequencia}" />
+		<br />
+		
+		<label th:for="${#ids.next('vagas')}">vagas: </label> 
+		<input type="text" id="vagas" name="vagas" th:value="${bolsa.vagas}" /> 
+		<br /> 
+		
+		<label th:for="${#ids.next('observacao')}">observacao: </label> 
+		<input type="text" id="observacao" name="observacao" th:value="${bolsa.observacao}" />
+		<br /> 
+		
+		<label th:for="${#ids.next('status')}">status</label>
+		<input type="checkbox" th:field="*{status}" th:value="${bolsa.status}" />
+		<br />
+		
+		<label th:for="${#ids.next('folhaPagamento')}">folhaPagamento</label>
+		<input type="checkbox" th:field="*{folhaPagamento}"  th:value="${bolsa.folhaPagamento}"/>
+		<br />
+		
+		Tipo Bolsa
+		<select  th:field="*{tipoBolsa}">
+         	<option th:each="tb:${tipoBolsas}" th:text="${tb.nome}"  
+         	 th:value="${{tb}}">Nome</option>
+        </select>
+		
+		<br />
+
+	<button type="submit">Salvar</button>
+
+</form>
+
+
+
+
+
+
+</body>
+</html>

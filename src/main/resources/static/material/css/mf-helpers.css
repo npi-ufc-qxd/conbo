@@ -18,6 +18,16 @@
 .radius-top-16 { border-radius: 16px 16px 0 0; }
 .radius-top-24 { border-radius: 24px 24px 0 0; }
 
+.max-width-50 { max-width: 50px; }
+.max-width-100 { max-width: 100px; }
+.max-width-150 { max-width: 150px; }
+.max-width-200 { max-width: 200px; }
+.max-width-250 { max-width: 250px; }
+.max-width-300 { max-width: 300px; }
+.max-width-350 { max-width: 350px; }
+.max-width-400 { max-width: 400px; }
+.max-width-450 { max-width: 450px; }
+
 .circle {
     border-radius: 50%;
 }

@@ -1,29 +1,88 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<title>Lista de Pessoas</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="views/base/base"
+    th:with="currentPage='pessoa'">
 
-	<table id="table-pessoas" border="1">
-		<thead>
-			<tr>
-				<th>Nome</th>
-				<th>E-mail</th>
-				<th>id</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="pessoa:${pessoas}">
-				<td th:text="${pessoa.nome}"></td>
-				<td th:text="${pessoa.email}"></td>
-				<td th:text="${pessoa.idPessoa}"></td>
+	<head>
+	
+	    <title>Conbo - Pessoas</title>
+	    
+	</head>
+
+	<section layout:fragment="conteudo">
+		
+		<div class="row">
+		
+			<!-- BREADCRUMBS - Mostra o caminho até a página atual -->
+			
+			<div class="col s12 breadcrumbs valign-wrapper">
+	            
+	            <a th:href="@{/}" class="breadcrumb blue-grey-text">
+	                <i class="material-icons left">home</i>
+	            </a>
+	            
+	            <a class="breadcrumb blue-grey-text">Pessoas</a>
+	            
+	        </div>
+	        
+	        <!-- BREADCRUMBS -->
+		
+		
+			<!-- CONTAINER - Conteiner principal da aplicação -->
+			
+		    <div class="col s12">
+		    	
+				<div class="card">
+					
+					<a th:href="@{/pessoa/cadastrar}"
+						class="btn-floating btn-large waves-effect waves-light top-right tooltipped"
+						data-tooltip="Cadastrar pessoa" type="button"
+						th:classappend="${#lists.isEmpty(pessoas)}? self-sampled"><i class="material-icons">add</i></a>
+					
+					<div class="card-content">
+					
+						<span class="bold indigo-text" th:if="${#lists.isEmpty(pessoas)}">Não há pessoas cadastradas</span>
+					
+						<table th:unless="${#lists.isEmpty(pessoas)}" id="table-pessoas">
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>Email</th>
+									<th>Opções</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="pessoa:${pessoas}">
+								
+									<td class="max-width-200"><span th:text="${pessoa.nome}" class="justify"></span></td>
+									<td th:text="${pessoa.email}"></td>
+									<td>
+										<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/pessoa/editar/'+pessoa.idPessoa}}" ><i class="material-icons">edit</i></a>
+										<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover esta pessoa?" data-tooltip="Remover" th:href="@{${'/pessoa/remover/'+pessoa.idPessoa}}" ><i class="material-icons">delete</i></a>
+									</td>
+									
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				
-			</tr>
-		</tbody>
-	</table>
+				</div>
 
+		    </div>
+		    	        	   
+		    <!-- CONTAINER -->
+		    
+		</div>
+		
+	</section>
 
-</body>
+	<section layout:fragment="js">
+	
+		<!-- SCRIPTS - Coloque aqui os scripts desta página -->
+			
+	</section>
+
 </html>
+				

@@ -25,7 +25,7 @@
 	            
 	            <a th:href="@{/aluno/listar}" class="breadcrumb blue-grey-text">Alunos</a>
 	            
-	            <a class="breadcrumb blue-grey-text" th:text="${acao}"></a>
+	            <a class="breadcrumb blue-grey-text">Cadastrar</a>
 	            
 	        </div>
 	        
@@ -53,7 +53,7 @@
 							
 							<div class="col l6 m6 s12 input-field">   	
 							    <label th:for="${#ids.next('CPF')}">CPF: </label>
-							    <input type="text" id="CPF" name="CPF" th:value="${CPF}"/>
+							    <input type="text" id="CPF" name="CPF" th:value="${CPF}" class="cpf"/>
 							</div>
 							
 							<div class="col s12 input-field">   	
@@ -75,7 +75,7 @@
 					</div>
 					
 					<div class="card-action right-align">
-						<a th:href="@{/aluno/listar}" class="btn btn-flat waves-effect">Cencelar</a>
+						<a th:href="@{/aluno/listar}" data-text="Deseja voltar à listagem?" class="confirm btn btn-flat waves-effect">Cencelar</a>
 						<button class="btn waves-effect waves-light" type="submit">Salvar</button>
 					</div>
 					

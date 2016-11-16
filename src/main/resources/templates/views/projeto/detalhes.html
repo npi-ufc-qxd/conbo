@@ -54,7 +54,7 @@
 								<span class="light" th:text="${projeto.descricao}"></span>
 							</div>
 						</div>
-						<div class="row no-margin">
+						<div class="row no-margin" id="divBolsa" style="display:none">
 							<div class="col l12 m12 s12">
 								<span class="bold">Bolsas:</span> <br/>
 								<span class="bold indigo-text" th:if="${#lists.isEmpty(projeto.bolsas)}">Não há bolsas cadastradas neste projeto</span>
@@ -82,7 +82,7 @@
 						<a th:href="@{/projeto/listar}" class="btn btn-flat waves-effect">Voltar à Listagem</a>
 						<a class="btn btn-raised waves-effect waves-light">Asociar Bolsa</a>
 						<a class="btn waves-effect waves-light">Ver Bolsista</a>
-						<a class="btn waves-effect waves-light">Ver Bolsas</a>
+						<a class="btn waves-effect waves-light" type="button" onclick="Mudarestado('divBolsa')">Ver Bolsas</a>
 				
 					</div>
 				</div>
@@ -94,11 +94,11 @@
 		</div>
 		
 	</section>
-
+		
 	<section layout:fragment="js">
-	
 		<!-- SCRIPTS - Coloque aqui os scripts desta página -->
-			
+			<script th:src="@{/js/projeto/detalhes.js}" type="text/javascript"></script>
 	</section>
 
 </html>
+

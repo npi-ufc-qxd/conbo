@@ -88,15 +88,15 @@ public class ProjetoController {
 	
 	@RequestMapping(value = "/detalhes/{id}", method = RequestMethod.GET)
 	public ModelAndView visualizar(@PathVariable("id") Long idProjeto){
-		ModelAndView modelAndView = new ModelAndView("/views/projeto/detalhes");
 		
+		ModelAndView modelAndView = new ModelAndView("/views/projeto/detalhes");
 		modelAndView.addObject("bolsasNaoAssociadas", bolsaService.buscarBolsasNaoAssociadas());
 		modelAndView.addObject("projeto", projetoService.buscarPorId(idProjeto));
 		modelAndView.addObject("bolsas", bolsaService.listar());
 		
 		return modelAndView; 
 	}
-	
+
 	@RequestMapping(value = "/{idProjeto}/associar/bolsa/{idBolsa}", method = RequestMethod.GET)
 	public String associarBolsa(@PathVariable("idProjeto") Long idProjeto, 
 			@PathVariable("idBolsa") Long idBolsa){
@@ -116,4 +116,5 @@ public class ProjetoController {
 		//return modelAndView;
 		return "redirect:/projeto/detalhes/"+idProjeto;
 	}
+
 }

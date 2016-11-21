@@ -1,5 +1,7 @@
 package br.ufc.conbo.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.ufc.conbo.model.Bolsa;
 import br.ufc.conbo.model.Projeto;
+import br.ufc.conbo.service.BolsaService;
 import br.ufc.conbo.service.ProjetoService;
 
 @Controller
@@ -20,7 +24,11 @@ public class ProjetoController {
 	
 
 	@Inject
-	private ProjetoService projetoService;	
+	private ProjetoService projetoService;
+	
+	@Inject
+	private BolsaService bolsaService;	
+
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
 	public ModelAndView cadastrarForm(){
@@ -40,7 +48,6 @@ public class ProjetoController {
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
 	public ModelAndView listar (){
 		ModelAndView modelAndView = new ModelAndView("/views/projeto/listar");
-		
 		modelAndView.addObject("projetos", projetoService.listar());
 		return modelAndView;
 	}
@@ -60,17 +67,14 @@ public class ProjetoController {
 	
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
 	public ModelAndView editarForm (@PathVariable("id") Long idProjeto){
-		
 		Projeto projeto = projetoService.buscarPorId(idProjeto);
 		ModelAndView modelAndView = new ModelAndView("/views/projeto/editar");
-		
 		if(projeto==null){
 			return null;
 		}
-		
 		modelAndView.addObject("projeto", projeto);
 		modelAndView.addObject("acao", "EDITAR");
-		return modelAndView ;
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/editar", method = RequestMethod.POST)
@@ -84,14 +88,33 @@ public class ProjetoController {
 	
 	@RequestMapping(value = "/detalhes/{id}", method = RequestMethod.GET)
 	public ModelAndView visualizar(@PathVariable("id") Long idProjeto){
+		
 		ModelAndView modelAndView = new ModelAndView("/views/projeto/detalhes");
-		
-		
-		
+		modelAndView.addObject("bolsasNaoAssociadas", bolsaService.buscarBolsasNaoAssociadas());
 		modelAndView.addObject("projeto", projetoService.buscarPorId(idProjeto));
+		modelAndView.addObject("bolsas", bolsaService.listar());
+		
 		return modelAndView; 
 	}
-	
-	
-	
+
+	@RequestMapping(value = "/{idProjeto}/associar/bolsa/{idBolsa}", method = RequestMethod.GET)
+	public String associarBolsa(@PathVariable("idProjeto") Long idProjeto, 
+			@PathVariable("idBolsa") Long idBolsa){
+		Bolsa bolsa = bolsaService.buscarPorId(idBolsa);
+		Projeto projeto = projetoService.buscarPorId(idProjeto);
+		List<Bolsa> bolsas = projeto.getBolsas();
+		bolsa.setProjeto(projeto);
+		bolsas.add(bolsa);
+		projeto.setBolsas(bolsas);
+		projetoService.salvar(projeto);
+		
+		
+		ModelAndView modelAndView = new ModelAndView("/views/projeto/detalhes");
+		modelAndView.addObject("projeto", projetoService.buscarPorId(idProjeto));
+		modelAndView.addObject("bolsas", bolsaService.listar());
+		
+		//return modelAndView;
+		return "redirect:/projeto/detalhes/"+idProjeto;
+	}
+
 }

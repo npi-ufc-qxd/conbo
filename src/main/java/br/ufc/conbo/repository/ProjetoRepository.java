@@ -15,5 +15,5 @@ public interface ProjetoRepository extends JpaRepository<Projeto, Long> {
 	
 	@Query("from Projeto p where (lower(p.nome) like :busca)")
 	List<Projeto> buscarPorNome(@Param("busca") String busca);
-
+	
 }

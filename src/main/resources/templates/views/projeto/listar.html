@@ -71,7 +71,7 @@
 								<tr th:each="projeto:${projetos}">
 									<td class="max-width-200"><span th:text="${projeto.nome}" class="justify"></span></td>
 									<td th:text="${projeto.bolsas.size()}"></td>
-									<td class="max-width-200"><span th:text="${projeto.descricao}" class="justify"></span></td>
+									<td class="max-width-200"><span th:text="${#strings.substring(projeto.descricao,0,200)}+'...'" class="justify"></span></td>
 									<td>
 										<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/projeto/editar/'+projeto.idProjeto}}" ><i class="material-icons">edit</i></a>
 										<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este projeto?" data-tooltip="Remover" th:href="@{${'/projeto/remover/'+projeto.idProjeto}}" ><i class="material-icons">delete</i></a>

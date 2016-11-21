@@ -48,7 +48,6 @@ public class ProjetoController {
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
 	public ModelAndView listar (){
 		ModelAndView modelAndView = new ModelAndView("/views/projeto/listar");
-		
 		modelAndView.addObject("projetos", projetoService.listar());
 		return modelAndView;
 	}
@@ -90,6 +89,9 @@ public class ProjetoController {
 	@RequestMapping(value = "/detalhes/{id}", method = RequestMethod.GET)
 	public ModelAndView visualizar(@PathVariable("id") Long idProjeto){
 		ModelAndView modelAndView = new ModelAndView("/views/projeto/detalhes");
+		
+		//modelAndView.addObject("bolsasAssociadas", bolsaService.buscarBolsasAssociadas(idProjeto));
+		modelAndView.addObject("bolsasAssociadas", bolsaService.buscarBolsasNaoAssociadas());
 		modelAndView.addObject("projeto", projetoService.buscarPorId(idProjeto));
 		modelAndView.addObject("bolsas", bolsaService.listar());
 		

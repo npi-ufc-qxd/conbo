@@ -1,4 +1,5 @@
 function Mudarestado(el) {
+
     var display = document.getElementById(el).style.display;
 
     if(display == "none")
@@ -6,5 +7,6 @@ function Mudarestado(el) {
     else
         document.getElementById(el).style.display = 'none';
 }
+
 
 

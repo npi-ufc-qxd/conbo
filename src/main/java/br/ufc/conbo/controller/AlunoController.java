@@ -38,6 +38,17 @@ public class AlunoController {
 		return "redirect:listar";
 	}
 	
+	@RequestMapping(value="/detalhes/{id}", method = RequestMethod.GET)
+	public ModelAndView detalhes(@PathVariable("id") Long id){
+		ModelAndView model = new ModelAndView("/views/aluno/detalhes");
+		Aluno aluno = this.alunoService.buscarPorId(id);
+		model.addObject("aluno", aluno);
+		List<Aluno> alunos = new ArrayList<>();
+		alunos.add(aluno);
+		model.addObject("alunos", alunos);
+		return model;
+	}
+	
 	@RequestMapping(value="/buscar/{nome}", method = RequestMethod.GET)
 	public ModelAndView buscarForm(@PathVariable("nome") String nome){
 		ModelAndView model = new ModelAndView("/views/aluno/detalhes");

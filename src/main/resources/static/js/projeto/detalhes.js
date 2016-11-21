@@ -1,4 +1,4 @@
-function associarBolsa(el) {
+function MudarEstado(el) {
     var display = document.getElementById(el).style.display;
 
     if(display == "none")

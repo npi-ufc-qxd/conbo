@@ -22,6 +22,4 @@ public interface BolsaService {
 	
 	List<Bolsa> buscarBolsasNaoAssociadas();
 	
-	List<Bolsa> buscarBolsasAssociadas(long idProjeto);
-	
 }

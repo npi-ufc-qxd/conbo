@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import br.ufc.conbo.model.Bolsa;
-import br.ufc.conbo.model.Projeto;
 import br.ufc.conbo.repository.BolsaRepository;
 import br.ufc.conbo.service.BolsaService;
 
@@ -49,11 +49,6 @@ public class BolsaServiceImpl implements BolsaService{
 	@Override
 	public List<Bolsa> buscarBolsasNaoAssociadas() {
 		return bolsaRepository.buscarBolsasNaoAssociadas();
-	}
-
-	@Override
-	public List<Bolsa> buscarBolsasAssociadas(long idProjeto) {
-		return bolsaRepository.buscarBolsasAssociadas(idProjeto);
 	}
 
 }

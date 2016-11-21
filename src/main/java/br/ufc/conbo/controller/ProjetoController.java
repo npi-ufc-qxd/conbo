@@ -90,8 +90,7 @@ public class ProjetoController {
 	public ModelAndView visualizar(@PathVariable("id") Long idProjeto){
 		ModelAndView modelAndView = new ModelAndView("/views/projeto/detalhes");
 		
-		//modelAndView.addObject("bolsasAssociadas", bolsaService.buscarBolsasAssociadas(idProjeto));
-		modelAndView.addObject("bolsasAssociadas", bolsaService.buscarBolsasNaoAssociadas());
+		modelAndView.addObject("bolsasNaoAssociadas", bolsaService.buscarBolsasNaoAssociadas());
 		modelAndView.addObject("projeto", projetoService.buscarPorId(idProjeto));
 		modelAndView.addObject("bolsas", bolsaService.listar());
 		
@@ -99,7 +98,7 @@ public class ProjetoController {
 	}
 	
 	@RequestMapping(value = "/{idProjeto}/associar/bolsa/{idBolsa}", method = RequestMethod.GET)
-	public ModelAndView associarBolsa(@PathVariable("idProjeto") Long idProjeto, 
+	public String associarBolsa(@PathVariable("idProjeto") Long idProjeto, 
 			@PathVariable("idBolsa") Long idBolsa){
 		Bolsa bolsa = bolsaService.buscarPorId(idBolsa);
 		Projeto projeto = projetoService.buscarPorId(idProjeto);
@@ -109,10 +108,12 @@ public class ProjetoController {
 		projeto.setBolsas(bolsas);
 		projetoService.salvar(projeto);
 		
+		
 		ModelAndView modelAndView = new ModelAndView("/views/projeto/detalhes");
 		modelAndView.addObject("projeto", projetoService.buscarPorId(idProjeto));
 		modelAndView.addObject("bolsas", bolsaService.listar());
 		
-		return modelAndView; 
+		//return modelAndView;
+		return "redirect:/projeto/detalhes/"+idProjeto;
 	}
 }

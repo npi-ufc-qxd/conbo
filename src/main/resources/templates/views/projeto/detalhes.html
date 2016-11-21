@@ -1,89 +1,105 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="views/base/base"
+    th:with="currentPage='projeto'">
+
 <head>
-<meta charset="UTF-8" />
-<title>Detalhes Projeto</title>
+    <title>Conbo - Detalhes do Projeto</title>
 </head>
-<body>
 
-	<h3 th:text="${projeto.nome}"></h3>
-	<label th:text="${projeto.descricao}"></label>
-	
-	<a th:href="@{${'/projeto/editar/' + projeto.idProjeto}}">Editar dados</a>
-	
-	<h3>Ações</h3>
-	<button onClick="associarBolsa('divAssociarBolsa')">Associar Bolsa</button>
-	<button>Ver Bolsista</button>
-	<button onClick="associarBolsa('divVerBolsa')">Ver Bolsas</button>
+	<section layout:fragment="conteudo">
 		
-	<div id="divBolsa" style="display: none">
-
-
-		<h3>Lista de Bolsas do Projeto</h3>
-
-		<table id="table-bolsas" border="1">
-			<thead>
-				<tr>
-					<th>Nome</th>
-					<th>Tipo</th>
-					<th>Bolsistas</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="bolsa:${projeto.bolsas}">
-					<td th:text="${bolsa.nome}"></td>
-					<td th:text="${bolsa.tipoBolsa.nome}"></td>
-					<td th:text="${bolsa.countBolsistasAtivos()}"></td>
-				</tr>
-			</tbody>
-		</table>
-
-	</div>
-	
-	<div id="divAssociarBolsa" style="display: none">
-		
-		<h3>Lista de Bolsas</h3>
-			
-		<table id="table-bolsasAssociadas" border="1">
-			<thead>
-				<tr>
-					<th>Nome</th>
-					<th>Tipo</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="bolsa:${bolsas}">
-					<td th:text="${bolsa.nome}"></td>
-					<td th:text= "${bolsa.tipoBolsa.nome}"></td>
-					<th><a th:href="@{${'/projeto/'+projeto.idProjeto+'/associar/bolsa/'+bolsa.idBolsa}}">Associar</a></th>
-				</tr>
-			</tbody>
-		</table>
-			
-	</div>
-	
-	<div id="divVerBolsa" style="display: none">
-		
-		<h3>Lista de Bolsas Associadas</h3>
-			
-		<table id="table-bolsasAssociadasProjeto" border="1">
-			<thead>
-				<tr>
-					<th>Nome</th>
-					<th>Tipo</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="bolsa:${bolsasAssociadas}">
-					<td th:text="${bolsa.nome}"></td>
-					<td th:text= "${bolsa.tipoBolsa.nome}"></td>
-				</tr>
-			</tbody>
-		</table>
-			
-	</div>
-	
-	
-</body>
-	<script th:src="@{/js/projeto/detalhes.js}" type="text/javascript"></script>
+		<div class="row">
+			<!-- BREADCRUMBS - Mostra o caminho até a página atual -->
+			<div class="col s12 breadcrumbs valign-wrapper">
+	            <a th:href="@{/}" class="breadcrumb blue-grey-text">
+	                <i class="material-icons left">home</i>
+	            </a>
+	            <a th:href="@{/projetos/listar}" class="breadcrumb blue-grey-text">Projetos</a>
+	            <a class="breadcrumb blue-grey-text">Detalhes</a>
+	        </div>
+	        <!-- BREADCRUMBS -->
+			<!-- CONTAINER - Conteiner principal da aplicação -->
+		    <div class="col s12">
+		    	
+				<div class="card">
+					<div class="card-content">
+						
+						<a class="btn-floating btn-large top-right waves-effect waves-light waves-circle tooltipped"
+							data-tooltip="Editar"
+							th:href="@{${'/projeto/editar/'+projeto.idProjeto}}" ><i class="material-icons">edit</i></a>
+					
+						<div class="row">
+							<div class="col l6 m6 s12">
+								<span class="bold">Nome:</span> <br/>
+								<span class="light" th:text="${projeto.nome}"></span>
+							</div>
+							
+							<div class="col l6 m6 s12">
+								<span class="bold">Descrição:</span> <br/>
+								<span class="light" th:text="${projeto.descricao}"></span>
+							</div>
+						</div>
+						
+						<div class="row no-margin" id="divBolsa" style="display:none">
+							<div class="col l12 m12 s12">
+								<span class="bold">Bolsas:</span> <br/>
+								<span class="bold indigo-text" th:if="${#lists.isEmpty(projeto.bolsas)}">Não há bolsas cadastradas neste projeto</span>
+					
+								<table th:unless="${#lists.isEmpty(projeto.bolsas)}" id="table-bolsas">
+									<thead>
+										<tr>
+											<th>Nome</th>
+											<th>Tipo</th>
+											<th>Bolsistas</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="bolsa:${projeto.bolsas}">
+											<td class="max-width-200"><span th:text="${bolsa.nome}" class="justify"></span></td>
+											<td th:text="${bolsa.tipoBolsa.nome}"></td>
+											<td th:text="${bolsa.countBolsistasAtivos()}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+								
+						<div class="row no-margin" id="divAssociarBolsas" style="display:none">
+							<div class="col l12 m12 s12">
+								<span class="bold">Associar Bolsas:</span> <br/>
+								<span class="bold indigo-text" th:if="${#lists.isEmpty(bolsasNaoAssociadas)}">Não há bolsas disponíveis</span>
+							
+								<table th:unless="${#lists.isEmpty(bolsasNaoAssociadas)}" id="table-associarBolsas">
+									<thead>
+										<tr>
+											<th>Nome</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="bolsa:${bolsasNaoAssociadas}">
+											<td th:text="${bolsa.nome}"></td>
+											<th><a class="btn waves-effect waves-light" th:href="@{${'/projeto/'+projeto.idProjeto+'/associar/bolsa/'+bolsa.idBolsa}}">Associar</a></th>
+										</tr>
+									</tbody>
+								</table>						
+							</div>
+						</div>
+					
+						<div class="card-action right-align">
+							<a th:href="@{/projeto/listar}" class="btn btn-flat waves-effect">Voltar à Listagem</a>
+							<a class="btn btn-raised waves-effect waves-light" type="button" onclick="MudarEstado('divAssociarBolsas')"> Associar Bolsa</a>
+							<a class="btn waves-effect waves-light">Ver Bolsista</a>
+							<a class="btn waves-effect waves-light" type="button" onclick="MudarEstado('divBolsa')">Ver Bolsas</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</section>
+	<section layout:fragment="js">
+		<script th:src="@{/js/projeto/detalhes.js}" type="text/javascript"></script>
+	</section>
 </html>

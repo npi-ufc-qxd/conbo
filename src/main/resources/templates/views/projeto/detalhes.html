@@ -7,6 +7,9 @@
 <head>
 
     <title>Conbo - Detalhes do Projeto</title>
+    
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projeto/detalhes.css}"/>
+    
 </head>
 
 	<section layout:fragment="conteudo">
@@ -33,7 +36,9 @@
 					
 						<div class="row">
 							<div class="col s12">
-								<h1 class="light" th:text="${projeto.nome}"></h1>
+								<span 
+									class="thin text-42 project-title pink-text text-lighten-1" 
+									th:text="${projeto.nome}"></span>
 							</div>
 						</div>
 					
@@ -43,29 +48,29 @@
 								<span class="light" th:text="${projeto.descricao}"></span>
 							</div>
 						</div>
+					</div>
+					
+					<div class="card-action">
 						
-						<div class="row no-margin" id="divAssociarBolsas" style="display:none">
-							<div class="col l12 m12 s12">
-								<span class="bold">Associar Bolsas:</span> <br/>
-								<span class="bold indigo-text" th:if="${#lists.isEmpty(bolsasNaoAssociadas)}">Não há bolsas disponíveis</span>
+						<div class="row no-margin">
+							<div class="col s10 input-field">
+								<select>
+									<option value="" disabled="true" selected="true">Escolher bolsa</option>
+									<option th:each="bolsa:${bolsasNaoAssociadas}" th:text="${bolsa.nome}" th:value="${bolsa.idBolsa}">Option 1</option>
+							    </select>
+							    <label>Bolsa</label>
+							</div>
 							
-								<table th:unless="${#lists.isEmpty(bolsasNaoAssociadas)}" id="table-associarBolsas">
-									<thead>
-										<tr>
-											<th>Nome</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="bolsa:${bolsasNaoAssociadas}">
-											<td th:text="${bolsa.nome}"></td>
-											<th><a class="btn waves-effect waves-light" th:href="@{${'/projeto/'+projeto.idProjeto+'/associar/bolsa/'+bolsa.idBolsa}}">Associar</a></th>
-										</tr>
-									</tbody>
-								</table>						
+							<div class="col s2 input-field">
+								<button class="btn waves-effect waves-light">Associar bolsa</button>
 							</div>
 						</div>
 						
-						<div class="row no-margin" id="divBolsa" style="display:none">
+					</div>
+					
+					<div class="card-action">
+						
+						<div class="row no-margin">
 							<div class="col l12 m12 s12">
 								<span class="bold">Bolsas:</span> <br/>
 								<span class="bold indigo-text" th:if="${#lists.isEmpty(projeto.bolsas)}">Não há bolsas cadastradas neste projeto</span>
@@ -124,14 +129,6 @@
 						</div>
 					</div>
 
-					
-					
-						<div class="card-action right-align">
-							<a th:href="@{/projeto/listar}" class="btn btn-flat waves-effect">Voltar à Listagem</a>
-							<a class="btn btn-raised waves-effect waves-light" type="button" onclick="MudarEstado('divAssociarBolsas')"> Associar Bolsa</a>
-							<a class="btn waves-effect waves-light" type="button" onclick="MudarEstado('VerBolsistas')">Ver Bolsista</a>
-							<a class="btn waves-effect waves-light" type="button" onclick="MudarEstado('divBolsa')">Ver Bolsas</a>
-						</div>
 					</div>
 				</div>
 			</div>

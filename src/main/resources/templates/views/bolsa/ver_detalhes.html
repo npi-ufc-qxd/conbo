@@ -32,7 +32,7 @@ Frequencia:
 <label th:text="${bolsa.frequencia}" ></label>
 <br/>
 
-Bolsistas:
+Bolsistas Ativos
 
 
 <br/>
@@ -47,13 +47,42 @@ Bolsistas:
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="parcipacao:${bolsa.participacoes}">
-				<td th:text="${parcipacao.aluno.nome}"></td>
-				<td th:text="${parcipacao.aluno.matricula}"></td>
-				<th><a th:href="@{${'/bolsa/encerrarbolsista/'+bolsa.idBolsa+'/'+parcipacao.aluno.idAluno}}">Encerrar Bolsista</a></th>
+			<tr th:each="participacao:${bolsa.participacoes}">
+				<td th:text="${participacao.aluno.nome}"></td>
+				<td th:text="${participacao.aluno.matricula}"></td>
+				<th><a th:href="@{${'/bolsa/encerrarBolsista/'+bolsa.idBolsa+'/'+participacao.aluno.idAluno}}">Encerrar Bolsista</a></th>
 			</tr>
 		</tbody>
 	</table>
+
+<br/>
+
+
+Bolsistas Inativos
+
+
+<br/>
+
+	<table id="table-inativos" border="1">
+		<thead>
+			<tr>
+				
+				<th>Nome</th>
+				<th>matricula</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="participacao:${inativos}">
+				<td th:text="${participacao.aluno.nome}"></td>
+				<td th:text="${participacao.aluno.matricula}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+
 
 
 Responsaveis:

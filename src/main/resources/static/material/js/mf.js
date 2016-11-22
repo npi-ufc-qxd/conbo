@@ -65,9 +65,85 @@ var mf_base = function() {
         }
     }
     
+    var initSelfSampling = function() {
+    	
+    	var animate = function() {
+    		setTimeout(function() {
+    			$(".self-sampled").addClass("move-left");
+    		}, 100);
+    		setTimeout(function() {
+    			$(".self-sampled").removeClass("move-left");
+    			$(".self-sampled").addClass("move-right");
+    		}, 200);
+    		setTimeout(function() {
+    			$(".self-sampled").removeClass("move-right");
+    			$(".self-sampled").addClass("move-left");
+    		}, 300);
+    		setTimeout(function() {
+    			$(".self-sampled").removeClass("move-left");
+    		}, 400);
+    	};
+    	
+    	setTimeout(function() {
+    		animate();
+    		setInterval(function() {
+        		animate();
+        	}, 5000);
+    	}, 1800);
+    	
+    }
+    
+    var initAlerts = function() {
+    	
+    	var getIconByType = function(type) {
+    		return (
+    			(type == 'info')   ? 'info':
+    			(type == 'warning')? 'warning':
+    			(type == 'success')? 'check':
+    			(type == 'error')  ? 'error': ''
+    		);
+    	}
+    	var getColorByType = function(type) {
+    		
+    		return (
+    			(type == 'info')    ? 'blue':
+    			(type == 'warning') ? 'deep-orange':
+    			(type == 'success') ? 'green':
+    			(type == 'error')   ? 'red': 'black'
+    		);
+    	}
+    	
+    	var delayAmount = 0;
+   		$(".alert-message").each(function(_, el) {
+   			$(el).remove();
+    			var text = $(el).text();
+        		var type = $(el).data("type").toLowerCase();
+        		var delay = $(el).data("delay");
+        		var icon = getIconByType(type);
+        		var color = getColorByType(type);
+        		var content = $('<div class="valign-wrapper"><i class="material-icons ' + color + '-text">' + icon + '</i><span class="' + color + '-text">' + text + '</span></div>');
+
+        	setTimeout(function() {    			
+        		Materialize.toast(content, delay, 'alert-' + type + ' rounded');
+    		}, delayAmount);
+        	
+        	delayAmount += 500;
+        	
+       	});
+    }
+
     var hideForeground = function() {
     	$("body").removeClass("no-transition");
     	$(".mf-foreground").fadeOut("slow");
+    }
+
+    var initConfirm = function() {
+        try {
+            $(".confirm").confirm({
+                "confirmButton": "Sim", 
+                "cancelButton": "Não"
+            });
+        } catch(err) { }
     }
 
     return {
@@ -77,8 +153,11 @@ var mf_base = function() {
             initSideBar();
             initCharts();
             initMask();
+            initSelfSampling();
+            initAlerts();
+            initConfirm();
             
-            hideForeground();
+            hideForeground();            
         },
         
         doAddChart : function(el, type, labels, datasets) {

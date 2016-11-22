@@ -1,0 +1,9 @@
+.bottom-right {
+	position: absolute;
+	bottom: -26px;
+	right: 26px;
+}
+
+.bottom-right .btn-floating {
+	margin-left: 26px;
+}

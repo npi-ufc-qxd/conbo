@@ -85,6 +85,9 @@ public class ProjetoController {
 	@RequestMapping(value = "/detalhes/{id}", method = RequestMethod.GET)
 	public ModelAndView visualizar(@PathVariable("id") Long idProjeto){
 		ModelAndView modelAndView = new ModelAndView("/views/projeto/detalhes");
+		
+		
+		
 		modelAndView.addObject("projeto", projetoService.buscarPorId(idProjeto));
 		return modelAndView; 
 	}

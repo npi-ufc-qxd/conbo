@@ -38,50 +38,53 @@
 		    	
 				<div class="card">
 					
-					<form class="card-content relative" th:action="@{/projeto/listar/}" th:method="post">
+					<div class="card-content relative" th:action="@{/projeto/listar/}" th:method="post">
 						<div class="row">
 							<div class="col s12 input-field">
-								 <input type="text" id="busca" name="busca" th:value="${nome}" />
-								 <label for="nome">Buscar</label>
+								 <input type="text" id="table-filter" name="busca" th:value="${nome}" />
+								 <label for="table-filter">Buscar</label>
 							</div>
 						</div>
 						
 						<div class="bottom-right">
-							<button class="btn-floating btn-large waves-effect waves-light tooltipped" data-tooltip="Pesquisar projetos" type="submit"><i class="material-icons">search</i></button>
 							<a th:href="@{/projeto/cadastrar}" 
 								class="btn-floating btn-large waves-effect waves-light tooltipped" 
 								data-tooltip="Cadastrar projeto" type="button"
 								th:classappend="${#lists.isEmpty(projetos)}? self-sampled"><i class="material-icons">add</i></a>
 						</div>
-					</form>
-					
-					<div class="card-action">
-						<span class="bold indigo-text" th:if="${#lists.isEmpty(projetos)}">Não há projetos cadastradas</span>
-					
-						<table th:unless="${#lists.isEmpty(projetos)}" id="table-projetos">
-							<thead>
-								<tr>
-									<th>Nome</th>
-									<th>Bolsas</th>
-									<th>Descrição</th>
-									<th>Opções</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="projeto:${projetos}">
-									<td class="max-width-200"><span th:text="${projeto.nome}" class="justify"></span></td>
-									<td th:text="${projeto.bolsas.size()}"></td>
-									<td class="max-width-200"><span th:text="${#strings.substring(projeto.descricao,0,200)}+'...'" class="justify"></span></td>
-									<td>
-										<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/projeto/editar/'+projeto.idProjeto}}" ><i class="material-icons">edit</i></a>
-										<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este projeto?" data-tooltip="Remover" th:href="@{${'/projeto/remover/'+projeto.idProjeto}}" ><i class="material-icons">delete</i></a>
-										<a class="btn-icon waves-effect tooltipped" data-tooltip="Detalhes" th:href="@{${'/projeto/detalhes/'+projeto.idProjeto}}" ><i class="material-icons">zoom_in</i></a>
-									</td>
-									
-								</tr>
-							</tbody>
-						</table>
 					</div>
+					
+					<div class="card-action" th:if="${#lists.isEmpty(projetos)}">
+						<span class="bold indigo-text">Não há projetos cadastradas</span>
+					</div>
+					
+					<table th:unless="${#lists.isEmpty(projetos)}" id="table-projetos"
+						class="datatable table-hover table-lite table-card"
+						data-sort-col="0,1,2" data-sort-direction="desc,desc,asc" 
+						data-filter="#table-filter">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>Bolsas</th>
+								<th>Descrição</th>
+								<th>Opções</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="projeto:${projetos}">
+								<td class="max-width-200"><span th:text="${projeto.nome}" class="justify"></span></td>
+								<td th:text="${projeto.bolsas.size()}"></td>
+								<td class="max-width-200"><span th:text="${#strings.abbreviate(projeto.descricao,100)}" class="justify"></span></td>
+								<td>
+									<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/projeto/editar/'+projeto.idProjeto}}" ><i class="material-icons">edit</i></a>
+									<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este projeto?" data-tooltip="Remover" th:href="@{${'/projeto/remover/'+projeto.idProjeto}}" ><i class="material-icons">delete</i></a>
+									<a class="btn-icon waves-effect tooltipped" data-tooltip="Detalhes" th:href="@{${'/projeto/detalhes/'+projeto.idProjeto}}" ><i class="material-icons">zoom_in</i></a>
+								</td>
+								
+							</tr>
+						</tbody>
+					</table>
+				
 				
 				</div>
 

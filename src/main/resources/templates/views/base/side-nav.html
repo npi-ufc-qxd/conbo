@@ -22,13 +22,19 @@
     <li>
     	<a th:href="@{/pessoa/listar/}" class="waves-effect waves-light" th:classappend="(${currentPage} == 'pessoa')? sidenav-active">
     		<i class="material-icons">group</i>
-    		Pessoas
+    		Responsáveis
     	</a>
     </li>
     <li>
     	<a th:href="@{/projeto/listar/}" class="waves-effect waves-light" th:classappend="(${currentPage} == 'projeto')? sidenav-active">
     		<i class="mdi mdi-view-dashboard"></i>
     		Projetos
+    	</a>
+    </li>
+    <li>
+    	<a th:href="@{/bolsa/listar/}" class="waves-effect waves-light" th:classappend="(${currentPage} == 'bolsa')? sidenav-active">
+    		<i class="material-icons">work</i>
+    		Bolsas
     	</a>
     </li>
     <li>

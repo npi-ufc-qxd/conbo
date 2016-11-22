@@ -10,7 +10,7 @@
     <link rel="stylesheet" th:href="@{/material/materialize/fonts/icons/material-icons.css}"/>
     <link rel="stylesheet" th:href="@{/material/materialize/fonts/icons/material-icons-google.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/material/materialize/css/materialize.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/material/plugins/data_tables/css/dataTables.materialize.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/material/plugins/datatables/dataTables.materialize.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/material/css/mf.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/material/css/mf-helpers.css}"/>
 			
@@ -46,25 +46,13 @@
 		th:attr="data-type=${alert.type},data-delay=${alert.delay}" 
 		th:text="${alert.text}"></div>
 	
-	<!-- JANELA DE CONFIRMAÇÃO PADRÃO -->
-	<div id="confirm-modal" class="modal">
-		<div class="modal-content">
-			<h4>Modal Header</h4>
-			<p>A bunch of text</p>
-		</div>
-		<div class="modal-footer">
-			<a class="modal-action modal-action-no modal-close waves-effect btn-flat">Não</a>
-			<a class="modal-action modal-action-yes modal-close waves-effect btn-flat">Sim</a>
-		</div>
-	</div>
-
     <div class="mf-foreground white" ></div>
     
     <!-- Plugins externos e JQuery -->
     <script type="text/javascript" th:src="@{/material/plugins/jquery/jquery-3.1.1.js}"></script>
     <script type="text/javascript" th:src="@{/material/plugins/jquery/jquery.mask.min.js}"></script>
-    <script type="text/javascript" th:src="@{/material/plugins/data_tables/js/jquery.dataTables.min.js}"></script>
-    <script type="text/javascript" th:src="@{/material/plugins/data_tables/js/dataTables.materialize.js}"></script>
+    <script type="text/javascript" th:src="@{/material/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/material/plugins/datatables/dataTables.materialize.js}"></script>
     <script type="text/javascript" th:src="@{/material/plugins/chart/chart.js}"></script>
     <script type="text/javascript" th:src="@{/material/plugins/cookie/cookie.js}"></script>
     

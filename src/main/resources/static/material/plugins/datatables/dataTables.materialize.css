@@ -1,7 +1,5 @@
 table.dataTable {
   clear: both;
-  margin-top: 6px !important;
-  margin-bottom: 6px !important;
   max-width: none !important;
 }
 table.dataTable td,
@@ -29,7 +27,7 @@ div.dataTables_wrapper div.dataTables_length select {
   display: inline-block;
 }
 div.dataTables_wrapper div.dataTables_filter {
-  text-align: left;
+  text-align: right;
 }
 div.dataTables_wrapper div.dataTables_filter label {
   font-weight: normal;
@@ -42,7 +40,6 @@ div.dataTables_wrapper div.dataTables_filter input {
   width: auto;
 }
 div.dataTables_wrapper div.dataTables_info {
-  padding-top: 8px;
   white-space: nowrap;
 }
 div.dataTables_wrapper div.dataTables_paginate {
@@ -273,4 +270,26 @@ div.dataTables_wrapper div.dataTables_filter input {
 
 .datatables_wrapper .bottom-row {
   margin-bottom: 6px;
+}
+
+.pagination li.active {
+  background-color: transparent !important;  
+}
+
+.pagination li a {
+  line-height: 36px !important;
+}
+
+.pagination li.active a {
+  background-color: #ec407a !important;
+  color: #fff !important;  
+  border-radius: 50%;
+}
+
+.pagination li.disabled a {
+  color: #ddd !important;
+}
+
+.pagination li.disabled a:hover {
+  background-color: transparent !important;
 }

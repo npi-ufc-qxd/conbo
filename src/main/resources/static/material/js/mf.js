@@ -9,6 +9,11 @@ $(document).ready(function() {
     mf_base.doInit();
 });
 
+var _context = $("meta[name='_context']").attr("content");
+if(_context == null){
+	_context = "";
+}
+
 jQuery.fn.extend({
     exists: function () {
     	return $(this).length > 0;
@@ -146,6 +151,64 @@ var mf_base = function() {
         } catch(err) { }
     }
 
+    var initDataTableInElement = function(el, setts) {
+        var orderCols = (el.data("sort-col") == undefined)? [] : el.data("sort-col").toString().split(",");
+        var orderDirs = (el.data("sort-direction") === undefined)? [] : el.data("sort-direction").toString().split(",");
+        var order = [];
+
+        orderCols.forEach(function(col, i) {
+            if(!isNaN(parseInt(col))) {
+                order.push([parseInt(col), orderDirs[i]]);
+            }
+        });
+
+        var dataTable = el.DataTable(
+            $.extend({ 
+                "order": order, 
+                "pagingType": "full_numbers", 
+                "language": {
+                    "sEmptyTable": "Nenhum registro encontrado",
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "_MENU_ resultados por página",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+                    "sSearch": "Filtrar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
+                    }
+                }
+            }, setts)
+        );
+        
+        $('select').material_select();
+
+        var searchInput = $(el.data("filter"));
+        searchInput.keyup(function() {
+            dataTable.search( $(this).val() ).draw();
+        });
+        
+        return dataTable;
+    }
+
+    var initDataTables = function() {
+        $(".datatable").each(function(_, el) {
+            var table = $(el);
+            initDataTableInElement(table);
+        });
+    }
+
     return {
         
         doInit : function() {
@@ -156,6 +219,7 @@ var mf_base = function() {
             initSelfSampling();
             initAlerts();
             initConfirm();
+            initDataTables();
             
             hideForeground();            
         },
@@ -182,52 +246,31 @@ var mf_base = function() {
 			
         }, 
         
-        doAddDataTable : function(el, setts) {
-        	var dataTable = el.DataTable(
-        		$.extend({ 
-	                "language": {
-	            	    "sEmptyTable": "Nenhum registro encontrado",
-	            	    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-	            	    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-	            	    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-	            	    "sInfoPostFix": "",
-	            	    "sInfoThousands": ".",
-	            	    "sLengthMenu": "_MENU_ resultados por página",
-	            	    "sLoadingRecords": "Carregando...",
-	            	    "sProcessing": "Processando...",
-	            	    "sZeroRecords": "Nenhum registro encontrado",
-	            	    "sSearch": "Filtrar",
-	            	    "oPaginate": {
-	            	        "sNext": "Próximo",
-	            	        "sPrevious": "Anterior",
-	            	        "sFirst": "Primeiro",
-	            	        "sLast": "Último"
-	            	    },
-	            	    "oAria": {
-	            	        "sSortAscending": ": Ordenar colunas de forma ascendente",
-	            	        "sSortDescending": ": Ordenar colunas de forma descendente"
-	            	    }
-	                }
-        		}, setts)
-        	);
-        	
-			$('select').material_select();
-			
-            $(".paginate_button").addClass("waves-effect btn-flat");
-            
-            el.on("draw.dt", function () {
-                $(".paginate_button").addClass("waves-effect btn-flat");
-            } );
-            
-			
-			return dataTable;
-        }, 
+        doAddDataTable : initDataTableInElement, 
 
         doAlertSet : function(alertSet) {
             for(k in alertSet) {
                 var alert = alertSet[k];
                 Materialize.toast(alert.message, alert.delay);
             }
+        }, 
+        
+        doGetCurrentDate : function() {
+        	var today = new Date();
+        	var dd = today.getDate();
+        	var mm = today.getMonth()+1; //January is 0!
+        	var yyyy = today.getFullYear();
+
+        	if(dd<10) {
+        	    dd='0'+dd
+        	} 
+
+        	if(mm<10) {
+        	    mm='0'+mm
+        	} 
+
+        	today = mm + '/' + dd + '/' + yyyy;
+        	return today;
         }
         
     };

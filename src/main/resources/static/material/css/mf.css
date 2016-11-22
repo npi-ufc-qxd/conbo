@@ -174,24 +174,33 @@ nav .button-collapse {
 	flex-grow: 0;
 }
 
-table {
-	overflow: scroll;
+.table-hover tr:hover {
+	background-color: rgba(0, 0, 0, .05);
 }
 
-.mf-table th {
-	font-weight: 400 !important;
+.table-hover tr .btn-icon {
+	opacity: 0.0;
 }
 
-.mf-table td {
-	font-weight: 300;
-	padding-top: 0;
-	padding-bottom: 0;
-	height: 52px;
+.table-hover tr:hover .btn-icon {
+	opacity: 1.0;
 }
-.mf-table td a {
-	display: block;
-	transition: all .1s linear;
-	font-weight: 500;	
+
+.table-card thead tr:first-child {
+	background-color: #efefef;
+}
+
+.table-card tbody tr:not(:last-child) {
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.table-card th:first-child, 
+.table-card th:last-child, 
+.table-card td:first-child, 
+.table-card td:last-child {
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 0px !important;
 }
 
 .fab-bottom-right {

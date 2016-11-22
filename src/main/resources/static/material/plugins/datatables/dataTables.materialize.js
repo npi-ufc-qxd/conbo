@@ -151,9 +151,10 @@ $.extend( true, DataTable.defaults, {
     },
     sPaginationType: 'listbox',
 	dom:
-		//"<'row'<'col s6'f>>" +
-		"<'card-content row no-margin table-body'<'col s12 no-padding'tr>>" + 
-		"<'card-action row no-margin'<'bottom-row'fpli<'chev'>>>",
+		"<'row hide'<'col s12'f>>" +
+		"<'row table-body no-margin'<'col s12 no-padding'tr>>" +
+		//"<'row no-margin'<'col s12 bottom-row'pli<'chev'>>>",
+		"<'row card-action no-margin valign-wrapper'<'col s6 no-padding' i><'col s6 no-padding' p>>",
 	renderer: 'bootstrap',
 	oLanguage: {
 		oPaginate: {
@@ -192,7 +193,9 @@ $.extend( DataTable.ext.classes, {
 	sWrapper:      "dataTables_wrapper form-inline dt-bootstrap",
 	sFilterInput:  "form-control input-sm",
 	sLengthSelect: "form-control input-sm",
-	sProcessing:   "dataTables_processing panel panel-default"
+	sProcessing:   "dataTables_processing panel panel-default", 
+	sPageButton:   "table-pagination-button", 
+	sPageButtonActive:   "table-pagination-button-active", 
 } );
 
 
@@ -272,7 +275,8 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 								'aria-controls': settings.sTableId,
 								'aria-label': aria[ button ],
 								'data-dt-idx': counter,
-								'tabindex': settings.iTabIndex
+								'tabindex': settings.iTabIndex, 
+								'class': "btn-flat waves-effect"
 							} )
 							.html( btnDisplay )
 						)
@@ -344,7 +348,7 @@ if ( DataTable.TableTools ) {
 		"collection": {
 			"container": "ul",
 			"button": "li",
-			"liner": "a"
+			"liner": "span"
 		}
 	} );
 }

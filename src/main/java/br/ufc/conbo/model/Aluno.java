@@ -23,6 +23,14 @@ public class Aluno {
 	@OneToMany
 	private List<Participacao> participacoes;
 
+	public List<Participacao> getParticipacoes() {
+		return participacoes;
+	}
+
+	public void setParticipacoes(List<Participacao> participacoes) {
+		this.participacoes = participacoes;
+	}
+
 	public Aluno() {
 		super();
 	}

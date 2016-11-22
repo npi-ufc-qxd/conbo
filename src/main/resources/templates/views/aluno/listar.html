@@ -38,56 +38,59 @@
 		    	
 				<div class="card">
 					
-					<form class="card-content relative" th:action="@{/aluno/buscar/}" th:method="post">
+					<div class="card-content relative">
 						<div class="row">
 							<div class="col s12 input-field">
-								 <input type="text" id="nome" name="nome" th:value="${nome}" />
-								 <label for="nome">Buscar</label>
+								 <input type="text" id="table-filter" name="nome" th:value="${nome}" />
+								 <label for="table-filter">Buscar</label>
 							</div>
 						</div>
 						
 						<div class="bottom-right">
-							<button class="btn-floating btn-large waves-effect waves-light tooltipped" data-tooltip="Pesquisar alunos" type="submit"><i class="material-icons">search</i></button>
 							<a th:href="@{/aluno/cadastrar}" 
 								class="btn-floating btn-large waves-effect waves-light tooltipped" 
 								data-tooltip="Cadastrar aluno" type="button"
 								th:classappend="${#lists.isEmpty(alunos)}? self-sampled"><i class="material-icons">add</i></a>
 						</div>
-					</form>
-					
-					<div class="card-action">
-						<span class="bold indigo-text" th:if="${#lists.isEmpty(alunos)}">Não há alunos cadastradas</span>
-					
-						<table th:unless="${#lists.isEmpty(alunos)}" id="table-alunos">
-							<thead>
-								<tr>
-									<th>Nome</th>
-									<th>Matrícula</th>
-									<th>CPF</th>
-									<th>Banco</th>
-									<th>Agencia</th>
-									<th>Conta Corrente</th>
-									<th>Opções</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="aluno:${alunos}">
-									<td class="max-width-200"><span th:text="${aluno.nome}" class="justify"></span></td>
-									<td th:text="${aluno.matricula}"></td>
-									<td th:text="${aluno.CPF}"></td>
-									<td th:text="${aluno.banco}"></td>
-									<td th:text="${aluno.agBanco}"></td>
-									<td th:text="${aluno.numeroContaCorrente}"></td>
-									<td>
-										<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/aluno/editar/'+aluno.id}}" ><i class="material-icons">edit</i></a>
-										<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este aluno?" data-tooltip="Remover" th:href="@{${'/aluno/remover/'+aluno.id}}" ><i class="material-icons">delete</i></a>
-										<a class="btn-icon waves-effect tooltipped" data-tooltip="Detalhes" th:href="@{${'/aluno/detalhes/'+aluno.id}}" ><i class="material-icons">zoom_in</i></a>
-									</td>
-									
-								</tr>
-							</tbody>
-						</table>
+
 					</div>
+					
+					<div class="card-action" th:if="${#lists.isEmpty(alunos)}">
+						<span class="bold indigo-text">Não há alunos cadastradas</span>
+					</div>
+					
+					<table th:unless="${#lists.isEmpty(alunos)}" id="table-alunos"
+						class="datatable table-hover table-lite table-card"
+						data-sort-col="0,1,2" data-sort-direction="desc,desc,asc" 
+						data-filter="#table-filter">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>Matrícula</th>
+								<th class="hide-on-small-only">CPF</th>
+								<th class="hide-on-med-and-down">Banco</th>
+								<th class="hide-on-med-and-down">Agencia</th>
+								<th class="hide-on-med-and-down">Conta Corrente</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="aluno:${alunos}">
+								<td class="max-width-200"><span th:text="${aluno.nome}" class="justify"></span></td>
+								<td th:text="${aluno.matricula}"></td>
+								<td class="hide-on-small-only" th:text="${aluno.CPF}"></td>
+								<td class="hide-on-med-and-down" th:text="${aluno.banco}"></td>
+								<td class="hide-on-med-and-down" th:text="${aluno.agBanco}"></td>
+								<td class="hide-on-med-and-down" th:text="${aluno.numeroContaCorrente}"></td>
+								<td>
+									<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/aluno/editar/'+aluno.id}}" ><i class="material-icons">edit</i></a>
+									<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este aluno?" data-tooltip="Remover" th:href="@{${'/aluno/remover/'+aluno.id}}" ><i class="material-icons">delete</i></a>
+									<a class="btn-icon waves-effect tooltipped" data-tooltip="Detalhes" th:href="@{${'/aluno/detalhes/'+aluno.id}}" ><i class="material-icons">zoom_in</i></a>
+								</td>
+								
+							</tr>
+						</tbody>
+					</table>
 				
 				</div>
 

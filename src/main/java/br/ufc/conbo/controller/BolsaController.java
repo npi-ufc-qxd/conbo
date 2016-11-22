@@ -81,17 +81,17 @@ public class BolsaController {
 	}
 
 	@RequestMapping(value = "/verDetalhes/{id}", method = RequestMethod.GET)
-	public ModelAndView verDetalhes (@PathVariable("id") Long idBolsa){
-		ModelAndView modelAndView = new ModelAndView("/views/bolsa/ver_detalhes");
-		System.err.println(this.bolsaService.buscarPorId(idBolsa).getParticipacoes().size());
-		modelAndView.addObject("bolsa", this.bolsaService.buscarPorId(idBolsa));
+	public ModelAndView verDetalhes (@PathVariable("id") Long id){
+		ModelAndView modelAndView = new ModelAndView("/views/bolsa/detalhes");
+		System.err.println(this.bolsaService.buscarPorId(id).getParticipacoes().size());
+		modelAndView.addObject("bolsa", this.bolsaService.buscarPorId(id));
 
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/remover/{id}", method = RequestMethod.GET)
-	public ModelAndView remover(@PathVariable("id") Long idBolsa){
-		this.bolsaService.remover(idBolsa);
+	public ModelAndView remover(@PathVariable("id") Long id){
+		this.bolsaService.remover(id);
 
 		ModelAndView modelAndView = new ModelAndView("/views/bolsa/listar");
 		modelAndView.addObject("bolsas", this.bolsaService.listar());
@@ -100,9 +100,9 @@ public class BolsaController {
 	}
 
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
-	public ModelAndView editarForm (@PathVariable("id") Long idBolsa){
+	public ModelAndView editarForm (@PathVariable("id") Long id){
 
-		Bolsa bolsa = bolsaService.buscarPorId(idBolsa);
+		Bolsa bolsa = bolsaService.buscarPorId(id);
 		ModelAndView modelAndView = new ModelAndView("/views/bolsa/editar");
 
 		if(bolsa==null){

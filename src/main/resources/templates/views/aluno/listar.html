@@ -79,9 +79,9 @@
 									<td th:text="${aluno.agBanco}"></td>
 									<td th:text="${aluno.numeroContaCorrente}"></td>
 									<td>
-										<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/aluno/editar/'+aluno.idAluno}}" ><i class="material-icons">edit</i></a>
-										<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este aluno?" data-tooltip="Remover" th:href="@{${'/aluno/remover/'+aluno.idAluno}}" ><i class="material-icons">delete</i></a>
-										<a class="btn-icon waves-effect tooltipped" data-tooltip="Detalhes" th:href="@{${'/aluno/detalhes/'+aluno.idAluno}}" ><i class="material-icons">zoom_in</i></a>
+										<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/aluno/editar/'+aluno.id}}" ><i class="material-icons">edit</i></a>
+										<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este aluno?" data-tooltip="Remover" th:href="@{${'/aluno/remover/'+aluno.id}}" ><i class="material-icons">delete</i></a>
+										<a class="btn-icon waves-effect tooltipped" data-tooltip="Detalhes" th:href="@{${'/aluno/detalhes/'+aluno.id}}" ><i class="material-icons">zoom_in</i></a>
 									</td>
 									
 								</tr>

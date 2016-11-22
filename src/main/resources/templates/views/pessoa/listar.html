@@ -59,8 +59,8 @@
 									<td class="max-width-200"><span th:text="${pessoa.nome}" class="justify"></span></td>
 									<td th:text="${pessoa.email}"></td>
 									<td>
-										<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/pessoa/editar/'+pessoa.idPessoa}}" ><i class="material-icons">edit</i></a>
-										<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover esta pessoa?" data-tooltip="Remover" th:href="@{${'/pessoa/remover/'+pessoa.idPessoa}}" ><i class="material-icons">delete</i></a>
+										<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/pessoa/editar/'+pessoa.id}}" ><i class="material-icons">edit</i></a>
+										<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover esta pessoa?" data-tooltip="Remover" th:href="@{${'/pessoa/remover/'+pessoa.id}}" ><i class="material-icons">delete</i></a>
 									</td>
 									
 								</tr>

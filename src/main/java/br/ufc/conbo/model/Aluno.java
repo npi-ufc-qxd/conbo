@@ -12,7 +12,7 @@ public class Aluno {
 
 	@Id
 	@GeneratedValue
-	private long idAluno;
+	private long id;
 	private String nome;
 	private String CPF;
 	private long matricula;
@@ -27,12 +27,12 @@ public class Aluno {
 		super();
 	}
 
-	public long getIdAluno() {
-		return idAluno;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdAluno(long idAluno) {
-		this.idAluno = idAluno;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNome() {

@@ -12,7 +12,7 @@ public class TipoBolsa {
 	
 	@Id
 	@GeneratedValue
-	private long idTipoBolsa;
+	private long id;
 	private String nome;
 	private String descricao;
 	
@@ -23,11 +23,11 @@ public class TipoBolsa {
 		super();
 	}
 	
-	public long getIdTipoBolsa() {
-		return idTipoBolsa;
+	public long getId() {
+		return id;
 	}
-	public void setIdTipoBolsa(long idTipoBolsa) {
-		this.idTipoBolsa = idTipoBolsa;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public String getNome() {
 		return nome;
@@ -44,7 +44,7 @@ public class TipoBolsa {
 
 	@Override
 	public String toString() {
-		return "TipoBolsa [idTipoBolsa=" + idTipoBolsa + ", nome=" + nome + ", descricao=" + descricao + ", bolsas="
+		return "TipoBolsa [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", bolsas="
 				+ bolsas + "]";
 	}
 	

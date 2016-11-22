@@ -14,7 +14,7 @@ public class Participacao {
 	
 	@Id
 	@GeneratedValue
-	private long idParticipacao;
+	private long id;
 	private Date dataInicio;
 	private Date dataFim;
 	private Date dataExpectFim;
@@ -34,12 +34,12 @@ public class Participacao {
 		super();
 	}
 	
-	public long getIdParticipacao() {
-		return idParticipacao;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdParticipacao(long idParticipacao) {
-		this.idParticipacao = idParticipacao;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Date getDataInicio() {

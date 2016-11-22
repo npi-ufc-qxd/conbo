@@ -107,13 +107,7 @@ public class BolsaController {
 			}
 		}
 		bolsa.setParticipacoes(partipacoes);
-		System.err.println(inativos.size());
 		
-		for (Participacao participacao : inativos) {
-			System.err.println(participacao.getAluno().getNome());
-		}
-		
-		//System.err.println(inativos.get(0).getAluno().getNome());
 		modelAndView.addObject("bolsa", bolsa);
 		modelAndView.addObject("inativos", inativos);
 

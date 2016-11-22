@@ -89,9 +89,9 @@ public class BolsaController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/verDetalhes/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/detalhes/{id}", method = RequestMethod.GET)
 	public ModelAndView verDetalhes (@PathVariable("id") Long id){
-		ModelAndView modelAndView = new ModelAndView("/views/bolsa/ver_detalhes");
+		ModelAndView modelAndView = new ModelAndView("/views/bolsa/detalhes");
 		
 		Bolsa bolsa = this.bolsaService.buscarPorId(id);
 		

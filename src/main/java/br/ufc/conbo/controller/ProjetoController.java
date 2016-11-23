@@ -60,14 +60,14 @@ public class ProjetoController {
 	}
 	
 	@RequestMapping(value = "/remover/{id}", method = RequestMethod.GET)
-	public String remover(@PathVariable("id") Long idProjeto){
-		projetoService.remover(idProjeto);
+	public String remover(@PathVariable("id") Long id){
+		projetoService.remover(id);
 		return "redirect:/projeto/listar";
 	}
 	
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
-	public ModelAndView editarForm (@PathVariable("id") Long idProjeto){
-		Projeto projeto = projetoService.buscarPorId(idProjeto);
+	public ModelAndView editarForm (@PathVariable("id") Long id){
+		Projeto projeto = projetoService.buscarPorId(id);
 		ModelAndView modelAndView = new ModelAndView("/views/projeto/editar");
 		if(projeto==null){
 			return null;
@@ -87,19 +87,20 @@ public class ProjetoController {
 	
 	
 	@RequestMapping(value = "/detalhes/{id}", method = RequestMethod.GET)
-	public ModelAndView visualizar(@PathVariable("id") Long idProjeto){
+	public ModelAndView visualizar(@PathVariable("id") Long id){
 		
 		ModelAndView modelAndView = new ModelAndView("/views/projeto/detalhes");
 		modelAndView.addObject("bolsasNaoAssociadas", bolsaService.buscarBolsasNaoAssociadas());
-		modelAndView.addObject("projeto", projetoService.buscarPorId(idProjeto));
+		modelAndView.addObject("projeto", projetoService.buscarPorId(id));
 		modelAndView.addObject("bolsas", bolsaService.listar());
 		
 		return modelAndView; 
 	}
 
-	@RequestMapping(value = "/{idProjeto}/associarBolsa/{idBolsa}", method = RequestMethod.GET)
-	public String associarBolsa(@PathVariable("idProjeto") Long idProjeto, 
+	@RequestMapping(value = "/{id}/associarBolsa/{idBolsa}", method = RequestMethod.GET)
+	public String associarBolsa(@PathVariable("id") Long idProjeto, 
 			@PathVariable("idBolsa") Long idBolsa){
+		
 		Bolsa bolsa = bolsaService.buscarPorId(idBolsa);
 		Projeto projeto = projetoService.buscarPorId(idProjeto);
 		List<Bolsa> bolsas = projeto.getBolsas();
@@ -107,13 +108,7 @@ public class ProjetoController {
 		bolsas.add(bolsa);
 		projeto.setBolsas(bolsas);
 		projetoService.salvar(projeto);
-		
-		
-		ModelAndView modelAndView = new ModelAndView("/views/projeto/detalhes");
-		modelAndView.addObject("projeto", projetoService.buscarPorId(idProjeto));
-		modelAndView.addObject("bolsas", bolsaService.listar());
-		
-		//return modelAndView;
+
 		return "redirect:/projeto/detalhes/"+idProjeto;
 	}
 

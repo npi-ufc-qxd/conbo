@@ -18,8 +18,8 @@ public class Participacao {
 	
 	@Id
 	@GeneratedValue
-	private long idParticipacao;
-	
+	private long id;
+
 	@Temporal(TemporalType.TIMESTAMP) 
 	@DateTimeFormat (pattern="dd-MM-YYYY")
 	private Date dataInicio;
@@ -48,12 +48,12 @@ public class Participacao {
 		super();
 	}
 	
-	public long getIdParticipacao() {
-		return idParticipacao;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdParticipacao(long idParticipacao) {
-		this.idParticipacao = idParticipacao;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Date getDataInicio() {

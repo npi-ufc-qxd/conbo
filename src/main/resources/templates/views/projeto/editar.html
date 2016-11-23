@@ -38,7 +38,7 @@
 		    	
 		    	<form class="card" action="#" th:action="@{/projeto/cadastrar}" th:object="${projeto}" th:method="post">
 		    	
-		    		<input id="id" type="hidden" th:field="*{idProjeto}" />
+		    		<input id="id" type="hidden" th:field="*{id}" />
 		    	
 		    		<div class="card-content">
 					   
@@ -58,7 +58,7 @@
 					</div>
 					
 					<div class="card-action right-align">
-						<a th:href="@{/projeto/listar}" class="btn btn-flat waves-effect">Cencelar</a>
+						<a th:href="@{/projeto/listar}" class="btn btn-flat waves-effect">Cancelar</a>
 						<button class="btn waves-effect waves-light" type="submit">Salvar</button>
 					</div>
 					

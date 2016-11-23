@@ -76,9 +76,9 @@
 								<td th:text="${projeto.bolsas.size()}"></td>
 								<td class="max-width-200"><span th:text="${#strings.abbreviate(projeto.descricao,100)}" class="justify"></span></td>
 								<td>
-									<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/projeto/editar/'+projeto.idProjeto}}" ><i class="material-icons">edit</i></a>
-									<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este projeto?" data-tooltip="Remover" th:href="@{${'/projeto/remover/'+projeto.idProjeto}}" ><i class="material-icons">delete</i></a>
-									<a class="btn-icon waves-effect tooltipped" data-tooltip="Detalhes" th:href="@{${'/projeto/detalhes/'+projeto.idProjeto}}" ><i class="material-icons">zoom_in</i></a>
+									<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/projeto/editar/'+projeto.id}}" ><i class="material-icons">edit</i></a>
+									<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este projeto?" data-tooltip="Remover" th:href="@{${'/projeto/remover/'+projeto.id}}" ><i class="material-icons">delete</i></a>
+									<a class="btn-icon waves-effect tooltipped" data-tooltip="Detalhes" th:href="@{${'/projeto/detalhes/'+projeto.id}}" ><i class="material-icons">zoom_in</i></a>
 								</td>
 								
 							</tr>

@@ -15,7 +15,7 @@ public class Projeto {
 	
 	@Id
 	@GeneratedValue
-	private long idProjeto;
+	private long id;
 	private String nome;
 	
 	
@@ -29,11 +29,11 @@ public class Projeto {
 		super();
 	}
 	
-	public long getIdProjeto() {
-		return idProjeto;
+	public long getId() {
+		return id;
 	}
-	public void setIdProjeto(long idProjeto) {
-		this.idProjeto = idProjeto;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public List<Bolsa> getBolsas() {
 		return bolsas;
@@ -58,8 +58,8 @@ public class Projeto {
 
 	@Override
 	public String toString() {
-		return "Projeto [idProjeto=" + idProjeto + ", nome=" + nome + ", descricao=" + descricao + ", bolsas=" + bolsas
-				+ ", getIdProjeto()=" + getIdProjeto() + ", getBolsas()=" + getBolsas() + ", getNome()=" + getNome()
+		return "Projeto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", bolsas=" + bolsas
+				+ ", getId()=" + getId() + ", getBolsas()=" + getBolsas() + ", getNome()=" + getNome()
 				+ ", getDescricao()=" + getDescricao() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
 	}

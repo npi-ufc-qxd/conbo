@@ -74,7 +74,7 @@
 						<tbody>
 							<tr th:each="bolsa:${bolsas}">
 								<td th:text="${bolsa.nome}"></td>
-								<td th:text="${bolsa.tipoBolsa}"></td>
+								<td th:text="${bolsa.tipoBolsa.nome}"></td>
 								<td th:text="${bolsa.vagas}"></td>
 								<td>
 									<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/bolsa/editar/'+bolsa.id}}" ><i class="material-icons">edit</i></a>

@@ -10,6 +10,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Bolsa {
@@ -34,6 +35,7 @@ public class Bolsa {
 	private Projeto projeto;
 	
 	@OneToOne
+	@NotNull
 	private TipoBolsa tipoBolsa;
 	@ManyToMany
 	@JoinTable(name="bolsa_responsaveis", 

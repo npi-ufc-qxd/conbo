@@ -8,5 +8,3 @@ function MudarEstado(el) {
     else
         document.getElementById(el).style.display = 'none';
 }
-
-

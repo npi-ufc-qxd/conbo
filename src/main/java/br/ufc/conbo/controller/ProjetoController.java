@@ -97,7 +97,7 @@ public class ProjetoController {
 		return modelAndView; 
 	}
 
-	@RequestMapping(value = "/{idProjeto}/associar/bolsa/{idBolsa}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{idProjeto}/associarBolsa/{idBolsa}", method = RequestMethod.GET)
 	public String associarBolsa(@PathVariable("idProjeto") Long idProjeto, 
 			@PathVariable("idBolsa") Long idBolsa){
 		Bolsa bolsa = bolsaService.buscarPorId(idBolsa);

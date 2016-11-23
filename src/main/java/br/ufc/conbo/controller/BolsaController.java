@@ -90,7 +90,7 @@ public class BolsaController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/verDetalhes/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/detalhes/{id}", method = RequestMethod.GET)
 	public ModelAndView verDetalhes (@PathVariable("id") Long idBolsa){
 		ModelAndView modelAndView = new ModelAndView("/views/bolsa/ver_detalhes");
 		

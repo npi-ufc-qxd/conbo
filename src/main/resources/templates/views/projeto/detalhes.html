@@ -54,7 +54,8 @@
 						
 						<div class="row no-margin">
 							<div class="col s10 input-field">
-								<select>
+								
+								<select name="bolsa">
 									<option value="" disabled="true" selected="true">Escolher bolsa</option>
 									<option th:each="bolsa:${bolsasNaoAssociadas}" th:text="${bolsa.nome}" th:value="${bolsa.idBolsa}">Option 1</option>
 							    </select>
@@ -62,13 +63,15 @@
 							</div>
 							
 							<div class="col s2 input-field">
-								<button class="btn waves-effect waves-light">Associar bolsa</button>
+								<!--   <a type="button" th:href="@{${'/projeto/'+projeto.idProjeto+'/associarBolsa/'+bolsa.idBolsa}}" class="btn waves-effect waves-light">Associar bolsa </a> -->
+								<a type="button" th:href="@{${'/projeto/detalhes/'+projeto.idProjeto}}" class="btn waves-effect waves-light">Associar bolsa </a>
 							</div>
 						</div>
 						
 					</div>
 					
 					<div class="card-action">
+						
 						
 						<div class="row no-margin">
 							<div class="col l12 m12 s12">

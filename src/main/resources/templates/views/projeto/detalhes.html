@@ -56,7 +56,7 @@
 							<div class="col s10 input-field">
 								<select>
 									<option value="" disabled="true" selected="true">Escolher bolsa</option>
-									<option th:each="bolsa:${bolsasNaoAssociadas}" th:text="${bolsa.nome}" th:value="${bolsa.idBolsa}">Option 1</option>
+									<option th:each="bolsa:${bolsasNaoAssociadas}" th:text="${bolsa.nome}" th:value="${bolsa.id}">Option 1</option>
 							    </select>
 							    <label>Bolsa</label>
 							</div>

@@ -46,8 +46,8 @@ public class TipoBolsaController {
 	}
 	
 	@RequestMapping(value = "/remover/{id}", method = RequestMethod.GET)
-	public ModelAndView remover(@PathVariable("id") Long idTipoBolsa){
-		this.tipoBolsaService.remover(idTipoBolsa);
+	public ModelAndView remover(@PathVariable("id") Long id){
+		this.tipoBolsaService.remover(id);
 		
 		ModelAndView modelAndView = new ModelAndView("/views/tipo_bolsa/listar");
 		modelAndView.addObject("tipoBolsas", this.tipoBolsaService.listar());
@@ -56,9 +56,9 @@ public class TipoBolsaController {
 	}
 	
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
-	public ModelAndView editarForm (@PathVariable("id") Long idTipoBolsa){
+	public ModelAndView editarForm (@PathVariable("id") Long id){
 		
-		TipoBolsa tipoBolsa = tipoBolsaService.buscarPorId(idTipoBolsa);
+		TipoBolsa tipoBolsa = tipoBolsaService.buscarPorId(id);
 		ModelAndView modelAndView = new ModelAndView("/views/tipo_bolsa/editar");
 		
 		if(tipoBolsa==null){

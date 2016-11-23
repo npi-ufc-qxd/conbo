@@ -1,13 +1,13 @@
 package br.ufc.conbo.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -90,11 +90,11 @@ public class BolsaController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/verDetalhes/{id}", method = RequestMethod.GET)
-	public ModelAndView verDetalhes (@PathVariable("id") Long idBolsa){
-		ModelAndView modelAndView = new ModelAndView("/views/bolsa/ver_detalhes");
+	@RequestMapping(value = "/detalhes/{id}", method = RequestMethod.GET)
+	public ModelAndView verDetalhes (@PathVariable("id") Long id){
+		ModelAndView modelAndView = new ModelAndView("/views/bolsa/detalhes");
 		
-		Bolsa bolsa = this.bolsaService.buscarPorId(idBolsa);
+		Bolsa bolsa = this.bolsaService.buscarPorId(id);
 		
 		List<Participacao> partipacoes = bolsa.getParticipacoes();
 		List<Participacao> inativos = new ArrayList<>();
@@ -111,12 +111,13 @@ public class BolsaController {
 		modelAndView.addObject("bolsa", bolsa);
 		modelAndView.addObject("inativos", inativos);
 
+
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/remover/{id}", method = RequestMethod.GET)
-	public ModelAndView remover(@PathVariable("id") Long idBolsa){
-		this.bolsaService.remover(idBolsa);
+	public ModelAndView remover(@PathVariable("id") Long id){
+		this.bolsaService.remover(id);
 
 		ModelAndView modelAndView = new ModelAndView("/views/bolsa/listar");
 		modelAndView.addObject("bolsas", this.bolsaService.listar());
@@ -125,9 +126,9 @@ public class BolsaController {
 	}
 
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
-	public ModelAndView editarForm (@PathVariable("id") Long idBolsa){
+	public ModelAndView editarForm (@PathVariable("id") Long id){
 
-		Bolsa bolsa = bolsaService.buscarPorId(idBolsa);
+		Bolsa bolsa = bolsaService.buscarPorId(id);
 		ModelAndView modelAndView = new ModelAndView("/views/bolsa/editar");
 
 		if(bolsa==null){
@@ -157,13 +158,13 @@ public class BolsaController {
 		
 		for (int i = 0; i < partipacoes.size(); i++) {
 			Bolsa bolsa = partipacoes.get(i).getBolsa();
-			if (bolsa.getIdBolsa() == idBolsa && partipacoes.get(i).getDataFim() == null){
+			if (bolsa.getId() == idBolsa && partipacoes.get(i).getDataFim() == null){
 				participacao = partipacoes.get(i);
 				break;
 			}
 		}
 		
-		ModelAndView modelAndView = new ModelAndView("redirect:/bolsa/encerrarParticipacao/"+participacao.getIdParticipacao());
+		ModelAndView modelAndView = new ModelAndView("redirect:/bolsa/encerrarParticipacao/"+participacao.getId());
 	
 
 		return modelAndView ;

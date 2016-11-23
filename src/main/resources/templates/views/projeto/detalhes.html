@@ -32,7 +32,7 @@
 						
 						<a class="btn-floating btn-large top-right waves-effect waves-light waves-circle tooltipped"
 							data-tooltip="Editar"
-							th:href="@{${'/projeto/editar/'+projeto.idProjeto}}" ><i class="material-icons">edit</i></a>
+							th:href="@{${'/projeto/editar/'+projeto.id}}" ><i class="material-icons">edit</i></a>
 					
 						<div class="row">
 							<div class="col s12">
@@ -56,13 +56,14 @@
 							<div class="col s10 input-field">
 								<select>
 									<option value="" disabled="true" selected="true">Escolher bolsa</option>
-									<option th:each="bolsa:${bolsasNaoAssociadas}" th:text="${bolsa.nome}" th:value="${bolsa.idBolsa}">Option 1</option>
+									<option th:each="bolsa:${bolsasNaoAssociadas}" th:text="${bolsa.nome}" th:value="${bolsa.id}">Option 1</option>
 							    </select>
 							    <label>Bolsa</label>
 							</div>
 							
 							<div class="col s2 input-field">
 								<button class="btn waves-effect waves-light">Associar bolsa</button>
+
 							</div>
 						</div>
 						
@@ -119,7 +120,7 @@
 											</td>
 											<td th:text="${bolsista.aluno.matricula}"></td>
 											<td>
-												<a type="button" th:href="@{${'/aluno/detalhes/'+bolsista.aluno.idAluno}}" class="btn btn-raised waves-effect waves-light">Ver Detalhes ></a>
+												<a type="button" th:href="@{${'/aluno/detalhes/'+bolsista.aluno.id}}" class="btn btn-raised waves-effect waves-light">Ver Detalhes ></a>
 											</td>
 										</tr>
 									</tbody>

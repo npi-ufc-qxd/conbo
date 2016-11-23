@@ -6,6 +6,7 @@
     th:with="currentPage='bolsa'">
 
 	<head>
+
 	
 	    <title>Conbo - Alunos</title>
 	    
@@ -73,12 +74,12 @@
 						<tbody>
 							<tr th:each="bolsa:${bolsas}">
 								<td th:text="${bolsa.nome}"></td>
-								<td th:text="${bolsa.tipoBolsa}"></td>
+								<td th:text="${bolsa.tipoBolsa.nome}"></td>
 								<td th:text="${bolsa.vagas}"></td>
 								<td>
-									<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/bolsa/editar/'+bolsa.idBolsa}}" ><i class="material-icons">edit</i></a>
-									<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este aluno?" data-tooltip="Remover" th:href="@{${'/bolsa/remover/'+bolsa.idBolsa}}" ><i class="material-icons">delete</i></a>
-									<a class="btn-icon waves-effect tooltipped" data-tooltip="Detalhes" th:href="@{${'/bolsa/detalhes/'+bolsa.idBolsa}}" ><i class="material-icons">zoom_in</i></a>
+									<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/bolsa/editar/'+bolsa.id}}" ><i class="material-icons">edit</i></a>
+									<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este aluno?" data-tooltip="Remover" th:href="@{${'/bolsa/remover/'+bolsa.id}}" ><i class="material-icons">delete</i></a>
+									<a class="btn-icon waves-effect tooltipped" data-tooltip="Detalhes" th:href="@{${'/bolsa/detalhes/'+bolsa.id}}" ><i class="material-icons">zoom_in</i></a>
 								</td>
 								
 							</tr>

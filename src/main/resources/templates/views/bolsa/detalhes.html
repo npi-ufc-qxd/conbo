@@ -50,7 +50,7 @@ Bolsistas Ativos
 			<tr th:each="participacao:${bolsa.participacoes}">
 				<td th:text="${participacao.aluno.nome}"></td>
 				<td th:text="${participacao.aluno.matricula}"></td>
-				<th><a th:href="@{${'/bolsa/encerrarBolsista/'+bolsa.idBolsa+'/'+participacao.aluno.idAluno}}">Encerrar Bolsista</a></th>
+				<th><a th:href="@{${'/bolsa/encerrarBolsista/'+bolsa.id+'/'+participacao.aluno.id}}">Encerrar Bolsista</a></th>
 			</tr>
 		</tbody>
 	</table>

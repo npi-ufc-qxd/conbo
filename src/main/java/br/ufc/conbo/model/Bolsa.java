@@ -1,5 +1,6 @@
 package br.ufc.conbo.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,6 +11,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Bolsa {
@@ -25,6 +30,10 @@ public class Bolsa {
 	private String observacao;
 	private boolean status;
 	private boolean folhaPagamento;
+	
+	@Temporal(TemporalType.TIMESTAMP) 
+	@DateTimeFormat (pattern="dd-MM-YYYY")
+	private Date dataFim;
 	
 	@OneToMany
 	private List<Participacao> participacoes;
@@ -166,13 +175,22 @@ public class Bolsa {
 		this.folhaPagamento = folhaPagamento;
 	}
 
-	/*@Override
+	public Date getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
+	}
+
+	@Override
 	public String toString() {
 		return "Bolsa [idBolsa=" + idBolsa + ", nome=" + nome + ", valor=" + valor + ", ano=" + ano + ", frequencia="
 				+ frequencia + ", vagas=" + vagas + ", observacao=" + observacao + ", status=" + status
-				+ ", folhaPagamento=" + folhaPagamento + ", participacoes=" + participacoes + ", projeto=" + projeto
-				+ ", tipoBolsa=" + tipoBolsa + ", responsaveis=" + responsaveis + "]";
+				+ ", folhaPagamento=" + folhaPagamento + ", dataFim=" + dataFim + ", participacoes=" + participacoes
+				+ ", projeto=" + projeto + ", tipoBolsa=" + tipoBolsa + ", responsaveis=" + responsaveis + "]";
 	}
 	
-*/	
+
+	
 }

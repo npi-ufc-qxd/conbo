@@ -102,6 +102,16 @@ public class Participacao {
 		return remuneracao;
 	}
 
+	
+	
+	@Override
+	public String toString() {
+		return "Participacao [idParticipacao=" + idParticipacao + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim
+				+ ", dataExpectFim=" + dataExpectFim + ", status=" + status + ", remuneracao=" + remuneracao
+				+ ", observacao=" + observacao + ", aluno=" + aluno + ", frequencias=" + frequencias + ", bolsa="
+				+ bolsa + "]";
+	}
+
 	public void setRemuneracao(boolean remuneracao) {
 		this.remuneracao = remuneracao;
 	}

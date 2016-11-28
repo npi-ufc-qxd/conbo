@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="views/base/base" th:with="currentPage='bolsa'">
+
+<head>
+
+<title>Conbo - Cadastro Bolsa</title>
+
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="row">
+
+		<!-- BREADCRUMBS - Mostra o caminho até a página atual -->
+
+		<div class="col s12 breadcrumbs valign-wrapper">
+
+			<a th:href="@{/}" class="breadcrumb blue-grey-text"> <i
+				class="material-icons left">home</i>
+			</a> <a th:href="@{/bolsa/listar}" class="breadcrumb blue-grey-text">Bolsas</a>
+
+			<a class="breadcrumb blue-grey-text">Folha de Pagamento</a>
+
+		</div>
+
+		<!-- BREADCRUMBS -->
+
+
+		<!-- CONTAINER - Conteiner principal da aplicação -->
+
+		<div class="col s12">
+			<div class="card">
+				<div class="card-content">
+
+					<div class="row">
+						<div class="card-content">
+							<span class="thin text-42 project-title pink-text text-lighten-1">Folha de Pagamento</span>
+						</div>
+						<div class="card-content">
+							<span class="text-20 bold">Finalidade: </span> 
+							<span class="text-20 bold" th:text="${bolsa.nome}"></span>
+						</div>
+
+					</div>
+				</div>
+				
+				<div class="card-action right-align">
+					<button class="btn waves-effect waves-light">Gerar pdf</button>
+				</div>
+				
+				<table class=" table-hover table-lite table-card">
+
+					<thead>
+						<tr>
+							<th>Seq.</th>
+							<th>Nome</th>
+							<th>CPF</th>
+							<th>Banco</th>
+							<th>AG.</th>
+							<th>Conta/Operação</th>
+							<th>Valor</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="participacao,iterationStatus:${bolsa.getParticipacoesAtivasRemuneradas()}">
+							<td th:text="${iterationStatus.index + 1}"></td>
+							<td th:text="${participacao.aluno.nome}"></td>
+							<td th:text="${participacao.aluno.CPF}"></td>
+							<td th:text="${participacao.aluno.banco}"></td>
+							<td th:text="${participacao.aluno.agBanco}"></td>
+							<td th:text="${participacao.aluno.numeroContaCorrente}"></td>
+							<td th:text="${bolsa.valor}"></td>
+						</tr>
+				</tbody>
+
+				</table>
+				
+				<div class="card col s10" th:align="center">
+					<span>TOTAL: </span>
+				</div>
+				
+				<div class="card col s2" th:align="right">
+					<span th:text="${bolsa.valor * bolsa.participacoes.size()}"></span>
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
+
+</section>
+
+</html>
+
+
+

@@ -32,8 +32,11 @@ Frequencia:
 <label th:text="${bolsa.frequencia}" ></label>
 <br/>
 
-Bolsistas Ativos
+<div th:if="${bolsa.folhaPagamento} and ${bolsa.status}">
+	<a th:href="@{${'/bolsa/folhaPagamento/'+bolsa.id}}">Folha de Pagamento</a>
+</div>
 
+Bolsistas Ativos
 
 <br/>
 

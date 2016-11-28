@@ -187,10 +187,20 @@ public class BolsaController {
 	@RequestMapping(value = "/encerrarParticipacao", method = RequestMethod.POST)
 	public ModelAndView encerar(Participacao participacao){
 		ModelAndView modelAndView = new ModelAndView("redirect:listar");
-		System.err.println(participacao.getDataFim().toString());
 		this.participacaoservice.editar(participacao);
 		modelAndView.addObject("bolsas", this.bolsaService.listar());
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "/folhaPagamento/{id}", method = RequestMethod.GET)
+	public ModelAndView folhaPagamento(@PathVariable("id") Long id){
+
+		ModelAndView modelAndView = new ModelAndView("/views/bolsa/folhaPagamento");
+		Bolsa bolsa = bolsaService.buscarPorId(id);
+		modelAndView.addObject("bolsa", bolsa);
+
+		return modelAndView;
+	}
+
 
 }

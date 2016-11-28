@@ -1,5 +1,6 @@
 package br.ufc.conbo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -69,7 +70,18 @@ public class Bolsa {
 		return count;
 	}
 
-
+	public List<Participacao> getParticipacoesAtivasRemuneradas() {
+		List<Participacao> participacoesAtivasRemuneradas= new ArrayList<Participacao>();
+		
+		for (Participacao participacao : participacoes) {
+			if(participacao.isStatus() && participacao.isRemuneracao()){
+				participacoesAtivasRemuneradas.add(participacao);
+			}
+			
+		}
+		
+		return participacoesAtivasRemuneradas;
+	}
 
 
 	public Double getValor() {

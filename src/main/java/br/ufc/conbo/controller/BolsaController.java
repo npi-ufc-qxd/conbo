@@ -134,6 +134,7 @@ public class BolsaController {
 		modelAndView.addObject("bolsa", bolsa);
 		modelAndView.addObject("acao", "EDITAR");
 		modelAndView.addObject("tipoBolsas", this.tipoBolsaService.listar());
+		modelAndView.addObject("pessoas", this.pessoaService.listar());
 		return modelAndView ;
 	}
 

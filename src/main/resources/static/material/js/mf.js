@@ -65,6 +65,16 @@ var mf_base = function() {
             $('.phone').mask('(00) 00000-0000', {reverse: false});
             $('.cpf').mask('000.000.000-00', {reverse: false});
             $('.money').mask('000.000.000.000.000,00', {reverse: true});
+            
+            $("form").submit(function(event) {
+            	
+            	$("input.money").each(function(_, el) {
+            		$(el).val( $(el).val().replace(/[.,]/g, function(x) {
+            		    return x == ',' ? '.' : '';
+            		}) );
+            	});
+            	            	
+            });
         } catch (err) {
             // ...
         }

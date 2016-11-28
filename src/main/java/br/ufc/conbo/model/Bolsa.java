@@ -39,7 +39,7 @@ public class Bolsa {
 	private TipoBolsa tipoBolsa;
 	@ManyToMany
 	@JoinTable(name="bolsa_responsaveis", 
-            joinColumns=  @JoinColumn( name = "id"), 
+            joinColumns=  @JoinColumn( name = "idBolsa"), 
             inverseJoinColumns= @JoinColumn(name = "idPessoa") )
 	private List<Pessoa> responsaveis;
 	

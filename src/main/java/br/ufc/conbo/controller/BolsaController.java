@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +29,6 @@ public class BolsaController {
 	@Inject
 	private BolsaService bolsaService;
 	
-
 	@Inject
 	private AlunoService alunoService;
 
@@ -42,7 +40,6 @@ public class BolsaController {
 	
 	@Inject
 	private ParticipacaoService participacaoservice;
-
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
 	public ModelAndView cadastrarForm(){
@@ -72,9 +69,7 @@ public class BolsaController {
 		ModelAndView modelAndView = new ModelAndView("redirect:" +bolsa.getNome());
 		return modelAndView;
 	}
-
-
-
+	
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public String cadastrar(@ModelAttribute("bolsa") Bolsa bolsa) {
 		bolsaService.salvar(bolsa);
@@ -91,6 +86,7 @@ public class BolsaController {
 	}
 
 	@RequestMapping(value = "/detalhes/{id}", method = RequestMethod.GET)
+
 	public ModelAndView verDetalhes (@PathVariable("id") Long id){
 		ModelAndView modelAndView = new ModelAndView("/views/bolsa/detalhes");
 		

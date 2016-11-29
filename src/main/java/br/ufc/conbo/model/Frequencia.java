@@ -13,7 +13,7 @@ public class Frequencia {
 	
 	@Id
 	@GeneratedValue
-	private Long idFrequencia;
+	private Long id;
 	private File arquivo;
 	private Date mes;
 	private Date dataEnvio;
@@ -25,11 +25,11 @@ public class Frequencia {
 		super();
 	}
 
-	public Long getIdFrequencia() {
-		return idFrequencia;
+	public Long getId() {
+		return id;
 	}
-	public void setIdFrequencia(Long idFrequencia) {
-		this.idFrequencia = idFrequencia;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public File getArquivo() {
 		return arquivo;

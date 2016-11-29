@@ -16,7 +16,7 @@ public class Pessoa {
 	
 	@Id
 	@GeneratedValue
-	private long idPessoa;
+	private long id;
 	private String nome;
 	private String email;
 	
@@ -30,11 +30,11 @@ public class Pessoa {
 		super();
 	}
 	
-	public long getIdPessoa() {
-		return idPessoa;
+	public long getId() {
+		return id;
 	}
-	public void setIdPessoa(long idPessoa) {
-		this.idPessoa = idPessoa;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public String getNome() {
 		return nome;
@@ -52,7 +52,7 @@ public class Pessoa {
 	
 	@Override
 	public String toString() {
-		return "Pessoa [idPessoa=" + idPessoa + ", nome=" + nome + ", email=" + email + ", bolsas=" + bolsas + "]";
+		return "Pessoa [id=" + id + ", nome=" + nome + ", email=" + email + ", bolsas=" + bolsas + "]";
 	}
 	
 }

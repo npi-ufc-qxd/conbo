@@ -10,7 +10,7 @@
 <form action="#" th:action="@{/bolsa/editar}" th:object="${bolsa}"
 	th:method="post">
 	
-	 <input id="id" type="hidden" th:field="*{idBolsa}" />
+	 <input id="id" type="hidden" th:field="*{id}" />
 
 		<label th:for="${#ids.next('nome')}">Nome: </label> 
 		<input type="text" id="nome" name="nome" th:value="${bolsa.nome}" /> 
@@ -48,6 +48,20 @@
 		<select  th:field="*{tipoBolsa}">
          	<option th:each="tb:${tipoBolsas}" th:text="${tb.nome}"  
          	 th:value="${{tb}}">Nome</option>
+        </select>
+        <br />
+        
+        Responsaveis
+		<select multiple="multiple" th:field="*{responsaveis}">
+         	<option th:each="res:${pessoas}" th:text="${res.nome}" 
+         	th:value="${{res}}">Nome</option>
+        </select>
+        <br />
+        
+        Projeto
+		<select  th:field="*{projeto}">
+         	<option th:each="proj:${projetos}" th:text="${proj.nome}"  
+         	 th:value="${{proj}}">Nome</option>
         </select>
 		
 		<br />

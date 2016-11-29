@@ -50,7 +50,7 @@ Bolsistas Ativos
 			<tr th:each="participacao:${bolsa.participacoes}">
 				<td th:text="${participacao.aluno.nome}"></td>
 				<td th:text="${participacao.aluno.matricula}"></td>
-				<th><a th:href="@{${'/bolsa/encerrarBolsista/'+bolsa.idBolsa+'/'+participacao.aluno.idAluno}}">Encerrar Bolsista</a></th>
+				<th><a th:href="@{${'/bolsa/encerrarBolsista/'+bolsa.id+'/'+participacao.aluno.id}}">Encerrar Bolsista</a></th>
 			</tr>
 		</tbody>
 	</table>
@@ -88,16 +88,12 @@ Bolsistas Inativos
 Responsaveis:
 <label th:each="rep:${bolsa.responsaveis}" th:text="${rep.nome}"></label>
 
-
-<label></label>
-
-<br/><br/>
-
-<a th:href="@{${'/bolsa/encerrarBolsa/'+bolsa.idBolsa}}">Encerrar Bolsa</a>
+<br/>
+<br/>
 
 
-
-
+<a th:href="@{${'/bolsa/encerrarBolsa/'+bolsa.id}}">Encerrar Bolsa</a>
+			
 
 
 

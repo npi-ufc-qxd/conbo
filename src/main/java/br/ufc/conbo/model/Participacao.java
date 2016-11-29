@@ -18,8 +18,8 @@ public class Participacao {
 	
 	@Id
 	@GeneratedValue
-	private long idParticipacao;
-	
+	private long id;
+
 	@Temporal(TemporalType.TIMESTAMP) 
 	@DateTimeFormat (pattern="dd-MM-YYYY")
 	private Date dataInicio;
@@ -48,12 +48,12 @@ public class Participacao {
 		super();
 	}
 	
-	public long getIdParticipacao() {
-		return idParticipacao;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdParticipacao(long idParticipacao) {
-		this.idParticipacao = idParticipacao;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Date getDataInicio() {
@@ -73,6 +73,8 @@ public class Participacao {
 		this.dataFim = dataFim;
 	}
 
+	
+	
 	public Date getDataExpectFim() {
 		return dataExpectFim;
 	}
@@ -102,15 +104,6 @@ public class Participacao {
 		return remuneracao;
 	}
 
-	
-	
-	@Override
-	public String toString() {
-		return "Participacao [idParticipacao=" + idParticipacao + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim
-				+ ", dataExpectFim=" + dataExpectFim + ", status=" + status + ", remuneracao=" + remuneracao
-				+ ", observacao=" + observacao + ", aluno=" + aluno + ", frequencias=" + frequencias + ", bolsa="
-				+ bolsa + "]";
-	}
 
 	public void setRemuneracao(boolean remuneracao) {
 		this.remuneracao = remuneracao;

@@ -1,7 +1,6 @@
 package br.ufc.conbo.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,10 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 import br.ufc.conbo.model.Aluno;
 import br.ufc.conbo.model.Bolsa;
 import br.ufc.conbo.model.Participacao;
+import br.ufc.conbo.model.Projeto;
 import br.ufc.conbo.service.AlunoService;
 import br.ufc.conbo.service.BolsaService;
 import br.ufc.conbo.service.ParticipacaoService;
 import br.ufc.conbo.service.PessoaService;
+import br.ufc.conbo.service.ProjetoService;
 import br.ufc.conbo.service.TipoBolsaService;
 
 @Controller
@@ -42,6 +43,10 @@ public class BolsaController {
 	
 	@Inject
 	private ParticipacaoService participacaoservice;
+	
+	@Inject
+	private ProjetoService projetoservice;
+	
 
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
@@ -73,14 +78,11 @@ public class BolsaController {
 		return modelAndView;
 	}
 
-
-
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public String cadastrar(@ModelAttribute("bolsa") Bolsa bolsa) {
 		bolsaService.salvar(bolsa);
 		return "redirect:listar";
 	}
-
 
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
 	public ModelAndView listar (){
@@ -91,36 +93,40 @@ public class BolsaController {
 	}
 
 	@RequestMapping(value = "/detalhes/{id}", method = RequestMethod.GET)
-	public ModelAndView verDetalhes (@PathVariable("id") Long idBolsa){
-		ModelAndView modelAndView = new ModelAndView("/views/bolsa/ver_detalhes");
+	public ModelAndView verDetalhes (@PathVariable("id") Long id){
+		ModelAndView modelAndView = new ModelAndView("/views/bolsa/detalhes");
 		
-		Bolsa bolsa = this.bolsaService.buscarPorId(idBolsa);
+		Bolsa bolsa = this.bolsaService.buscarPorId(id);
 		
 		List<Participacao> partipacoes = bolsa.getParticipacoes();
 		List<Participacao> inativos = new ArrayList<>();
+		List<Participacao> ativos = new ArrayList<>();
 		
 		Participacao participacao;
 		
-		for (int i = 0; i < partipacoes.size(); i++) {
+	
+		for (int i = 0; i <  partipacoes.size() ; i++) {
 			participacao = partipacoes.get(i);
 			if (! participacao.isStatus()){
-				partipacoes.remove(i);
 				inativos.add(participacao);
-				//System.err.println(participacao.getAluno().getNome());
-			}
+			}else
+				ativos.add(participacao);
 		}
 		
-		bolsa.setParticipacoes(partipacoes);
+		
+		
+		bolsa.setParticipacoes(ativos);
 		
 		modelAndView.addObject("bolsa", bolsa);
 		modelAndView.addObject("inativos", inativos);
+
 
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/remover/{id}", method = RequestMethod.GET)
-	public ModelAndView remover(@PathVariable("id") Long idBolsa){
-		this.bolsaService.remover(idBolsa);
+	public ModelAndView remover(@PathVariable("id") Long id){
+		this.bolsaService.remover(id);
 
 		ModelAndView modelAndView = new ModelAndView("/views/bolsa/listar");
 		modelAndView.addObject("bolsas", this.bolsaService.listar());
@@ -129,9 +135,9 @@ public class BolsaController {
 	}
 
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
-	public ModelAndView editarForm (@PathVariable("id") Long idBolsa){
+	public ModelAndView editarForm (@PathVariable("id") Long id){
 
-		Bolsa bolsa = bolsaService.buscarPorId(idBolsa);
+		Bolsa bolsa = bolsaService.buscarPorId(id);
 		ModelAndView modelAndView = new ModelAndView("/views/bolsa/editar");
 
 		if(bolsa==null){
@@ -141,6 +147,10 @@ public class BolsaController {
 		modelAndView.addObject("bolsa", bolsa);
 		modelAndView.addObject("acao", "EDITAR");
 		modelAndView.addObject("tipoBolsas", this.tipoBolsaService.listar());
+		modelAndView.addObject("pessoas", this.pessoaService.listar());
+		modelAndView.addObject("projetos", this.projetoservice.listar());
+		
+		System.out.println(bolsa.getResponsaveis().size());
 		return modelAndView ;
 	}
 
@@ -148,6 +158,7 @@ public class BolsaController {
 	public ModelAndView editar(@Valid Bolsa bolsa){
 		ModelAndView modelAndView = new ModelAndView("redirect:listar");
 		this.bolsaService.editar(bolsa);
+		
 		modelAndView.addObject("bolsas", this.bolsaService.listar());
 		return modelAndView;
 	}
@@ -161,13 +172,13 @@ public class BolsaController {
 		
 		for (int i = 0; i < partipacoes.size(); i++) {
 			Bolsa bolsa = partipacoes.get(i).getBolsa();
-			if (bolsa.getIdBolsa() == idBolsa && partipacoes.get(i).isStatus()){
+
+			if (bolsa.getId() == idBolsa && partipacoes.get(i).isStatus()){
 				participacao = partipacoes.get(i);
-				break;
 			}
 		}
 		
-		ModelAndView modelAndView = new ModelAndView("redirect:/bolsa/encerrarParticipacao/"+participacao.getIdParticipacao());
+		ModelAndView modelAndView = new ModelAndView("redirect:/bolsa/encerrarParticipacao/"+participacao.getId());
 	
 
 		return modelAndView ;
@@ -191,10 +202,10 @@ public class BolsaController {
 	public ModelAndView encerarParticipacao(Participacao participacao){
 		ModelAndView modelAndView = new ModelAndView("redirect:listar");
 		
-		System.err.println(participacao.getAluno().getNome());
-		
-		participacao.setStatus(false);
-		this.participacaoservice.editar(participacao);
+		Participacao partici2 = participacaoservice.buscarPorId(participacao.getId());
+		partici2.setStatus(false);
+		partici2.setDataFim(participacao.getDataFim());
+		this.participacaoservice.editar(partici2);
 		modelAndView.addObject("bolsas", this.bolsaService.listar());
 		return modelAndView;
 	}
@@ -217,14 +228,16 @@ public class BolsaController {
 		ModelAndView modelAndView = new ModelAndView("redirect:listar");
 		
 		//A bolsa q vinha do encerrarBolsaForm não continha as participacoes
-		Bolsa bolsa2 = bolsaService.buscarPorId(bolsa.getIdBolsa());
+		Bolsa bolsa2 = bolsaService.buscarPorId(bolsa.getId());
 		
 		List<Participacao> partici = bolsa2.getParticipacoes();
+		
 		for (Participacao participacao : partici) {
-			System.err.println(bolsa.getDataFim().toString());
-			participacao.setStatus(false);
-			participacao.setDataFim(bolsa.getDataFim());
-			participacao.setObservacao("A bolsa foi encerrada.");
+			if (participacao.isStatus()){
+				participacao.setStatus(false);
+				participacao.setDataFim(bolsa.getDataFim());
+				participacao.setObservacao("A bolsa foi encerrada.");
+			}
 		}
 		bolsa2.setParticipacoes(partici);
 		bolsa2.setDataFim(bolsa.getDataFim());
@@ -235,7 +248,6 @@ public class BolsaController {
 		
 		this.bolsaService.editar(bolsa2);
 		modelAndView.addObject("bolsas", this.bolsaService.listar());
-		System.err.println("A bolsa foi encerrada");
 		return modelAndView;
 	}
 	

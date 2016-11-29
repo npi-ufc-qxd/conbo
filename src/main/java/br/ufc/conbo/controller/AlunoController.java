@@ -78,8 +78,8 @@ public class AlunoController {
 	
 
 	@RequestMapping(value = "/remover/{id}", method = RequestMethod.GET)
-	public ModelAndView remover(@PathVariable("id") Long idAluno){
-		this.alunoService.remover(idAluno);
+	public ModelAndView remover(@PathVariable("id") Long id){
+		this.alunoService.remover(id);
 		
 		ModelAndView modelAndView = new ModelAndView("/views/aluno/listar");
 		modelAndView.addObject("alunos", this.alunoService.listar());
@@ -88,9 +88,9 @@ public class AlunoController {
 	}
 	
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
-	public ModelAndView editarForm (@PathVariable("id") Long idAluno){
+	public ModelAndView editarForm (@PathVariable("id") Long id){
 		
-		Aluno aluno = alunoService.buscarPorId(idAluno);
+		Aluno aluno = alunoService.buscarPorId(id);
 		ModelAndView modelAndView = new ModelAndView("/views/aluno/editar");
 		
 		if(aluno == null){

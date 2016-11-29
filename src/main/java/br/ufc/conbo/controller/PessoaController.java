@@ -46,8 +46,8 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(value = "/remover/{id}", method = RequestMethod.GET)
-	public ModelAndView remover(@PathVariable("id") Long idPessoa){
-		this.pessoaService.remover(idPessoa);
+	public ModelAndView remover(@PathVariable("id") Long id){
+		this.pessoaService.remover(id);
 		
 		ModelAndView modelAndView = new ModelAndView("/views/pessoa/listar");
 		modelAndView.addObject("pessoas", this.pessoaService.listar());
@@ -56,9 +56,9 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
-	public ModelAndView editarForm (@PathVariable("id") Long idPessoa){
+	public ModelAndView editarForm (@PathVariable("id") Long id){
 		
-		Pessoa pessoa = pessoaService.buscarPorId(idPessoa);
+		Pessoa pessoa = pessoaService.buscarPorId(id);
 		ModelAndView modelAndView = new ModelAndView("/views/pessoa/editar");
 		
 		if(pessoa==null){

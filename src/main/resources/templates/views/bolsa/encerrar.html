@@ -9,7 +9,7 @@
 
 <form action="#" th:action="@{/bolsa/encerrarBolsa}" th:object="${bolsa}"
 	th:method="post">
-		<input type="hidden" th:field="*{idBolsa}"/>
+		<input type="hidden" th:field="*{id}"/>
 		<label th:for="${#ids.next('dataFim')}">Data: </label> 
  		<input type="date" th:field="*{dataFim}" id="dataFim"/>
 

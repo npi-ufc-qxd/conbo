@@ -50,7 +50,7 @@
 						<div class="row">							
 							<div class="col s4 input-field">
 								<label th:for="${#ids.next('valor')}">valor: </label> 
-								<input class="number" type="number" id="${#ids.next('valor')}" name="valor" th:value="${valor}" required="true"/> 
+								<input class="money" type="text" id="${#ids.next('valor')}" name="valor" th:value="${valor}" required="true"/> 
 							</div>
 								
 							<div class="col s4 input-field">
@@ -87,7 +87,7 @@
 						
 							<div class="col s6 input-field">
 								<select th:id="${#ids.next('tipoBolsas')}" name="tipoBolsa">
-									<option value="">Escolha um tipo de bolsa...</option>
+									<option value="" disabled="true" selected="true">Escolha um tipo de bolsa...</option>
 						         	<option th:each="tb:${tipoBolsas}" th:text="${tb.nome}" th:value="${{tb}}">Nome</option>
 						        </select>
 						        <label th:for="${#ids.next('tipoBolsas')}">Tipo Bolsa:</label>
@@ -95,6 +95,7 @@
 						
 							<div class="col s6 input-field">
 								<select th:id="${#ids.next('responsaveis')}" multiple="multiple" name="responsaveis" >
+						  			<option value="" disabled="true" selected="true">Escolha um responsável...</option>
 						  			<option th:each="pessoa:${pessoas}" th:text="${pessoa.nome}"  
 						         	 th:value="${{pessoa}}">Nome</option>
 						        </select>

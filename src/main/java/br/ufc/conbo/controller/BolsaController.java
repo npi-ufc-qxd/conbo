@@ -31,7 +31,6 @@ public class BolsaController {
 	@Inject
 	private BolsaService bolsaService;
 	
-
 	@Inject
 	private AlunoService alunoService;
 
@@ -43,10 +42,9 @@ public class BolsaController {
 	
 	@Inject
 	private ParticipacaoService participacaoservice;
-	
+
 	@Inject
 	private ProjetoService projetoservice;
-	
 
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
@@ -93,6 +91,7 @@ public class BolsaController {
 	}
 
 	@RequestMapping(value = "/detalhes/{id}", method = RequestMethod.GET)
+
 	public ModelAndView verDetalhes (@PathVariable("id") Long id){
 		ModelAndView modelAndView = new ModelAndView("/views/bolsa/detalhes");
 		
@@ -119,7 +118,7 @@ public class BolsaController {
 		
 		modelAndView.addObject("bolsa", bolsa);
 		modelAndView.addObject("inativos", inativos);
-
+	
 
 		return modelAndView;
 	}
@@ -150,7 +149,6 @@ public class BolsaController {
 		modelAndView.addObject("pessoas", this.pessoaService.listar());
 		modelAndView.addObject("projetos", this.projetoservice.listar());
 		
-		System.out.println(bolsa.getResponsaveis().size());
 		return modelAndView ;
 	}
 

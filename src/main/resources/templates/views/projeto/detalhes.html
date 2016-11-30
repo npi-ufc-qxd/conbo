@@ -20,7 +20,7 @@
 	            <a th:href="@{/}" class="breadcrumb blue-grey-text">
 	                <i class="material-icons left">home</i>
 	            </a>
-	            <a th:href="@{/projetos/listar}" class="breadcrumb blue-grey-text">Projetos</a>
+	            <a th:href="@{/projeto/listar}" class="breadcrumb blue-grey-text">Projetos</a>
 	            <a class="breadcrumb blue-grey-text">Detalhes</a>
 	        </div>
 	        <!-- BREADCRUMBS -->
@@ -50,24 +50,27 @@
 						</div>
 					</div>
 					
-					<div class="card-action">
-						
-						<div class="row no-margin">
-							<div class="col s10 input-field">
-								<select>
-									<option value="" disabled="true" selected="true">Escolher bolsa</option>
-									<option th:each="bolsa:${bolsasNaoAssociadas}" th:text="${bolsa.nome}" th:value="${bolsa.id}">Option 1</option>
-							    </select>
-							    <label>Bolsa</label>
+					<form th:action="@{'/projeto/'+${projeto.id}+'/associarBolsa/'}" method="post">
+					
+						<div class="card-action">
+							
+							<div class="row no-margin">
+								<div class="col s10 input-field">
+									
+									<select th:name="bolsaId">
+										<option value="" disabled="true" selected="true">Escolher bolsa</option>
+										<option th:each="bolsa:${bolsasNaoAssociadas}" th:text="${bolsa.nome}" th:value="${bolsa.id}" >Option 1</option>
+								    </select>
+								    <label>Bolsa</label>
+								</div>
+															
+								<div class="col s2 input-field">
+									<button type="submit" class="btn waves-effect waves-light">Associar</button>
+								</div>
 							</div>
 							
-							<div class="col s2 input-field">
-								<button class="btn waves-effect waves-light">Associar bolsa</button>
-
-							</div>
 						</div>
-						
-					</div>
+					</form>
 					
 					<div class="card-action">
 						

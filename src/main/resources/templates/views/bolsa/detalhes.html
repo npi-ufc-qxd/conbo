@@ -1,101 +1,174 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8"/>
-<title>Detalhes Bolsa</title>
-</head>
-<body>
-Nome:
-<label th:text="${bolsa.nome}"></label>
-<br/>
-Descrição:
-<label th:text="${bolsa.observacao}"></label>
-<br/>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="views/base/base"
+    th:with="currentPage='aluno'">
 
-Tipo:
-<label th:text="${bolsa.tipoBolsa.nome}"></label>
-<br/>
+	<head>
+	
+	    <title>Conbo - Detalhes do Aluno</title>
+	    
+	</head>
 
-Vagas:
-<label th:text="${bolsa.vagas}" ></label>
-<br/>
-
-Ano:
-<label th:text="${bolsa.ano}" ></label>
-<br/>
-
-Valor:
-<label th:text="${bolsa.valor}" ></label>
-<br/>
-
-Frequencia:
-<label th:text="${bolsa.frequencia}" ></label>
-<br/>
-
-Bolsistas Ativos
-
-
-<br/>
-
-	<table id="table-bolsistas" border="1">
-		<thead>
-			<tr>
-				
-				<th>Nome</th>
-				<th>matricula</th>
-				
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="participacao:${bolsa.participacoes}">
-				<td th:text="${participacao.aluno.nome}"></td>
-				<td th:text="${participacao.aluno.matricula}"></td>
-				<th><a th:href="@{${'/bolsa/encerrarBolsista/'+bolsa.id+'/'+participacao.aluno.id}}">Encerrar Bolsista</a></th>
-			</tr>
-		</tbody>
-	</table>
-
-<br/>
-
-
-Bolsistas Inativos
-
-
-<br/>
-
-	<table id="table-inativos" border="1">
-		<thead>
-			<tr>
-				
-				<th>Nome</th>
-				<th>matricula</th>
-				
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="participacao:${inativos}">
-				<td th:text="${participacao.aluno.nome}"></td>
-				<td th:text="${participacao.aluno.matricula}"></td>
-			</tr>
-		</tbody>
-	</table>
-
-
-
-
-
-
-Responsaveis:
-<label th:each="rep:${bolsa.responsaveis}" th:text="${rep.nome}"></label>
-
-<br/>
-<br/>
-
-
-<a th:href="@{${'/bolsa/encerrarBolsa/'+bolsa.id}}">Encerrar Bolsa</a>
+	<section layout:fragment="conteudo">
+		
+		<div class="row">
+		
+			<!-- BREADCRUMBS - Mostra o caminho até a página atual -->
 			
+			<div class="col s12 breadcrumbs valign-wrapper">
+	            
+	            <a th:href="@{/}" class="breadcrumb blue-grey-text">
+	                <i class="material-icons left">home</i>
+	            </a>
+	            
+	            <a th:href="@{/aluno/listar}" class="breadcrumb blue-grey-text">Alunos</a>
+	            
+	            <a class="breadcrumb blue-grey-text">Detalhes</a>
+	            
+	        </div>
+	        
+	        <!-- BREADCRUMBS -->
+		
+		
+			<!-- CONTAINER - Conteiner principal da aplicação -->
+			
+		    <div class="col s12">
+		    	
+				<div class="card">
+					<div class="card-content">
+						
+						<a class="btn-floating btn-large top-right waves-effect waves-light waves-circle tooltipped"
+							data-tooltip="Editar"
+							th:href="@{${'/bolsa/editar/'+bolsa.id}}" ><i class="material-icons">edit</i></a>
+					
+						<div class="row">
+							<div class="col s8">
+								<span class="bold">Nome:</span> <br/>
+								<span class="light" th:text="${bolsa.nome}"></span>
+							</div>
+							<div class="col s4">
+								<span class="bold">Tipo:</span> <br/>
+								<span class="light" th:text="${bolsa.tipoBolsa.nome}"></span>
+							</div>
+						<div class="row">
+						
+						</div>
+							<div class="col s12">
+								<span class="bold">Observação:</span> <br/>
+								<span class="light" th:text="${bolsa.observacao}"></span>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col l3 m6 s6">
+								<span class="bold">Vagas:</span> <br/>
+								<span class="light" th:text="${bolsa.vagas}"></span>
+							</div>
 
+							<div class="col l3 m6 s6">
+								<span class="bold">Ano:</span> <br/>
+								<span class="light" th:text="${bolsa.ano}"></span>
+							</div>
+							
+							<div class="col l3 m6 s6">
+								<span class="bold">Valor:</span> <br/>
+								<span class="light" th:text="${bolsa.valor}"></span>
+							</div>
+							
+							<div class="col l3 m6 s6">
+								<span class="bold">Frequência:</span> <br/>
+								<span class="light" th:text="${bolsa.frequencia}"></span>
+							</div>
+						</div>
+						
+						<div class="row">	
+							<div class="col s12">
+								<span class="bold">Responsáveis:</span> <br/>
+								<span class="light" th:each="rep:${bolsa.responsaveis}" th:text="${rep.nome}"></span>
+							</div>
+							
+						</div>
+					</div>
+					<div class="card-action">
+						
+						<span th:if="${#lists.isEmpty(bolsa.participacoes)}" class="bold">Não há bolsistas ativos</span> <br/>
+						
+						<span th:unless="${#lists.isEmpty(bolsa.participacoes)}" class="bold">Bolsistas ativos:</span> <br/>
+						<table th:unless="${#lists.isEmpty(bolsa.participacoes)}" id="table-bolsistas"
+							class="datatable table-hover table-lite table-card"
+							data-sort-col="0,1,2" data-sort-direction="desc,desc,asc" 
+							data-filter="#table-filter">
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>Matrícula</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="participacao:${bolsa.participacoes}">
+									<td class="max-width-200" th:text="${participacao.aluno.nome}"></td>
+									<td th:text="${participacao.aluno.matricula}"></td>
+									
+									<td>
+										<a class="btn-icon waves-effect tooltipped confirm" 
+											data-text="Deseja realmente desvincular este bolsista?" 
+											data-tooltip="Remover" 
+											th:href="@{${'/bolsa/encerrarBolsista/'+bolsa.id+'/'+participacao.aluno.id}}" >
+											<i class="material-icons">delete</i></a>
+									</td>
+									
+								</tr>
+							</tbody>
+						</table>
+				
+					</div>
+					
+					
+					<div class="card-action">
+						
+						<span th:if="${#lists.isEmpty(inativos)}" class="bold">Não há bolsistas inativos</span> <br/>
+						<span th:unless="${#lists.isEmpty(inativos)}" class="bold">Bolsistas inativos:</span> <br/>
+						
+						<table th:unless="${#lists.isEmpty(inativos)}" id="table-bolsistas"
+							class="datatable table-hover table-lite table-card"
+							data-sort-col="0,1" data-sort-direction="desc,desc" 
+							data-filter="#table-filter"> 
+					
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>Matrícula</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="participacao:${inativos}">
+									<td class="max-width-200" th:text="${participacao.aluno.nome}"></td>
+									<td th:text="${participacao.aluno.matricula}"></td>
+									
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+					
+				</div>
 
+		    </div>
+		    	        	   
+		    <!-- CONTAINER -->
+		    
+		</div>
+		
+	</section>
 
-</body>
+	<section layout:fragment="js">
+	
+		<!-- SCRIPTS - Coloque aqui os scripts desta página -->
+			
+	</section>
+
 </html>
+

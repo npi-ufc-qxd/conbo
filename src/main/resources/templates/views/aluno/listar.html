@@ -76,7 +76,7 @@
 						</thead>
 						<tbody>
 							<tr th:each="aluno:${alunos}">
-								<td class="max-width-200"><span th:text="${aluno.nome}" class="justify"></span></td>
+								<td class="max-width-200"><span th:text="${aluno.nome}" class="limit justify" data-max-length="100"></span></td>
 								<td th:text="${aluno.matricula}"></td>
 								<td class="hide-on-small-only" th:text="${aluno.CPF}"></td>
 								<td class="hide-on-med-and-down" th:text="${aluno.banco}"></td>

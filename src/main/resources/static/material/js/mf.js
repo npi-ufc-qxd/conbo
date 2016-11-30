@@ -219,6 +219,23 @@ var mf_base = function() {
         });
     }
 
+    var initLimit = function() {
+    	$(".limit").each(function(_, e) {
+    		var el = $(e);
+    		var text = el.text();
+
+    		el.addClass("tooltipped");
+    		el.attr("data-tooltip", text);
+    		el.tooltip();
+
+    		var maxLength = el.data("max-length");
+    		if(text && maxLength && text.length > maxLength) {
+    			text = text.substring(0, maxLength) + "...";
+    		}
+    		el.text(text);
+    	});
+    }
+
     return {
         
         doInit : function() {
@@ -230,6 +247,7 @@ var mf_base = function() {
             initAlerts();
             initConfirm();
             initDataTables();
+            initLimit();
             
             hideForeground();            
         },

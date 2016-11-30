@@ -3,6 +3,7 @@ package br.ufc.conbo.service;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import br.ufc.conbo.model.Aluno;
+import br.ufc.conbo.model.Bolsa;
 
 @Service
 public interface AlunoService {

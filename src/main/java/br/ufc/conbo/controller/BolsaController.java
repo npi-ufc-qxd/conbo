@@ -1,3 +1,4 @@
+
 package br.ufc.conbo.controller;
 
 import java.util.ArrayList;
@@ -187,6 +188,35 @@ public class BolsaController {
 		System.err.println(participacao.getDataFim().toString());
 		this.participacaoservice.editar(participacao);
 		modelAndView.addObject("bolsas", this.bolsaService.listar());
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/{id}/associarBolsista/", method = RequestMethod.GET)
+	public ModelAndView associarBolsistaForm(@PathVariable("id") Long id){
+	
+		Bolsa bolsa = bolsaService.buscarPorId(id);
+		
+		List<Aluno> alunos = alunoService.listar();
+		
+		ModelAndView modelAndView = new ModelAndView("/views/bolsa/associarBolsista");
+		modelAndView.addObject("bolsa",bolsa);
+		modelAndView.addObject("participacao", new Participacao());
+		modelAndView.addObject("alunosNaoAssociados", alunos);
+
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/{id}/associarBolsista/", method = RequestMethod.POST)
+	public ModelAndView associarBolsista(@PathVariable("id") Long idBolsa, @ModelAttribute Participacao participacao){
+		
+		ModelAndView modelAndView = new ModelAndView("/views/bolsa/listar");
+		modelAndView.addObject("bolsas", this.bolsaService.listar());
+
+		Bolsa bolsa = bolsaService.buscarPorId(idBolsa);
+		participacao.setBolsa(bolsa);
+		participacaoservice.salvar(participacao);
+		this.bolsaService.salvar(bolsa);
+
 		return modelAndView;
 	}
 

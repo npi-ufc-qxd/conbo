@@ -131,10 +131,12 @@
 						
 						<span th:if="${#lists.isEmpty(inativos)}" class="bold">Não há bolsistas inativos</span> <br/>
 						<span th:unless="${#lists.isEmpty(inativos)}" class="bold">Bolsistas inativos:</span> <br/>
-						<table th:unless="${#lists.isEmpty(alunos)}" id="table-bolsistas"
+						
+						<table th:unless="${#lists.isEmpty(inativos)}" id="table-bolsistas"
 							class="datatable table-hover table-lite table-card"
-							data-sort-col="0,1,2" data-sort-direction="desc,desc,asc" 
-							data-filter="#table-filter">
+							data-sort-col="0,1" data-sort-direction="desc,desc" 
+							data-filter="#table-filter"> 
+					
 							<thead>
 								<tr>
 									<th>Nome</th>
@@ -149,7 +151,6 @@
 								</tr>
 							</tbody>
 						</table>
-				
 					</div>
 					
 					
@@ -170,3 +171,4 @@
 	</section>
 
 </html>
+

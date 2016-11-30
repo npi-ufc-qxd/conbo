@@ -73,6 +73,8 @@ public class Participacao {
 		this.dataFim = dataFim;
 	}
 
+	
+	
 	public Date getDataExpectFim() {
 		return dataExpectFim;
 	}
@@ -101,6 +103,7 @@ public class Participacao {
 	public boolean isRemuneracao() {
 		return remuneracao;
 	}
+
 
 	public void setRemuneracao(boolean remuneracao) {
 		this.remuneracao = remuneracao;

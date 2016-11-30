@@ -69,6 +69,7 @@
 								<th>Tipo</th>
 								<th>Bolsistas</th>
 								<th>Opções</th>
+								<th>Status</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -81,7 +82,8 @@
 									<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este aluno?" data-tooltip="Remover" th:href="@{${'/bolsa/remover/'+bolsa.id}}" ><i class="material-icons">delete</i></a>
 									<a class="btn-icon waves-effect tooltipped" data-tooltip="Detalhes" th:href="@{${'/bolsa/detalhes/'+bolsa.id}}" ><i class="material-icons">zoom_in</i></a>
 								</td>
-								
+								<td th:if= "(not bolsa.status)" > Ativo</td>
+								<td th:if= "(bolsa.status)" > Inativo</td>
 							</tr>
 						</tbody>
 					</table>

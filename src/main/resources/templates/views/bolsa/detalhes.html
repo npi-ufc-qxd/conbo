@@ -90,7 +90,17 @@
 							</div>
 							
 						</div>
+						
+						
+						
 					</div>
+
+						<div class="right-align">
+							<div class="col s12">
+								<a th:href="@{${'/bolsa/'+ bolsa.id+'/associarBolsista/'}}" class="btn waves-effect waves-light">Associar Bolsista</a>
+							</div>
+						</div>
+
 					<div class="card-action">
 						
 						<span th:if="${#lists.isEmpty(bolsa.participacoes)}" class="bold">Não há bolsistas ativos</span> <br/>

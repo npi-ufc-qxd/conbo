@@ -90,5 +90,5 @@ public class Aluno {
 	public void setNumeroContaCorrente(String numeroContaCorrente) {
 		this.numeroContaCorrente = numeroContaCorrente;
 	}
-
+	
 }

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="views/base/base"
+    th:with="currentPage='bolsa'">
+
+	<head>
+	
+	    <title>Conbo - Cadastro Bolsa</title>
+	    
+	</head>
+
+	<section layout:fragment="conteudo">
+		
+		<div class="row">
+		
+			<!-- BREADCRUMBS - Mostra o caminho até a página atual -->
+			
+			<div class="col s12 breadcrumbs valign-wrapper">
+	            
+	            <a th:href="@{/}" class="breadcrumb blue-grey-text">
+	                <i class="material-icons left">home</i>
+	            </a>
+	            
+	            <a th:href="@{/bolsa/listar}" class="breadcrumb blue-grey-text">Bolsa</a>
+	            
+	            <a th:href="@{${'/bolsa/detalhes/'+bolsa.id}}" class="breadcrumb blue-grey-text">Bolsa</a>
+	            
+	            <a class="breadcrumb blue-grey-text">Associar Bolsa</a>
+	            
+	        </div>
+	        
+	        <!-- BREADCRUMBS -->
+		
+		
+			<!-- CONTAINER - Conteiner principal da aplicação -->
+			
+		    <div class="col s12">
+		    	
+		    	<form class="card" action="#" th:action="@{${'/bolsa/'+bolsa.id+'/associarBolsista/'}}" th:object="${participacao}" th:method="post">
+		    		<div class="card-content">
+		    		
+		    		<input type="hidden" name="status" th:value="true"/>
+		    			
+		    			<div class="row">
+		    				<div class="col s6">
+		    					<label th:for="${#ids.next('dataInicio')}">Data de início: </label> 
+								<input type="date" th:id="${#ids.next('dataInicio')}" name="dataInicio" th:value="${dataInicio}" required="true" />
+		    				</div>
+		    				<div class="col s6">
+		    					<label th:for="${#ids.next('dataExpectFim')}">Data de expectativa de fim: </label> 
+								<input type="date" th:id="${#ids.next('dataExpectFim')}" name="dataExpectFim" th:value="${dataExpectFim}" required="true" />
+		    				</div>
+						</div>
+						<div class="row">				
+							<div class="col s6">	
+								<input type="checkbox" th:id="${#ids.next('remuneracao')}" th:name="remuneracao"  />
+								<label th:for="${#ids.next('remuneracao')}">Remuneração</label>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col s12 input-field">
+								<select th:id="${#ids.next('aluno')}" name="aluno">
+									<option value="" disabled="true" selected="true">Escolha um bolsista...</option>
+						         	<option th:each="alunoNaoAssociado:${alunosNaoAssociados}" th:text="${alunoNaoAssociado.nome}" th:value="${{alunoNaoAssociado}}">Nome</option>
+						        </select>
+						        <label th:for="${#ids.next('aluno')}">Bolsista:</label>
+							</div>
+						</div>
+						
+						<div class="row">		
+							<div class="col s12 input-field">
+								<label th:for="${#ids.next('observacao')}">Observacao: </label> 
+								<textarea class="materialize-textarea" id="observacao" name="observacao" th:text="${observacao}"></textarea>
+							</div>
+						</div>
+						
+					</div>
+					
+					<div class="card-action right-align">
+						<a th:href="@{${'/bolsa/detalhes/'+bolsa.id}}" data-text="Deseja cancelar o cadastro?" class="confirm btn btn-flat waves-effect">Cancelar</a>
+						<button class="btn waves-effect waves-light" type="submit">Salvar</button>
+					</div>
+					
+		    			
+		    	</form>
+		    	
+		    </div>
+		    	        	   
+		    <!-- CONTAINER -->
+		    
+		</div>
+		
+	</section>
+
+	<section layout:fragment="js">
+	
+		<!-- SCRIPTS - Coloque aqui os scripts desta página -->
+			
+	</section>
+
+</html>
+
+
+

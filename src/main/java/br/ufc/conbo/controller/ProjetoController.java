@@ -1,14 +1,11 @@
 package br.ufc.conbo.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -100,11 +97,7 @@ public class ProjetoController {
 
 	@RequestMapping(value = "/{id}/associarBolsa/", method = RequestMethod.POST)
 	public String associarBolsa(@ModelAttribute("id") Projeto projeto, @RequestParam("bolsaId") Bolsa bolsa){
-		List<Bolsa> bolsas = projeto.getBolsas();
-		bolsa.setProjeto(projeto);
-		bolsas.add(bolsa);
-		projeto.setBolsas(bolsas);
-		projetoService.salvar(projeto);
+		
 
 		return "redirect:/projeto/detalhes/"+projeto.getId();
 	}

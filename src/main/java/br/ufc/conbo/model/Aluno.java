@@ -83,4 +83,13 @@ public class Aluno {
 		this.numeroContaCorrente = numeroContaCorrente;
 	}
 
+	public List<Participacao> getParticipacoes() {
+		return participacoes;
+	}
+
+	public void setParticipacoes(List<Participacao> participacoes) {
+		this.participacoes = participacoes;
+	}
+
+	
 }

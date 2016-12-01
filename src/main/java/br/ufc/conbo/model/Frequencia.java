@@ -1,12 +1,14 @@
 package br.ufc.conbo.model;
 
-import java.io.File;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Frequencia {
@@ -14,11 +16,21 @@ public class Frequencia {
 	@Id
 	@GeneratedValue
 	private Long idFrequencia;
-	private File arquivo;
+	private String caminhoArquivo;
+	@DateTimeFormat(pattern = "YYYY-MM")
 	private Date mes;
 	private Date dataEnvio;
+	private String nome;
 	
-	@OneToOne
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	@ManyToOne
 	private Participacao participacao;
 	
 	public Frequencia() {
@@ -31,12 +43,12 @@ public class Frequencia {
 	public void setIdFrequencia(Long idFrequencia) {
 		this.idFrequencia = idFrequencia;
 	}
-	public File getArquivo() {
-		return arquivo;
+	public String getCaminhoArquivo() {
+		return caminhoArquivo;
 	}
 
-	public void setArquivo(File arquivo) {
-		this.arquivo = arquivo;
+	public void setCaminhoArquivo(String caminhoArquivo) {
+		this.caminhoArquivo = caminhoArquivo;
 	}
 
 	public Date getMes() {
@@ -54,4 +66,14 @@ public class Frequencia {
 	public void setDataEnvio(Date dataEnvio) {
 		this.dataEnvio = dataEnvio;
 	}
+
+	public Participacao getParticipacao() {
+		return participacao;
+	}
+
+	public void setParticipacao(Participacao participacao) {
+		this.participacao = participacao;
+	}
+	
+	
 }

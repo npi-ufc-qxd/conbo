@@ -78,8 +78,8 @@
 						</div>
 					</div>
 					<div class="card-action right-align">
-						<a class="btn waves-effect waves-light">Enviar Frequência</a>
-						<a class="btn waves-effect waves-light">Ver Frequência</a>
+						<a class="btn waves-effect waves-light" th:href="@{${'/frequencia/adicionar/'+aluno.idAluno}}">Enviar Frequência</a>
+						<a class="btn waves-effect waves-light" th:href="@{${'/frequencia/listar/'+aluno.idAluno}}">Ver Frequência</a>
 						<a class="btn waves-effect waves-light">Histórico</a>
 				
 					</div>

@@ -38,6 +38,17 @@ public class AlunoController {
 		return "redirect:listar";
 	}
 	
+	@RequestMapping(value="/detalhes/{id}", method = RequestMethod.GET)
+	public ModelAndView detalhes(@PathVariable("id") Long id){
+		ModelAndView model = new ModelAndView("/views/aluno/detalhes");
+		Aluno aluno = this.alunoService.buscarPorId(id);
+		model.addObject("aluno", aluno);
+		List<Aluno> alunos = new ArrayList<>();
+		alunos.add(aluno);
+		model.addObject("alunos", alunos);
+		return model;
+	}
+	
 	@RequestMapping(value="/buscar/{nome}", method = RequestMethod.GET)
 	public ModelAndView buscarForm(@PathVariable("nome") String nome){
 		ModelAndView model = new ModelAndView("/views/aluno/detalhes");
@@ -67,8 +78,8 @@ public class AlunoController {
 	
 
 	@RequestMapping(value = "/remover/{id}", method = RequestMethod.GET)
-	public ModelAndView remover(@PathVariable("id") Long idAluno){
-		this.alunoService.remover(idAluno);
+	public ModelAndView remover(@PathVariable("id") Long id){
+		this.alunoService.remover(id);
 		
 		ModelAndView modelAndView = new ModelAndView("/views/aluno/listar");
 		modelAndView.addObject("alunos", this.alunoService.listar());
@@ -77,9 +88,9 @@ public class AlunoController {
 	}
 	
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
-	public ModelAndView editarForm (@PathVariable("id") Long idAluno){
+	public ModelAndView editarForm (@PathVariable("id") Long id){
 		
-		Aluno aluno = alunoService.buscarPorId(idAluno);
+		Aluno aluno = alunoService.buscarPorId(id);
 		ModelAndView modelAndView = new ModelAndView("/views/aluno/editar");
 		
 		if(aluno == null){

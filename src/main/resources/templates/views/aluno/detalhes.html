@@ -7,7 +7,7 @@
 
 	<head>
 	
-	    <title>Conbo - Página Modelo</title>
+	    <title>Conbo - Detalhes do Aluno</title>
 	    
 	</head>
 
@@ -41,7 +41,7 @@
 						
 						<a class="btn-floating btn-large top-right waves-effect waves-light waves-circle tooltipped"
 							data-tooltip="Editar"
-							th:href="@{${'/aluno/editar/'+aluno.idAluno}}" ><i class="material-icons">edit</i></a>
+							th:href="@{${'/aluno/editar/'+aluno.id}}" ><i class="material-icons">edit</i></a>
 					
 						<div class="row">
 							<div class="col s9">
@@ -78,6 +78,8 @@
 						</div>
 					</div>
 					<div class="card-action right-align">
+
+						<a th:href="@{/aluno/listar}" class="btn btn-flat waves-effect">Voltar à Listagem</a>
 						<a class="btn waves-effect waves-light" th:href="@{${'/frequencia/adicionar/'+aluno.idAluno}}">Enviar Frequência</a>
 						<a class="btn waves-effect waves-light" th:href="@{${'/frequencia/listar/'+aluno.idAluno}}">Ver Frequência</a>
 						<a class="btn waves-effect waves-light">Histórico</a>

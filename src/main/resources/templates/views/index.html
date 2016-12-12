@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="views/base/base"
+    th:with="currentPage='inicio'">
+
+	<head>
+	
+	    <title>Conbo</title>
+	    
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/index/index.css}"/>
+	    <link rel="stylesheet" type="text/css" th:href="@{/material/plugins/grid/gridstack.min.css}"/>
+	    <!-- link rel="stylesheet" type="text/css" th:href="@{/material/plugins/grid/gridstack-extra.min.css}"/ -->
+	    
+	</head>
+
+	<section layout:fragment="conteudo">
+		
+		<div class="row">
+		
+			<!-- CONTAINER - Conteiner principal da aplicação -->
+			
+		    <div class="col l10 offset-l1 s12">
+		    	<!-- Conteúdo da página ... -->
+		    	
+		    	<div class="index__card-container grid-stack grid-stack-12">
+		    		
+		    		<div class="index__card-reference grid-stack-item"
+				        data-gs-auto-position="false"
+				        data-gs-no-drag="true"
+				        data-gs-no-resize="true"
+				        data-gs-width="4" data-gs-height="4">
+				        
+				        <div class="grid-stack-item-content">
+				    		<div class="card">
+				    		
+				    			<a class="card__menu btn-floating transparent z-depth-0 waves-effect waves-light dropdown-button"
+				    				data-activates="card-menu"
+				    				data-beloworigin="false"
+				    				data-alignment="right">
+				    				<i class="material-icons">more_vert</i>
+				    			</a>
+				    			<ul id="card-menu" class="dropdown-content card__menu-drop-down">
+									<li><a class="card__size-large">Grande</a></li>
+									<li><a class="card__size-medium">Pequeno</a></li>
+								</ul>
+				    			
+					    		<a class="index__card-image-link card-image lighten-1 waves-effect waves-block waves-light">
+					    			<span class="index__card-title card-title"></span>
+					    			<i class="index__card-icon material-icons card-image-icon"></i>
+					    		</a>
+					    		<div class="index__card-action card-action left-align">
+					    			<a class="index__card-action-link-reference btn-flat waves-effect"></a>
+					    		</div>
+					    	</div>
+				    		
+				    	</div>
+				    	
+				    </div>
+		    		
+		    		<!-- Dados para criação dos cards baseados no de referência -->
+		    		<div class="index__card"
+		    			data-title="Alunos" data-color="red" data-icon="school" data-size="medium">
+		    			<a th:href="@{/aluno/listar}">Listar</a>
+		    			<a th:href="@{/aluno/cadastrar}">Adicionar</a>
+		    		</div>
+		    		
+		    		<div class="index__card"
+		    			data-title="Pessoas" data-color="blue" data-icon="account-multiple" data-size="medium">
+		    			<a th:href="@{/pessoa/listar}">Listar</a>
+		    			<a th:href="@{/pessoa/cadastrar}">Adicionar</a>
+		    		</div>
+		    		
+		    		<div class="index__card"
+		    			data-title="Projetos" data-color="blue-grey" data-icon="view-dashboard" data-size="medium">
+		    			<a th:href="@{/projeto/listar}">Listar</a>
+		    			<a th:href="@{/projeto/cadastrar}">Adicionar</a>
+		    		</div>
+		    		
+		    	</div>
+		    	
+		    </div>
+		    	        	   
+		    <!-- CONTAINER -->
+		    
+		</div>
+		
+	</section>
+
+	<section layout:fragment="js">
+	
+		<!-- SCRIPTS - Coloque aqui os scripts desta página -->
+		<script type="text/javascript" th:src="@{/material/plugins/jquery/jquery-ui.min.js}"></script>
+		<script type="text/javascript" th:src="@{/material/plugins/jquery/jquery.ui.touch-punch.min.js}"></script>
+		<script type="text/javascript" th:src="@{/material/plugins/grid/lodash.js}"></script>
+		<script type="text/javascript" th:src="@{/material/plugins/grid/gridstack.min.js}"></script>
+		<script type="text/javascript" th:src="@{/material/plugins/grid/gridstack.jQueryUI.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/index/index.js}"></script>
+			
+	</section>
+
+</html>

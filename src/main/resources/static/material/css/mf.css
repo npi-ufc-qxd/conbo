@@ -174,24 +174,33 @@ nav .button-collapse {
 	flex-grow: 0;
 }
 
-table {
-	overflow: scroll;
+.table-hover tr:hover {
+	background-color: rgba(0, 0, 0, .05);
 }
 
-.mf-table th {
-	font-weight: 400 !important;
+.table-hover tr .btn-icon {
+	opacity: 0.0;
 }
 
-.mf-table td {
-	font-weight: 300;
-	padding-top: 0;
-	padding-bottom: 0;
-	height: 52px;
+.table-hover tr:hover .btn-icon {
+	opacity: 1.0;
 }
-.mf-table td a {
-	display: block;
-	transition: all .1s linear;
-	font-weight: 500;	
+
+.table-card thead tr:first-child {
+	background-color: #efefef;
+}
+
+.table-card tbody tr:not(:last-child) {
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.table-card th:first-child, 
+.table-card th:last-child, 
+.table-card td:first-child, 
+.table-card td:last-child {
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 0px !important;
 }
 
 .fab-bottom-right {
@@ -222,7 +231,7 @@ table {
 .card-image-icon {
 	width: 100%;
 	text-align: center;
-	font-size: 128px;
+	font-size: 96px;
 	line-height: 240px;
 	color: #FFFFFF;
 }
@@ -260,4 +269,30 @@ span.item-value {
 	font-weight: 300;
 	font-size: 18px;
 	display: block;
+}
+
+.self-sampled {
+	transition: all .1s linear;
+	transform: translateX(0);
+}
+
+.self-sampled.move-left {
+	transform: translateX(-8px);
+}
+
+.self-sampled.move-right {
+	transform: translateX(8px);
+}
+
+.toast {
+	background-color: #fff;
+}
+
+.toast i {
+	margin-right: 16px;
+}
+
+.toast i, .toast span {
+	margin-right: 16px;
+	font-weight: 400;
 }

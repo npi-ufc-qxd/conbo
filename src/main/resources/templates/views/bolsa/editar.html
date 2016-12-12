@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="views/base/base"
+    th:with="currentPage='bolsa'">
+
+	<head>
+	
+	    <title>Conbo - Cadastro Bolsa</title>
+	    
+	</head>
+
+	<section layout:fragment="conteudo">
+		
+		<div class="row">
+		
+			<!-- BREADCRUMBS - Mostra o caminho até a página atual -->
+			
+			<div class="col s12 breadcrumbs valign-wrapper">
+	            
+	            <a th:href="@{/}" class="breadcrumb blue-grey-text">
+	                <i class="material-icons left">home</i>
+	            </a>
+	            
+	            <a th:href="@{/bolsa/listar}" class="breadcrumb blue-grey-text">Bolsas</a>
+	            
+	            <a class="breadcrumb blue-grey-text">Cadastrar</a>
+	            
+	        </div>
+	        
+	        <!-- BREADCRUMBS -->
+		
+		
+			<!-- CONTAINER - Conteiner principal da aplicação -->
+			
+		    <div class="col s12">
+		    	
+		    	<form class="card" action="#" th:action="@{/bolsa/editar}" th:object="${bolsa}" th:method="post">
+
+	 				<input id="id" type="hidden" th:field="*{id}"/>
+	 
+		    		<div class="card-content">
+		    			
+		    			<div class="row">
+		    			
+		    				<div class="col s12 input-field">
+		    					<label th:for="${#ids.next('nome')}">Nome: </label> 
+								<input type="text" th:id="${#ids.next('nome')}" name="nome" th:value="*{nome}" required="true" />
+		    				</div>
+						</div>
+						
+						<div class="row">							
+							<div class="col s4 input-field">
+								<label th:for="${#ids.next('valor')}">valor: </label> 
+								<input class="money" type="text" id="${#ids.next('valor')}" name="valor" th:value="*{valor}" required="true"/> 
+							</div>
+								
+							<div class="col s4 input-field">
+								<label th:for="${#ids.next('ano')}">ano: </label> 
+								<input class="number" type="number" id="${#ids.next('ano')}" name="ano" th:value="*{ano}" required="true" />
+							</div>
+							
+							<div class="col s4 input-field">
+								<label th:for="${#ids.next('vagas')}">vagas: </label> 
+								<input class="number" type="number" th:id="${#ids.next('vagas')}" name="vagas" th:value="*{vagas}" required="true" /> 
+							</div>
+						</div>
+						
+						<div class="row">
+						
+							<div class="col s4">	
+								<input type="checkbox" th:id="${#ids.next('frequencia')}" th:name="frequencia" th:attr="checked=*{frequencia}"  />
+								<label th:for="${#ids.next('frequencia')}">frequencia</label>
+							</div>
+								
+							<div class="col s4">
+								<input th:id="${#ids.next('status')}" type="checkbox" th:name="status" th:attr="checked=*{status}" />
+								<label th:for="${#ids.next('status')}">status</label>
+							</div>
+						
+							<div class="col s4">
+								<input th:id="${#ids.next('folhaPagamento')}" type="checkbox" th:name="folhaPagamento" th:attr="checked=*{folhaPagamento}" />
+								<label th:for="${#ids.next('folhaPagamento')}">folhaPagamento</label>
+							</div>
+						
+						</div>
+						
+						<div class="row">
+						
+							<div class="col s6 input-field">
+								<select th:id="${#ids.next('tipoBolsas')}" name="tipoBolsa">
+									<option value="">Escolha um tipo de bolsa...</option>
+						         	<option th:attr="selected=(*{tipoBolsa.id}==${tb.id})" th:each="tb:${tipoBolsas}" th:text="${tb.nome}" th:value="${{tb}}">Nome</option>
+						        </select>
+						        <label th:for="${#ids.next('tipoBolsas')}">Tipo Bolsa:</label>
+							</div>
+						
+							<div class="col s6 input-field">
+								<select th:id="${#ids.next('responsaveis')}" multiple="multiple" name="responsaveis" >
+						  			<option th:each="pessoa:${pessoas}" th:attr="selected=(${#lists.contains(bolsa.responsaveis, pessoa.id)})" th:text="${pessoa.nome}"  
+						         	 th:value="${{pessoa}}">Nome</option>
+						        </select>
+								<label th:for="${#ids.next('responsaveis')}">Responsável:</label>		
+							</div>
+						</div>
+						
+						<div class="row">		
+							<div class="col s12 input-field">
+								<label th:for="${#ids.next('observacao')}">observacao: </label> 
+								<textarea class="materialize-textarea" id="observacao" name="observacao" th:text="${observacao}"></textarea>
+							</div>
+						</div>
+						
+					</div>
+					
+					<div class="card-action right-align">
+						<a th:href="@{/bolsa/listar}" data-text="Deseja cancelar o cadastro?" class="confirm btn btn-flat waves-effect">Cancelar</a>
+						<button class="btn waves-effect waves-light" type="submit">Salvar</button>
+					</div>
+					
+		    			
+		    	</form>
+		    	
+		    </div>
+		    	        	   
+		    <!-- CONTAINER -->
+		    
+		</div>
+		
+	</section>
+
+	<section layout:fragment="js">
+	
+		<!-- SCRIPTS - Coloque aqui os scripts desta página -->
+			
+	</section>
+
+</html>

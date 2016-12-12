@@ -6,15 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Bolsa {
 	
 	@Id
 	@GeneratedValue
-	private long idBolsa;
+	private long id;
 	private String nome;
 	private Double valor;
 	private int ano;
@@ -32,23 +35,47 @@ public class Bolsa {
 	private Projeto projeto;
 	
 	@OneToOne
+	@NotNull
 	private TipoBolsa tipoBolsa;
-	
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name="bolsa_responsaveis", 
+            joinColumns=  @JoinColumn( name = "idBolsa"), 
+            inverseJoinColumns= @JoinColumn(name = "idPessoa") )
 	private List<Pessoa> responsaveis;
 	
 	public Bolsa() {
 		super();		
 	}
 
-	public long getIdBolsa() {
-		return idBolsa;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdBolsa(long idBolsa) {
-		this.idBolsa = idBolsa;
+	public void setId(long id) {
+		this.id = id;
 	}
 	
+	
+
+	public int countBolsistasAtivos(){
+		int count = 0;
+		
+		for(Participacao participacao: getParticipacoes()){
+			if(participacao.isStatus()){
+				count++;
+			}
+		}
+		
+		return count;
+	}
+
+
+
+
+	public Double getValor() {
+		return valor;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -63,18 +90,6 @@ public class Bolsa {
 
 	public void setParticipacoes(List<Participacao> participacoes) {
 		this.participacoes = participacoes;
-	}
-	
-	public int countBolsistasAtivos(){
-		int count = 0;
-		
-		for(Participacao participacao: getParticipacoes()){
-			if(participacao.isStatus()){
-				count++;
-			}
-		}
-		
-		return count;
 	}
 
 	public Projeto getProjeto() {
@@ -91,10 +106,6 @@ public class Bolsa {
 
 	public void setTipoBolsa(TipoBolsa tipoBolsa) {
 		this.tipoBolsa = tipoBolsa;
-	}
-
-	public Double getValor() {
-		return valor;
 	}
 
 	public void setValor(Double valor) {
@@ -156,4 +167,5 @@ public class Bolsa {
 	public void setFolhaPagamento(boolean folhaPagamento) {
 		this.folhaPagamento = folhaPagamento;
 	}
+
 }

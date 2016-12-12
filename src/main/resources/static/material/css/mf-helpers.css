@@ -1,3 +1,5 @@
+.table-lite td { padding: 4px; };
+
 .absolute { position: absolute; }
 .relative { position: relative; }
 .fixed { position: fixed; }
@@ -17,6 +19,16 @@
 .radius-top-8 { border-radius: 8px 8px 0 0; }
 .radius-top-16 { border-radius: 16px 16px 0 0; }
 .radius-top-24 { border-radius: 24px 24px 0 0; }
+
+.max-width-50 { max-width: 50px; }
+.max-width-100 { max-width: 100px; }
+.max-width-150 { max-width: 150px; }
+.max-width-200 { max-width: 200px; }
+.max-width-250 { max-width: 250px; }
+.max-width-300 { max-width: 300px; }
+.max-width-350 { max-width: 350px; }
+.max-width-400 { max-width: 400px; }
+.max-width-450 { max-width: 450px; }
 
 .circle {
     border-radius: 50%;
@@ -93,65 +105,65 @@
 }
 
 .text-10 {
- 	font-size: 10px;
+ 	font-size: 10px !important;
  }
  
  .text-12 {
- 	font-size: 12px;
+ 	font-size: 12px !important;
  }
  
  .text-14 {
- 	font-size: 14px;
+ 	font-size: 14px !important;
  }
  
  .text-16 {
- 	font-size: 16px;
+ 	font-size: 16px !important;
  }
  
  .text-18 {
- 	font-size: 18px;
+ 	font-size: 18px !important;
  }
  
  .text-20 {
- 	font-size: 20px;
+ 	font-size: 20px !important;
  }
  
  .text-24 {
- 	font-size: 24px;
+ 	font-size: 24px !important;
  }
  
  .text-28 {
- 	font-size: 28px;
+ 	font-size: 28px !important;
  }
  
  .text-32 {
- 	font-size: 32px;
+ 	font-size: 32px !important;
  }
  
  .text-36 {
- 	font-size: 36px;
+ 	font-size: 36px !important;
  }
  
  .text-42 {
- 	font-size: 42px;
+ 	font-size: 42px !important;
  }
  
  .text-48 {
- 	font-size: 48px;
+ 	font-size: 48px !important;
  }
 
 .text-52 {
- 	font-size: 52px;
+ 	font-size: 52px !important;
  }
 
 .text-72 {
- 	font-size: 72px;
+ 	font-size: 72px !important;
  }
 
 .text-96 {
- 	font-size: 96px;
+ 	font-size: 96px !important;
  }
 
 .text-128 {
- 	font-size: 128px;
+ 	font-size: 128px !important;
  }

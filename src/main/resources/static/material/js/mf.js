@@ -9,6 +9,11 @@ $(document).ready(function() {
     mf_base.doInit();
 });
 
+var _context = $("meta[name='_context']").attr("content");
+if(_context == null){
+	_context = "";
+}
+
 jQuery.fn.extend({
     exists: function () {
     	return $(this).length > 0;
@@ -60,14 +65,158 @@ var mf_base = function() {
             $('.phone').mask('(00) 00000-0000', {reverse: false});
             $('.cpf').mask('000.000.000-00', {reverse: false});
             $('.money').mask('000.000.000.000.000,00', {reverse: true});
+            
+            $("form").submit(function(event) {
+            	
+            	$("input.money").each(function(_, el) {
+            		$(el).val( $(el).val().replace(/[.,]/g, function(x) {
+            		    return x == ',' ? '.' : '';
+            		}) );
+            	});
+            	            	
+            });
         } catch (err) {
             // ...
         }
     }
     
+    var initSelfSampling = function() {
+    	
+    	var animate = function() {
+    		setTimeout(function() {
+    			$(".self-sampled").addClass("move-left");
+    		}, 100);
+    		setTimeout(function() {
+    			$(".self-sampled").removeClass("move-left");
+    			$(".self-sampled").addClass("move-right");
+    		}, 200);
+    		setTimeout(function() {
+    			$(".self-sampled").removeClass("move-right");
+    			$(".self-sampled").addClass("move-left");
+    		}, 300);
+    		setTimeout(function() {
+    			$(".self-sampled").removeClass("move-left");
+    		}, 400);
+    	};
+    	
+    	setTimeout(function() {
+    		animate();
+    		setInterval(function() {
+        		animate();
+        	}, 5000);
+    	}, 1800);
+    	
+    }
+    
+    var initAlerts = function() {
+    	
+    	var getIconByType = function(type) {
+    		return (
+    			(type == 'info')   ? 'info':
+    			(type == 'warning')? 'warning':
+    			(type == 'success')? 'check':
+    			(type == 'error')  ? 'error': ''
+    		);
+    	}
+    	var getColorByType = function(type) {
+    		
+    		return (
+    			(type == 'info')    ? 'blue':
+    			(type == 'warning') ? 'deep-orange':
+    			(type == 'success') ? 'green':
+    			(type == 'error')   ? 'red': 'black'
+    		);
+    	}
+    	
+    	var delayAmount = 0;
+   		$(".alert-message").each(function(_, el) {
+   			$(el).remove();
+    			var text = $(el).text();
+        		var type = $(el).data("type").toLowerCase();
+        		var delay = $(el).data("delay");
+        		var icon = getIconByType(type);
+        		var color = getColorByType(type);
+        		var content = $('<div class="valign-wrapper"><i class="material-icons ' + color + '-text">' + icon + '</i><span class="' + color + '-text">' + text + '</span></div>');
+
+        	setTimeout(function() {    			
+        		Materialize.toast(content, delay, 'alert-' + type + ' rounded');
+    		}, delayAmount);
+        	
+        	delayAmount += 500;
+        	
+       	});
+    }
+
     var hideForeground = function() {
     	$("body").removeClass("no-transition");
     	$(".mf-foreground").fadeOut("slow");
+    }
+
+    var initConfirm = function() {
+        try {
+            $(".confirm").confirm({
+                "confirmButton": "Sim", 
+                "cancelButton": "Não"
+            });
+        } catch(err) { }
+    }
+
+    var initDataTableInElement = function(el, setts) {
+        var orderCols = (el.data("sort-col") == undefined)? [] : el.data("sort-col").toString().split(",");
+        var orderDirs = (el.data("sort-direction") === undefined)? [] : el.data("sort-direction").toString().split(",");
+        var order = [];
+
+        orderCols.forEach(function(col, i) {
+            if(!isNaN(parseInt(col))) {
+                order.push([parseInt(col), orderDirs[i]]);
+            }
+        });
+
+        var dataTable = el.DataTable(
+            $.extend({ 
+                "order": order, 
+                "pagingType": "full_numbers", 
+                "language": {
+                    "sEmptyTable": "Nenhum registro encontrado",
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "_MENU_ resultados por página",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+                    "sSearch": "Filtrar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
+                    }
+                }
+            }, setts)
+        );
+        
+        $('select').material_select();
+
+        var searchInput = $(el.data("filter"));
+        searchInput.keyup(function() {
+            dataTable.search( $(this).val() ).draw();
+        });
+        
+        return dataTable;
+    }
+
+    var initDataTables = function() {
+        $(".datatable").each(function(_, el) {
+            var table = $(el);
+            initDataTableInElement(table);
+        });
     }
 
     return {
@@ -77,8 +226,12 @@ var mf_base = function() {
             initSideBar();
             initCharts();
             initMask();
+            initSelfSampling();
+            initAlerts();
+            initConfirm();
+            initDataTables();
             
-            hideForeground();
+            hideForeground();            
         },
         
         doAddChart : function(el, type, labels, datasets) {
@@ -103,52 +256,31 @@ var mf_base = function() {
 			
         }, 
         
-        doAddDataTable : function(el, setts) {
-        	var dataTable = el.DataTable(
-        		$.extend({ 
-	                "language": {
-	            	    "sEmptyTable": "Nenhum registro encontrado",
-	            	    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-	            	    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-	            	    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-	            	    "sInfoPostFix": "",
-	            	    "sInfoThousands": ".",
-	            	    "sLengthMenu": "_MENU_ resultados por página",
-	            	    "sLoadingRecords": "Carregando...",
-	            	    "sProcessing": "Processando...",
-	            	    "sZeroRecords": "Nenhum registro encontrado",
-	            	    "sSearch": "Filtrar",
-	            	    "oPaginate": {
-	            	        "sNext": "Próximo",
-	            	        "sPrevious": "Anterior",
-	            	        "sFirst": "Primeiro",
-	            	        "sLast": "Último"
-	            	    },
-	            	    "oAria": {
-	            	        "sSortAscending": ": Ordenar colunas de forma ascendente",
-	            	        "sSortDescending": ": Ordenar colunas de forma descendente"
-	            	    }
-	                }
-        		}, setts)
-        	);
-        	
-			$('select').material_select();
-			
-            $(".paginate_button").addClass("waves-effect btn-flat");
-            
-            el.on("draw.dt", function () {
-                $(".paginate_button").addClass("waves-effect btn-flat");
-            } );
-            
-			
-			return dataTable;
-        }, 
+        doAddDataTable : initDataTableInElement, 
 
         doAlertSet : function(alertSet) {
             for(k in alertSet) {
                 var alert = alertSet[k];
                 Materialize.toast(alert.message, alert.delay);
             }
+        }, 
+        
+        doGetCurrentDate : function() {
+        	var today = new Date();
+        	var dd = today.getDate();
+        	var mm = today.getMonth()+1; //January is 0!
+        	var yyyy = today.getFullYear();
+
+        	if(dd<10) {
+        	    dd='0'+dd
+        	} 
+
+        	if(mm<10) {
+        	    mm='0'+mm
+        	} 
+
+        	today = mm + '/' + dd + '/' + yyyy;
+        	return today;
         }
         
     };

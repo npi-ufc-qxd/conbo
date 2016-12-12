@@ -3,6 +3,7 @@ package br.ufc.conbo.service;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import br.ufc.conbo.model.Bolsa;
+import br.ufc.conbo.model.Projeto;
 
 @Service
 public interface BolsaService {
@@ -16,5 +17,9 @@ public interface BolsaService {
 	Bolsa buscarPorId(Long id);
 	
 	List<Bolsa> listar();
+	
+	Bolsa buscarPorNome(String nome);
+	
+	List<Bolsa> buscarBolsasNaoAssociadas();
 	
 }

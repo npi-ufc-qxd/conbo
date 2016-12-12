@@ -8,18 +8,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Participacao {
 	
 	@Id
 	@GeneratedValue
-	private long idParticipacao;
+	private long id;
+
+	@Temporal(TemporalType.TIMESTAMP) 
+	@DateTimeFormat (pattern="dd-MM-YYYY")
 	private Date dataInicio;
+	
+	@Temporal(TemporalType.TIMESTAMP) 
+	@DateTimeFormat (pattern="dd-MM-YYYY")
 	private Date dataFim;
+	
+	@Temporal(TemporalType.TIMESTAMP) 
+	@DateTimeFormat (pattern="dd-MM-YYYY")
 	private Date dataExpectFim;
 	private boolean status;
 	private boolean remuneracao;
+	private String observacao;
 	
 	@OneToOne
 	private Aluno aluno;
@@ -34,12 +48,12 @@ public class Participacao {
 		super();
 	}
 	
-	public long getIdParticipacao() {
-		return idParticipacao;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdParticipacao(long idParticipacao) {
-		this.idParticipacao = idParticipacao;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Date getDataInicio() {
@@ -53,6 +67,7 @@ public class Participacao {
 	public Date getDataFim() {
 		return dataFim;
 	}
+	
 
 	public void setDataFim(Date dataFim) {
 		this.dataFim = dataFim;
@@ -64,6 +79,15 @@ public class Participacao {
 
 	public void setDataExpectFim(Date dataExpectFim) {
 		this.dataExpectFim = dataExpectFim;
+	}
+	
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	public boolean isStatus() {
@@ -105,4 +129,5 @@ public class Participacao {
 	public void setBolsa(Bolsa bolsa) {
 		this.bolsa = bolsa;
 	}
+	
 }

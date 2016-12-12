@@ -1,24 +1,81 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8"/>
-<title>Cadastrar Pessoa</title>
-</head>
-<body th:with="acao_url=${acao == 'CADASTRAR'? 'cadastrar' :'editar' }">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="views/base/base"
+    th:with="currentPage='pessoa'">
 
-<label>EDITAR</label>
-<form action="#" th:action="@{/pessoa/editar}" th:object="${pessoa}" th:method="post">
-   
-   <input id="id" type="hidden" th:field="*{idPessoa}" />
-   
-    <label th:for="${#ids.next('nome')}">Nome: </label>
-    <input type="text" id="nome" name="nome" th:value="${pessoa.nome}" />
-   
-   	<label th:for="${#ids.next('email')}">Email: </label>
-    <input type="text" id="email" name="email" th:value="${pessoa.email}" />
-   	
-   	<button type="submit">Enviar</button>
-   	
-</form>
-</body>
+	<head>
+	
+	    <title>Conbo - Editar Pessoa</title>
+	    
+	</head>
+
+	<section layout:fragment="conteudo">
+		
+		<div class="row">
+		
+			<!-- BREADCRUMBS - Mostra o caminho até a página atual -->
+			
+			<div class="col s12 breadcrumbs valign-wrapper">
+	            
+	            <a th:href="@{/}" class="breadcrumb blue-grey-text">
+	                <i class="material-icons left">home</i>
+	            </a>
+	            
+	            <a th:href="@{/pessoa/listar}" class="breadcrumb blue-grey-text">Pessoas</a>
+	            
+	            <a class="breadcrumb blue-grey-text">Editar</a>
+	            
+	        </div>
+	        
+	        <!-- BREADCRUMBS -->
+		
+		
+			<!-- CONTAINER - Conteiner principal da aplicação -->
+			
+		    <div class="col s12" th:with="acao_url=${acao == 'CADASTRAR'? 'cadastrar' :'editar' }">
+		    	
+		    	<form class="card" th:action="@{/pessoa/cadastrar}" th:object="${pessoa}" th:method="post">
+		    		
+		    		<input id="id" type="hidden" th:field="*{id}" />
+		    		
+		    		<div class="card-content">
+					   
+					   	<div class="row">
+							<div class="col l6 m6 s12 input-field">
+							    <label th:for="${#ids.next('nome')}">Nome: </label>
+    							<input type="text" id="nome" name="nome" th:value="${pessoa.nome}" />
+							</div>
+							
+							<div class="col l6 m6 s12 input-field">   	
+							   	<label th:for="${#ids.next('email')}">Email: </label>
+    							<input type="text" id="email" name="email" th:value="${pessoa.email}" />
+							</div>
+						
+						</div>
+					   	
+					</div>
+					
+					<div class="card-action right-align">
+						<a th:href="@{/pessoa/listar}" class="btn btn-flat waves-effect">Cancelar</a>
+						<button class="btn waves-effect waves-light" type="submit">Salvar</button>
+					</div>
+					
+				</form>
+		    	
+		    </div>
+		    	        	   
+		    <!-- CONTAINER -->
+		    
+		</div>
+		
+	</section>
+
+	<section layout:fragment="js">
+	
+		<!-- SCRIPTS - Coloque aqui os scripts desta página -->
+		
+	</section>
+
 </html>

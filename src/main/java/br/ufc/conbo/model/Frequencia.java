@@ -15,7 +15,7 @@ public class Frequencia {
 	
 	@Id
 	@GeneratedValue
-	private Long idFrequencia;
+	private Long id;
 	private String caminhoArquivo;
 	@DateTimeFormat(pattern = "YYYY-MM")
 	private Date mes;
@@ -37,11 +37,11 @@ public class Frequencia {
 		super();
 	}
 
-	public Long getIdFrequencia() {
-		return idFrequencia;
+	public Long getId() {
+		return id;
 	}
-	public void setIdFrequencia(Long idFrequencia) {
-		this.idFrequencia = idFrequencia;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getCaminhoArquivo() {
 		return caminhoArquivo;

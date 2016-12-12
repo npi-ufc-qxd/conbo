@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="views/base/base"
+    th:with="currentPage='bolsa'">
+
+	<head>
+
+	
+	    <title>Conbo - Alunos</title>
+	    
+	    <link rel="stylesheet" th:href="@{/css/aluno/listar.css}"/>
+	    
+	</head>
+
+	<section layout:fragment="conteudo">
+		
+		<div class="row">
+		
+			<!-- BREADCRUMBS - Mostra o caminho até a página atual -->
+			
+			<div class="col s12 breadcrumbs valign-wrapper">
+	            
+	            <a th:href="@{/}" class="breadcrumb blue-grey-text">
+	                <i class="material-icons left">home</i>
+	            </a>
+	            
+	            <a class="breadcrumb blue-grey-text">Bolsas</a>
+	            
+	        </div>
+	        
+	        <!-- BREADCRUMBS -->
+		
+		
+			<!-- CONTAINER - Conteiner principal da aplicação -->
+			
+		    <div class="col s12">
+		    	
+				<div class="card">
+					
+					<div class="card-content relative">
+						<div class="row">
+							<div class="col s12 input-field">
+								 <input type="text" id="table-filter" name="nome" th:value="${nome}" />
+								 <label for="table-filter">Buscar</label>
+							</div>
+						</div>
+						
+						<div class="bottom-right">
+							<a th:href="@{/bolsa/cadastrar}" 
+								class="btn-floating btn-large waves-effect waves-light tooltipped" 
+								data-tooltip="Cadastrar aluno" type="button"
+								th:classappend="${#lists.isEmpty(bolsas)}? self-sampled"><i class="material-icons">add</i></a>
+						</div>
+					</div>
+					
+					<div class="card-action"  th:if="${#lists.isEmpty(bolsas)}">
+						<span class="bold indigo-text">Não há bolsas cadastradas</span>
+					</div>
+				
+					<table th:unless="${#lists.isEmpty(bolsas)}" id="table-alunos"
+						class="datatable table-hover table-lite table-card"
+						data-sort-col="0,1,2" data-sort-direction="desc,desc,asc" 
+						data-filter="#table-filter">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>Tipo</th>
+								<th>Bolsistas</th>
+								<th>Opções</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="bolsa:${bolsas}">
+								<td th:text="${bolsa.nome}"></td>
+								<td th:text="${bolsa.tipoBolsa.nome}"></td>
+								<td th:text="${bolsa.vagas}"></td>
+								<td>
+									<a class="btn-icon waves-effect tooltipped" data-tooltip="Editar" th:href="@{${'/bolsa/editar/'+bolsa.id}}" ><i class="material-icons">edit</i></a>
+									<a class="btn-icon waves-effect tooltipped confirm" data-text="Deseja realmente remover este aluno?" data-tooltip="Remover" th:href="@{${'/bolsa/remover/'+bolsa.id}}" ><i class="material-icons">delete</i></a>
+									<a class="btn-icon waves-effect tooltipped" data-tooltip="Detalhes" th:href="@{${'/bolsa/detalhes/'+bolsa.id}}" ><i class="material-icons">zoom_in</i></a>
+								</td>
+								
+							</tr>
+						</tbody>
+					</table>
+				
+				</div>
+
+		    </div>
+		    	        	   
+		    <!-- CONTAINER -->
+		    
+		</div>
+		
+	</section>
+
+	<section layout:fragment="js">
+	
+		<!-- SCRIPTS - Coloque aqui os scripts desta página -->
+			
+	</section>
+
+</html>
+
+
+

@@ -3,6 +3,7 @@ package br.ufc.conbo.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -17,9 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.ufc.conbo.model.Aluno;
 import br.ufc.conbo.model.Frequencia;
+import br.ufc.conbo.model.Participacao;
 import br.ufc.conbo.service.AlunoService;
 import br.ufc.conbo.service.FrequenciaService;
+import br.ufc.conbo.service.ParticipacaoService;
 import br.ufc.conbo.service.StorageService;
+import br.ufc.conbo.service.impl.ParticipacaoServiceImpl;
 
 @Controller
 @RequestMapping("frequencia")
@@ -30,6 +34,9 @@ public class FrequenciaController {
 	
 	@Inject
 	private AlunoService alunoService;
+	
+	@Inject
+	private ParticipacaoService participacaoService;
 
 	@Inject
 	private StorageService storageService;
@@ -60,7 +67,7 @@ public class FrequenciaController {
 		ModelAndView model = new ModelAndView("/views/aluno/listar");
 		model.addObject("alunos", this.alunoService.listar());
 		return model;
-	}
+}
 	
 	
 	private boolean saveFile(MultipartFile file, Frequencia frequencia) {
